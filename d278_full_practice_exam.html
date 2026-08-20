@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D278 — Scripting and Programming Foundations | Practice Exam</title>
+<style>
+  :root{
+    --bg:#f5f5f3; --card:#fff; --border:#e0ddd6;
+    --green:#1D9E75; --green-bg:#EAF3DE;
+    --red:#A32D2D; --red-bg:#FCEBEB;
+    --amber:#B45309; --amber-bg:#FFF3E0;
+    --purple:#534AB7; --purple-bg:#EEEDFE;
+    --label:#9b9b97; --label-dark:#6b6b67;
+    --hover:#f0eeea; --ink:#1a1a1a;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 16px 80px;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;}
+  .topbar h1{font-size:20px;margin:0 0 2px;}
+  .topbar .sub{color:var(--label-dark);font-size:14px;margin-bottom:10px;}
+  .pills{display:flex;gap:6px;flex-wrap:wrap;}
+  .pill{font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;letter-spacing:.02em;}
+  .pill-c1{background:var(--green-bg);color:var(--green);}
+  .pill-c2{background:var(--amber-bg);color:var(--amber);}
+  .pill-c3{background:var(--purple-bg);color:var(--purple);}
+  .pill-mixed{background:var(--red-bg);color:var(--red);}
+  .pill-diff{background:var(--hover);color:var(--label-dark);}
+  .scoreboard{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+  .stat{background:var(--hover);border-radius:10px;padding:10px;text-align:center;}
+  .stat .n{font-size:20px;font-weight:700;}
+  .stat .l{font-size:11px;color:var(--label-dark);text-transform:uppercase;letter-spacing:.03em;}
+  .progress-track{height:5px;background:var(--hover);border-radius:5px;overflow:hidden;margin-top:12px;}
+  .progress-fill{height:100%;background:var(--green);width:0%;transition:width .3s ease;}
+  .nav-toggle{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+  .nav-btn{border:0.5px solid var(--border);background:var(--card);color:var(--ink);font-size:13px;font-weight:600;padding:8px 12px;border-radius:8px;cursor:pointer;}
+  .nav-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .nav-btn:hover:not(.active){background:var(--hover);}
+  .nav-btn:disabled{opacity:.45;cursor:not-allowed;}
+  .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px;}
+  .summary-card{border-radius:10px;padding:12px;cursor:pointer;border:0.5px solid var(--border);}
+  .summary-card.pass{background:var(--green-bg);}
+  .summary-card.fail{background:var(--red-bg);}
+  .summary-card.neutral{background:var(--hover);}
+  .summary-card .t{font-size:12px;font-weight:700;}
+  .summary-card .p{font-size:18px;font-weight:800;}
+  .tabrow{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px;}
+  .tab{width:28px;height:28px;border-radius:6px;border:0.5px solid var(--border);background:var(--card);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--label-dark);}
+  .tab.correct{background:var(--green-bg);color:var(--green);border-color:var(--green);}
+  .tab.wrong{background:var(--red-bg);color:var(--red);border-color:var(--red);}
+  .tab.current{outline:2px solid var(--ink);outline-offset:1px;}
+  .qhead{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:10px;}
+  .qcounter{margin-left:auto;font-size:12px;color:var(--label-dark);}
+  .scenario{background:var(--hover);border-radius:8px;padding:12px;font-size:14px;margin-bottom:10px;}
+  .stem{font-size:15px;font-weight:600;margin-bottom:10px;}
+  pre.code{background:#1a1a1a;color:#e7e7e2;padding:12px;border-radius:8px;font-size:13px;overflow-x:auto;margin-bottom:10px;font-family:'SF Mono',Consolas,Menlo,monospace;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{border:0.5px solid var(--border);border-radius:8px;padding:10px 12px;cursor:pointer;font-size:14px;background:var(--card);}
+  .opt:hover:not(.locked){background:var(--hover);}
+  .opt.locked{cursor:default;}
+  .opt.selected-correct{background:var(--green-bg);border-color:var(--green);}
+  .opt.selected-wrong{background:var(--red-bg);border-color:var(--red);}
+  .opt.reveal-correct{background:var(--green-bg);border-color:var(--green);}
+  .feedback{margin-top:12px;padding:12px;border-radius:8px;background:var(--hover);font-size:14px;}
+  .feedback .rationale strong{color:var(--green);}
+  .feedback .misc{margin-top:8px;font-style:italic;color:var(--label-dark);font-size:13px;}
+  .navbtns{display:flex;justify-content:space-between;margin-top:16px;}
+  .navbtns button{border:0.5px solid var(--border);background:var(--card);padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;}
+  .navbtns button:hover{background:var(--hover);}
+  .breakdown-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px;}
+  .breakdown-label{width:150px;color:var(--label-dark);flex-shrink:0;}
+  .breakdown-track{flex:1;height:10px;background:var(--hover);border-radius:5px;overflow:hidden;}
+  .breakdown-fill{height:100%;}
+  .breakdown-pct{width:44px;text-align:right;font-weight:700;}
+  .placeholder{color:var(--label-dark);font-size:14px;text-align:center;padding:24px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="card topbar">
+    <h1>D278 — Scripting and Programming Foundations</h1>
+    <div class="sub">Full Practice Exam · WGU · Instructor: Dr. Mario Booker</div>
+    <div class="pills">
+      <span class="pill pill-c1">C1 · Program Requirements</span>
+      <span class="pill pill-c2">C2 · Programming Elements</span>
+      <span class="pill pill-c3">C3 · Logic &amp; Algorithms</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="scoreboard">
+      <div class="stat"><div class="n" id="statAnswered">0</div><div class="l">Answered</div></div>
+      <div class="stat"><div class="n" id="statCorrect">0</div><div class="l">Correct</div></div>
+      <div class="stat"><div class="n" id="statWrong">0</div><div class="l">Wrong</div></div>
+      <div class="stat"><div class="n" id="statPct">0%</div><div class="l">Score</div></div>
+      <div class="stat"><div class="n" id="statStatus">—</div><div class="l">Pass / Fail</div></div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="nav-toggle" id="navToggle"></div>
+
+  <div class="card" id="summaryCard">
+    <div class="summary-grid" id="summaryGrid"></div>
+  </div>
+
+  <div class="card" id="tabRowCard">
+    <div class="tabrow" id="tabRow"></div>
+  </div>
+
+  <div class="card" id="questionCard"></div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:700;margin-bottom:10px;">Competency Breakdown</div>
+    <div id="breakdown"></div>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   D278 PRACTICE EXAM — QUESTION DATA
+   Phase 1: C1 — Program Requirements (50 questions)
+   Sections built so far: c1
+   Sections pending: c2, c3, ch1, ch2, ch3, sim
+   ============================================================ */
+
+const SECTIONS = [
+  { key:'c1', label:'C1 — Program Requirements', comp:'C1' },
+  { key:'c2', label:'C2 — Programming Elements', comp:'C2' },
+  { key:'c3', label:'C3 — Logic & Algorithms', comp:'C3' },
+  { key:'ch1', label:'C1 Challenge', comp:'C1' },
+  { key:'ch2', label:'C2 Challenge', comp:'C2' },
+  { key:'ch3', label:'C3 Challenge', comp:'C3' },
+  { key:'sim', label:'Simulation', comp:'mixed' },
+];
+
+const QUESTIONS = {
+
+c1: [
+// --- Program vs. script distinction (4) ---
+{sec:'c1',comp:'C1',topic:'Program vs script',diff:'found',type:'mc',
+ stem:"Which best distinguishes a script from a compiled program in typical usage?",
+ opts:["A script must be converted to machine code before it can ever run","A script is generally executed directly by an interpreter, often to automate a task, while a compiled program is translated into machine code before execution","A script cannot contain loops or conditionals","A compiled program is always shorter than a script"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Scripts are typically run line-by-line by an interpreter and are often written to automate a task, while compiled programs are translated in full to machine code ahead of time.",
+ misconception:"Students often think 'script' and 'program' are strictly interchangeable terms rather than describing different execution models."},
+
+{sec:'c1',comp:'C1',topic:'Program vs script',diff:'found',type:'mc',
+ stem:"A developer writes a short set of Python commands to rename all files in a folder. What is this an example of?",
+ opts:["A compiler","A script","An assembler","A flowchart"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A short set of commands written to automate a repetitive task and run through an interpreter is a script.",
+ misconception:"Students sometimes assume anything written in Python must be a 'program' rather than recognizing task-automation code as a script."},
+
+{sec:'c1',comp:'C1',topic:'Program vs script',diff:'inter',type:'mc',
+ stem:"Which statement about the relationship between programs and scripts is accurate?",
+ opts:["Every program is a script, but not every script is a program","Every script is a program, but not every program is necessarily written to automate a task the way a script is","Scripts and programs use entirely different variable types","Only scripts can produce output"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A script is a type of program, generally interpreted and task-oriented, but the broader category of 'program' includes compiled software that is not a script.",
+ misconception:"Students often treat the two terms as mutually exclusive categories rather than one being a subset of the other."},
+
+{sec:'c1',comp:'C1',topic:'Program vs script',diff:'inter',type:'mc',
+ stem:"A large accounting application with a graphical interface, installed and compiled ahead of time, is best described as:",
+ opts:["A script","A pseudocode file","A compiled program","A flowchart"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Large, installed, pre-translated software is described as a compiled program rather than a script, which is typically smaller and interpreted.",
+ misconception:"Students sometimes label any executable file a 'script' regardless of how it was built or how large it is."},
+
+// --- Compiled vs interpreted languages (4) ---
+{sec:'c1',comp:'C1',topic:'Compiled vs interpreted',diff:'found',type:'mc',
+ stem:"What happens to source code in a compiled language before the program can run?",
+ opts:["It is translated entirely into machine code in advance by a compiler","It is executed one line at a time as it is read","It is converted directly into pseudocode","It is skipped and only comments are processed"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Compiled languages translate the entire source file into machine code ahead of runtime, producing an executable.",
+ misconception:"Students confuse compiling with interpreting, assuming both happen line-by-line at runtime."},
+
+{sec:'c1',comp:'C1',topic:'Compiled vs interpreted',diff:'found',type:'mc',
+ stem:"Which best describes how an interpreted language executes?",
+ opts:["The whole file is translated into an executable before any code runs","Each line or statement is translated and executed in sequence as the program runs","It requires an assembler instead of any translator","It produces object code that is stored permanently on disk"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> An interpreter reads and executes source code statement by statement at runtime rather than producing a standalone executable ahead of time.",
+ misconception:"Students sometimes think interpreted languages skip translation altogether, when in fact translation still happens — just incrementally at runtime."},
+
+{sec:'c1',comp:'C1',topic:'Compiled vs interpreted',diff:'inter',type:'mc',
+ stem:"Why might a compiled program often run faster than an equivalent interpreted script?",
+ opts:["Compiled programs use fewer variables","The translation to machine code happens once, ahead of time, rather than repeatedly during execution","Interpreted languages cannot use loops","Compiled programs are always written in fewer lines"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because compilation happens once before execution, the CPU runs pre-translated machine code directly, avoiding the repeated translation overhead an interpreter incurs during execution.",
+ misconception:"Students often attribute speed differences to code length or syntax rather than to when and how translation occurs."},
+
+{sec:'c1',comp:'C1',topic:'Compiled vs interpreted',diff:'adv',type:'mc',
+ stem:"A team needs a language where they can test a single changed line immediately without rebuilding the whole application. Which execution model best supports this workflow, and why?",
+ opts:["Compiled, because compilers detect errors faster","Interpreted, because each statement can be run and observed individually without a separate build step","Compiled, because machine code is portable across operating systems","Interpreted, because interpreters do not report errors"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Interpreted execution evaluates statements as encountered, so a single changed line can be tested immediately without recompiling the entire program.",
+ misconception:"Students sometimes assume compiled languages are always the better choice without weighing the iterative-testing tradeoff interpreters offer."},
+
+// --- Source/object/machine code (4) ---
+{sec:'c1',comp:'C1',topic:'Source, object, machine code',diff:'found',type:'mc',
+ stem:"The human-readable code a programmer types, before any translation, is called:",
+ opts:["Machine code","Object code","Source code","Bytecode assembly"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Source code is the original, human-readable code written by the programmer.",
+ misconception:"Students sometimes use 'source code' and 'machine code' interchangeably."},
+
+{sec:'c1',comp:'C1',topic:'Source, object, machine code',diff:'found',type:'mc',
+ stem:"Which type of code consists of binary instructions the CPU can execute directly?",
+ opts:["Source code","Pseudocode","Machine code","Flowchart notation"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Machine code is the binary instruction set that a CPU executes directly, produced after translation from source code.",
+ misconception:"Students sometimes think 'object code' and 'machine code' are always identical, when object code may still require linking before becoming a final executable."},
+
+{sec:'c1',comp:'C1',topic:'Source, object, machine code',diff:'inter',type:'mc',
+ stem:"An intermediate, partially-translated form of a program, produced by a compiler before final linking into an executable, is called:",
+ opts:["Source code","Object code","Pseudocode","A flowchart"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Object code is machine-oriented but not yet a complete, linked executable — it is the intermediate output of compilation.",
+ misconception:"Students frequently skip the concept of object code entirely, assuming compilation goes directly from source code to a finished executable in a single indivisible step."},
+
+{sec:'c1',comp:'C1',topic:'Source, object, machine code',diff:'inter',type:'mc',
+ stem:"Put the following into the correct order of transformation for a typical compiled language: (1) machine code, (2) source code, (3) object code.",
+ opts:["1, 2, 3","2, 3, 1","3, 2, 1","2, 1, 3"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A programmer writes source code (2), the compiler produces object code (3), and linking produces the final machine code executable (1).",
+ misconception:"Students often reverse the order, assuming machine code is produced before object code."},
+
+// --- Assemblers/compilers/interpreters (4) ---
+{sec:'c1',comp:'C1',topic:'Translators: assemblers/compilers/interpreters',diff:'found',type:'mc',
+ stem:"Which translator converts assembly language into machine code?",
+ opts:["Compiler","Interpreter","Assembler","Linker"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> An assembler is the translator specifically responsible for converting assembly language into machine code.",
+ misconception:"Students often use 'compiler' as a catch-all term for any translator, including assemblers and interpreters."},
+
+{sec:'c1',comp:'C1',topic:'Translators: assemblers/compilers/interpreters',diff:'found',type:'mc',
+ stem:"Which of these is NOT a type of language translator?",
+ opts:["Compiler","Interpreter","Assembler","Flowchart"],
+ ans:3,
+ rationale:"<strong>D is correct.</strong> A flowchart is a diagram used for planning logic, not a language translator; compilers, interpreters, and assemblers all translate code.",
+ misconception:"Students sometimes think flowcharts are executed by the computer rather than being a design/planning tool."},
+
+{sec:'c1',comp:'C1',topic:'Translators: assemblers/compilers/interpreters',diff:'inter',type:'mc',
+ stem:"A high-level language such as Python primarily relies on which type of translator to run?",
+ opts:["An assembler only","A compiler that produces a standalone .exe every time it runs","An interpreter, which executes statements directly, often without producing a separate machine-code file","A linker only"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Python code is typically executed by an interpreter, which reads and runs source statements without necessarily producing a permanent standalone executable.",
+ misconception:"Students sometimes assume all high-level languages must be compiled into a .exe file to run at all."},
+
+{sec:'c1',comp:'C1',topic:'Translators: assemblers/compilers/interpreters',diff:'adv',type:'mc',
+ stem:"A junior developer says, 'The compiler is running my program right now.' What is imprecise about this statement?",
+ opts:["Compilers cannot process any language","A compiler translates code before execution; it is not the mechanism that executes the running program","Compilers only work on assembly language","There is no imprecision — the statement is accurate"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A compiler's job is translation, which happens before execution. Once translated, the resulting machine code is executed by the CPU/operating system, not by the compiler itself.",
+ misconception:"Students often conflate the translation step with the execution step, treating the compiler as though it stays active while the program runs."},
+
+// --- IDEs and development environments (4) ---
+{sec:'c1',comp:'C1',topic:'IDEs',diff:'found',type:'mc',
+ stem:"What does IDE stand for in the context of software development?",
+ opts:["Interpreted Development Executable","Integrated Development Environment","Internal Data Encoder","Isolated Debugging Engine"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> IDE stands for Integrated Development Environment, a software application that bundles tools like an editor, debugger, and often a compiler or interpreter.",
+ misconception:"Students sometimes confuse IDE with a single tool like a text editor, missing that it integrates multiple tools."},
+
+{sec:'c1',comp:'C1',topic:'IDEs',diff:'found',type:'mc',
+ stem:"Which of the following is a benefit commonly provided by an IDE?",
+ opts:["It removes the need to ever test a program","Syntax highlighting, integrated debugging, and code completion in one environment","It guarantees the program has no logic errors","It replaces the need for pseudocode entirely"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> IDEs commonly bundle features like syntax highlighting, debugging tools, and code completion to streamline development.",
+ misconception:"Students sometimes think an IDE guarantees correctness rather than simply supporting the development process."},
+
+{sec:'c1',comp:'C1',topic:'IDEs',diff:'inter',type:'mc',
+ stem:"A student writes code in a plain text editor with no debugging tools, syntax highlighting, or build integration. What is missing compared to using an IDE?",
+ opts:["Nothing — plain text editors and IDEs are functionally identical","The integrated tooling that supports writing, testing, and debugging code within one environment","The ability to save the file","The ability to use variables"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The defining feature of an IDE is the integration of multiple development tools in one environment; a plain text editor lacks that integration.",
+ misconception:"Students sometimes assume any code editor qualifies as an IDE regardless of whether it integrates debugging or build tools."},
+
+{sec:'c1',comp:'C1',topic:'IDEs',diff:'inter',type:'mc',
+ stem:"Which scenario best justifies choosing an IDE over a plain text editor for a new scripting project?",
+ opts:["The project has zero lines of code","The developer wants built-in debugging and error highlighting while writing a multi-file project","The script will only ever be run once and deleted","The developer does not want any tooling support"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> IDEs are most valuable when a project benefits from integrated debugging, error detection, and organization across multiple files.",
+ misconception:"Students sometimes think IDEs are only useful for large compiled applications, not scripting projects."},
+
+// --- Pseudocode syntax and conventions (5) ---
+{sec:'c1',comp:'C1',topic:'Pseudocode conventions',diff:'found',type:'mc',
+ stem:"What is the primary purpose of pseudocode?",
+ opts:["To execute directly on a computer without translation","To describe an algorithm's logic in plain, structured language before writing actual code","To replace the need for testing","To serve as the final compiled output of a program"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Pseudocode is a structured, language-independent way to describe an algorithm's logic before implementation in a real programming language.",
+ misconception:"Students sometimes think pseudocode must follow a specific language's exact syntax rules."},
+
+{sec:'c1',comp:'C1',topic:'Pseudocode conventions',diff:'found',type:'mc',
+ stem:"Why is pseudocode useful when planning a program before writing real code?",
+ opts:["It lets a developer focus on logic and structure without worrying about a specific language's syntax","It automatically becomes the final program","It eliminates the need for variables","It can only be understood by compilers"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Pseudocode allows the developer to plan control flow and logic without getting bogged down in language-specific syntax rules.",
+ misconception:"Students sometimes treat pseudocode as throwaway busywork rather than a genuine planning tool that reduces logic errors later."},
+
+{sec:'c1',comp:'C1',topic:'Pseudocode conventions',diff:'inter',type:'mc',
+ stem:"Which of the following is written in an appropriate pseudocode style for a loop that sums input values until a sentinel of 0 is entered?",
+ opts:["sum = 0; while (val != 0) { sum += val; val = input(); }","sum = 0\nval = Get next input\nwhile val != 0\n   sum = sum + val\n   val = Get next input","for(int i=0;i<10;i++){sum+=val;}","SUM.EQUALS(0).THEN.LOOP.UNTIL.ZERO"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> This option uses plain structured language and indentation to express the loop's logic without binding to a specific programming language's exact syntax, which is the hallmark of good pseudocode.",
+ misconception:"Students often default to writing actual language syntax (like C-style braces and semicolons) instead of plain structured pseudocode."},
+
+{sec:'c1',comp:'C1',topic:'Pseudocode conventions',diff:'inter',type:'mc',
+ stem:"A pseudocode document uses consistent indentation to show which statements belong inside a loop or conditional. What is the primary reason this convention matters?",
+ opts:["Indentation is required for the pseudocode to compile","Indentation visually communicates the scope and structure of the logic to a human reader","Indentation determines variable data types","Indentation replaces the need for a stem in the question"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because pseudocode is not executed by a machine, indentation exists purely to communicate structure and scope clearly to human readers.",
+ misconception:"Students sometimes think indentation in pseudocode has functional significance the way it does in a language like Python, when its role is purely for readability."},
+
+{sec:'c1',comp:'C1',topic:'Pseudocode conventions',diff:'adv',type:'mc',
+ stem:"A developer is translating pseudocode into Python but the pseudocode line reads: 'if age is at least 18 and has valid ID, allow entry.' Which Python-style conditional most faithfully preserves the intended logic?",
+ opts:["if age >= 18 or has_valid_id:", "if age >= 18 and has_valid_id:", "if age > 18 and has_valid_id:", "if age >= 18: has_valid_id"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> 'At least 18' translates to >= 18, and the pseudocode requires both conditions to be true, which maps to a logical AND, not OR.",
+ misconception:"Students sometimes swap AND/OR when translating natural-language conjunctions, or mistranslate 'at least' as a strict greater-than."},
+
+// --- Flowchart symbols (5) ---
+{sec:'c1',comp:'C1',topic:'Flowchart symbols',diff:'found',type:'mc',
+ stem:"In standard flowchart notation, which shape represents a decision point?",
+ opts:["Rectangle","Oval","Diamond","Parallelogram"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> A diamond shape represents a decision point, where the flow branches based on a condition.",
+ misconception:"Students sometimes confuse the diamond (decision) with the rectangle (process step)."},
+
+{sec:'c1',comp:'C1',topic:'Flowchart symbols',diff:'found',type:'mc',
+ stem:"Which flowchart shape marks the start or stop point of a program's logic?",
+ opts:["Diamond","Oval / rounded shape","Rectangle","Parallelogram"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> An oval or rounded shape is the standard symbol for the start and stop points of a flowchart.",
+ misconception:"Students sometimes use a rectangle for start/stop, confusing it with a process step."},
+
+{sec:'c1',comp:'C1',topic:'Flowchart symbols',diff:'inter',type:'mc',
+ stem:"A flowchart shows a parallelogram symbol containing the text 'Enter your age.' What does this symbol most likely represent?",
+ opts:["A processing step, like an arithmetic calculation","An input or output operation","A decision point","The end of the program"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A parallelogram is the standard symbol for input/output operations, such as prompting for and receiving user input.",
+ misconception:"Students sometimes assume every shape besides the diamond and oval represents a generic processing step, missing that parallelograms specifically denote I/O."},
+
+{sec:'c1',comp:'C1',topic:'Flowchart symbols',diff:'inter',type:'mc',
+ stem:"In a flowchart, a rectangle labeled 'total = total + price' would represent which type of step?",
+ opts:["A decision","An input/output operation","A processing/assignment step","The start of the program"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> A rectangle represents a processing step, such as an assignment or calculation, which this arithmetic update to `total` is.",
+ misconception:"Students sometimes label any rectangle in a flowchart as 'the program' generally rather than recognizing it as a specific processing step."},
+
+{sec:'c1',comp:'C1',topic:'Flowchart symbols',diff:'adv',type:'mc',
+ stem:"A flowchart segment shows: Oval (Start) → Parallelogram (Get age) → Diamond (age >= 18?) → two paths leading to two Rectangles ('Set status = Adult' / 'Set status = Minor') → both paths merge into an Oval (Stop). What logic does this flowchart represent?",
+ opts:["A loop that repeats until age is 18","A conditional that assigns a status based on whether age is at least 18, then ends","An error-handling routine with no decision logic","A flowchart with no valid start or stop points"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The diamond creates a branch based on the age comparison, each branch assigns a different status in a rectangle, and both paths converge before reaching the stop oval — a straightforward if/else structure, not a loop.",
+ misconception:"Students sometimes assume any diamond in a flowchart implies a loop, rather than recognizing a simple one-time branch that merges back together."},
+
+// --- Requirements analysis (4) ---
+{sec:'c1',comp:'C1',topic:'Requirements analysis',diff:'found',type:'mc',
+ stem:"What is the primary purpose of requirements analysis before writing a program?",
+ opts:["To write the final code immediately","To identify what the program needs to accomplish, including its inputs, outputs, and constraints, before implementation begins","To skip the design phase entirely","To determine the programmer's salary"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Requirements analysis clarifies what a program must do — its needed inputs, outputs, and constraints — before any code is written.",
+ misconception:"Students sometimes treat requirements analysis as optional busywork rather than the step that prevents costly rework later."},
+
+{sec:'c1',comp:'C1',topic:'Requirements analysis',diff:'found',type:'mc',
+ stem:"A client says, 'I want an app that tracks employee hours and calculates weekly pay.' What phase of development does this statement primarily belong to?",
+ opts:["Testing","Requirements gathering","Compilation","Debugging"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A high-level statement of what the software should do is part of requirements gathering, which precedes design and implementation.",
+ misconception:"Students sometimes assume requirements gathering only happens through formal documents, missing that plain client statements are a primary source."},
+
+{sec:'c1',comp:'C1',topic:'Requirements analysis',diff:'inter',type:'mc',
+ stem:"During requirements analysis for a grade calculator, a developer determines the program needs: student scores as input, a letter grade as output, and a rule that scores must be between 0 and 100. What has the developer identified?",
+ opts:["Only the outputs","Inputs, outputs, and a constraint on valid data","Only the algorithm's time complexity","The final compiled machine code"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The developer has identified the required inputs (scores), the required output (letter grade), and a constraint on valid input values (0–100).",
+ misconception:"Students sometimes treat constraints as a separate, optional category rather than a core part of requirements analysis alongside inputs and outputs."},
+
+{sec:'c1',comp:'C1',topic:'Requirements analysis',diff:'inter',type:'mc',
+ stem:"Why is it problematic to begin writing code before requirements analysis is complete?",
+ opts:["It is not problematic; requirements can always be added after the code is finished with no cost","The developer risks building a program that does not solve the actual problem, requiring rework once the real requirements surface","Code cannot be written without a compiler installed first","Requirements analysis is only relevant to compiled languages"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Skipping or rushing requirements analysis risks building the wrong solution, which is typically far more costly to fix after implementation than to clarify beforehand.",
+ misconception:"Students sometimes think requirements gathering is a formality rather than a risk-reduction step tied directly to development cost."},
+
+// --- Input/output identification (4) ---
+{sec:'c1',comp:'C1',topic:'Input/output identification',diff:'found',type:'mc',
+ stem:"In a program that asks a user to type their name and then displays a greeting, what is the input?",
+ opts:["The greeting message","The name typed by the user","The program's source code","The variable declaration"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The name typed by the user is data entering the program, which makes it the input; the greeting is the output.",
+ misconception:"Students occasionally reverse input and output when a program both requests and displays information in close proximity."},
+
+{sec:'c1',comp:'C1',topic:'Input/output identification',diff:'found',type:'mc',
+ stem:"A program calculates the total cost of groceries and displays it on the screen. What is the output?",
+ opts:["The list of grocery item prices entered by the user","The total cost displayed on the screen","The name of the store","The programming language used"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The displayed total cost is the result the program produces for the user, making it the output. The entered prices are the inputs.",
+ misconception:"Students sometimes label anything shown to the user as 'input' rather than distinguishing what the program receives versus what it produces."},
+
+{sec:'c1',comp:'C1',topic:'Input/output identification',diff:'inter',type:'mc',
+ stem:"A weather app requires a ZIP code from the user and returns a forecast. Which correctly identifies the input and output?",
+ opts:["Input: forecast; Output: ZIP code","Input: ZIP code; Output: forecast","Both the ZIP code and forecast are inputs","Both the ZIP code and forecast are outputs"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The ZIP code is data supplied to the program (input), and the forecast is the result the program produces and returns (output).",
+ misconception:"Students sometimes assume any data exchanged with an external source counts as output regardless of direction."},
+
+{sec:'c1',comp:'C1',topic:'Input/output identification',diff:'inter',type:'mc',
+ stem:"During requirements analysis for a temperature converter, which pairing correctly separates input from output?",
+ opts:["Input: Celsius value entered by user; Output: converted Fahrenheit value displayed","Input: converted Fahrenheit value; Output: Celsius value entered by user","Both values are outputs since both are numbers","Neither value is input or output since no file is involved"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> The value the user provides (Celsius) is the input; the value the program calculates and displays (Fahrenheit) is the output.",
+ misconception:"Students sometimes think input/output classification depends on data type or storage rather than the direction data flows relative to the program."},
+
+// --- Variable declaration, naming conventions, scope (5) ---
+{sec:'c1',comp:'C1',topic:'Variables: declaration/naming/scope',diff:'found',type:'mc',
+ stem:"What does it mean to 'declare' a variable in a program?",
+ opts:["To delete the variable from memory", "To reserve a named storage location, typically with a specified data type, before it is used", "To convert the variable into a constant", "To print the variable's value to the screen"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Declaring a variable reserves a named storage location (often with a data type) so the program can later assign and reference a value.",
+ misconception:"Students sometimes conflate declaration with assignment, thinking a variable does not exist until it is given a value."},
+
+{sec:'c1',comp:'C1',topic:'Variables: declaration/naming/scope',diff:'found',type:'mc',
+ stem:"Which of these is generally considered a well-formed, descriptive variable name for storing a student's total score?",
+ opts:["x","totalScore","1score","total score"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> `totalScore` is descriptive and follows valid identifier rules (no spaces, does not start with a digit).",
+ misconception:"Students sometimes prioritize brevity (like single letters) over descriptiveness, especially for variables used throughout a larger program."},
+
+{sec:'c1',comp:'C1',topic:'Variables: declaration/naming/scope',diff:'inter',type:'mc',
+ stem:"A variable declared inside a function is generally only accessible within that function. What programming concept does this describe?",
+ opts:["Data type","Scope","Constant declaration","Compilation"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Scope refers to the region of a program where a variable is accessible; a variable declared inside a function typically has local scope limited to that function.",
+ misconception:"Students sometimes assume any declared variable is accessible everywhere in the program regardless of where it was declared."},
+
+{sec:'c1',comp:'C1',topic:'Variables: declaration/naming/scope',diff:'inter',type:'mc',
+ stem:"A variable named `numItems` is declared outside all functions, at the top level of a script. What is this variable's scope generally called?",
+ opts:["Local scope","Global scope","No scope","Temporary scope"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A variable declared at the top level of a script, outside any function, is generally accessible throughout the file — this is global scope.",
+ misconception:"Students sometimes assume all variables default to global scope regardless of where they are declared."},
+
+{sec:'c1',comp:'C1',topic:'Variables: declaration/naming/scope',diff:'adv',type:'mc',
+ stem:"A function declares a local variable named `total` and modifies it inside the function. A separate global variable also named `total` exists outside the function. What generally happens to the global `total` when the function runs?",
+ opts:["The global `total` is automatically deleted","The global `total` is unaffected, because the local variable inside the function is a distinct variable that only exists within the function's scope","The global `total` is overwritten permanently by the function's local value","A syntax error always occurs when two variables share a name"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because the local variable exists only within the function's scope, changes to it do not affect a same-named variable in the global scope unless the function is explicitly written to modify the global.",
+ misconception:"Students frequently assume that reusing a variable name inside a function automatically links it to a same-named variable elsewhere in the program."},
+
+// --- Constants vs variables (4) ---
+{sec:'c1',comp:'C1',topic:'Constants vs variables',diff:'found',type:'mc',
+ stem:"What is the key difference between a constant and a variable?",
+ opts:["A constant can change value during execution, a variable cannot", "A constant's value is set once and does not change during execution, while a variable's value can change", "Constants can only store text", "Variables cannot be declared with a data type"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A constant is assigned a value once and is not intended to change during program execution, unlike a variable.",
+ misconception:"Students sometimes reverse the definitions, thinking constants are the ones that change."},
+
+{sec:'c1',comp:'C1',topic:'Constants vs variables',diff:'found',type:'mc',
+ stem:"Which of these values is most appropriately declared as a constant rather than a variable?",
+ opts:["A user's current input value", "The number of days in a week (7)", "The running total of a shopping cart", "The current score in a game"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The number of days in a week is a fixed value that never changes during execution, making it appropriate as a constant.",
+ misconception:"Students sometimes declare naturally fixed values as ordinary variables, missing the readability and safety benefits of naming them as constants."},
+
+{sec:'c1',comp:'C1',topic:'Constants vs variables',diff:'inter',type:'mc',
+ stem:"A program repeatedly uses the value 3.14159 for calculations involving circles. What is the main benefit of declaring this as a named constant, such as PI, instead of retyping the literal value each time?",
+ opts:["It makes the program run faster at the CPU level", "It improves readability and makes future updates easier, since the value only needs to change in one place", "It converts the value into an integer automatically", "It removes the need for any variables in the program"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Naming a repeated fixed value as a constant improves readability and centralizes any future change to a single declaration, reducing the risk of inconsistent updates.",
+ misconception:"Students sometimes think constants exist purely for performance reasons rather than for readability and maintainability."},
+
+{sec:'c1',comp:'C1',topic:'Constants vs variables',diff:'inter',type:'mc',
+ stem:"Given integer constant `MAX_SCORE = 100` and integer variable `userScore`, which statement is problematic?",
+ opts:["userScore = 85","userScore = MAX_SCORE","MAX_SCORE = 105","userScore = userScore + 1"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Attempting to reassign a constant after its initial declaration violates the defining property of a constant — its value must not change during execution.",
+ misconception:"Students sometimes assume constants can be reassigned as long as the new value has the same data type as the original."},
+
+// --- Data type selection (3) ---
+{sec:'c1',comp:'C1',topic:'Data type selection',diff:'found',type:'mc',
+ stem:"Which data type is most appropriate for storing whether a user has completed a tutorial (yes or no)?",
+ opts:["integer","float","boolean","string"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> A boolean stores one of two states (true/false), which best fits a yes/no completion status.",
+ misconception:"Students sometimes use an integer (0/1) or a string ('yes'/'no') instead of the more direct and appropriate boolean type."},
+
+{sec:'c1',comp:'C1',topic:'Data type selection',diff:'inter',type:'mc',
+ stem:"A program needs to store a user's exact bank account balance, including cents. Which data type is most appropriate?",
+ opts:["integer","float (or decimal type)","boolean","character"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A monetary value that includes fractional cents requires a floating-point or decimal type rather than an integer, which cannot represent fractional values.",
+ misconception:"Students sometimes default to integer for any numeric value without considering whether fractional precision is required."},
+
+{sec:'c1',comp:'C1',topic:'Data type selection',diff:'adv',type:'mc',
+ stem:"A requirements document specifies a field for 'ZIP code' that must always be exactly 5 digits and is never used in arithmetic. Which data type choice is most defensible, and why?",
+ opts:["integer, because ZIP codes are made of digits","string, because ZIP codes are never used in calculations and may include a leading zero that an integer type would silently drop","float, because it can store more digits than an integer","boolean, because a ZIP code is either valid or invalid"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because ZIP codes are never used arithmetically and can legitimately begin with a leading zero (e.g., 00501), storing them as a string preserves the exact format; an integer type would drop the leading zero.",
+ misconception:"Students often default to integer for anything that looks numeric without considering whether the value is used in calculations or needs to preserve formatting like leading zeros."},
+
+],
+
+c2: [
+// --- Primitive data types (4) ---
+{sec:'c2',comp:'C2',topic:'Primitive data types',diff:'found',type:'mc',
+ stem:"Which data type is used to store a single value like 42, with no decimal component?",
+ opts:["float","integer","string","boolean"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> An integer stores whole numbers with no fractional/decimal component.",
+ misconception:"Students sometimes assume any numeric value defaults to float regardless of whether a decimal is present."},
+
+{sec:'c2',comp:'C2',topic:'Primitive data types',diff:'found',type:'mc',
+ stem:"Which data type is best suited to store a single character, such as 'y' for a yes/no prompt response?",
+ opts:["string","char","integer","boolean"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A char type stores exactly one character, which is the most precise fit for a single letter response.",
+ misconception:"Students often default to string even for single-character values, missing the more specific char type."},
+
+{sec:'c2',comp:'C2',topic:'Primitive data types',diff:'inter',type:'mc',
+ stem:"A variable stores the value 19.99 to represent a product's price. Which primitive type should it be declared as?",
+ opts:["integer","float","boolean","char"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because the value includes a fractional/decimal component, float is the appropriate primitive type, not integer.",
+ misconception:"Students sometimes round or truncate prices to fit an integer type instead of using float to preserve precision."},
+
+{sec:'c2',comp:'C2',topic:'Primitive data types',diff:'inter',type:'mc',
+ stem:"Given: integer x = 7 and float y = 2.0, what is the data type of the result of x / y?",
+ opts:["integer, because x is an integer","float, because at least one operand is a float","boolean","string"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> When an integer and a float are combined in an arithmetic expression, the result is promoted to float.",
+ misconception:"Students sometimes assume the result type always matches the first operand's type rather than the type-promotion rule."},
+
+// --- Arithmetic operators (4) ---
+{sec:'c2',comp:'C2',topic:'Arithmetic operators',diff:'adv',type:'mc',
+ stem:"Given integer values x = 17 and y = 5, what is the value of x % y?",
+ opts:["3.4","2","3","0"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The modulo operator (%) returns the remainder of integer division: 17 divided by 5 is 3 with a remainder of 2.",
+ misconception:"Students frequently compute the quotient (3) instead of the remainder when asked for %."},
+
+{sec:'c2',comp:'C2',topic:'Arithmetic operators',diff:'found',type:'mc',
+ stem:"Which operator is used to find the remainder of an integer division in most pseudocode and programming languages?",
+ opts:["/","%","*","//"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The % (modulo) operator returns the remainder of a division operation.",
+ misconception:"Students sometimes confuse % with the division operator itself rather than the remainder operator."},
+
+{sec:'c2',comp:'C2',topic:'Arithmetic operators',diff:'found',type:'mc',
+ stem:"Given integer x = 9 and integer y = 2, what is the value of x / y using integer division?",
+ opts:["4.5","4","5","0"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Integer division discards the fractional remainder, so 9 / 2 evaluates to 4.",
+ misconception:"Students often give the mathematically exact answer (4.5) rather than applying integer division truncation rules."},
+
+{sec:'c2',comp:'C2',topic:'Arithmetic operators',diff:'inter',type:'mc',
+ stem:"A cashier program computes change owed using integer amounts in cents. Which operator combination correctly determines the number of whole quarters in a change amount, and the cents remaining after removing those quarters?",
+ opts:["Only the / operator is needed for both", "Use / for the number of quarters and % for the remaining cents", "Use % for the number of quarters and / for the remaining cents", "Neither / nor % can be used for this"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Integer division (/) gives the whole number of quarters that fit into the amount, and modulo (%) gives what's left over after removing those quarters.",
+ misconception:"Students often swap the roles of / and %, expecting % to give the count and / to give the remainder."},
+
+// --- Comparison operators (3) ---
+{sec:'c2',comp:'C2',topic:'Comparison operators',diff:'inter',type:'mc',
+ stem:"Which comparison operator evaluates to true only when two values are exactly equal?",
+ opts:["=","==","!=","<>"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The == operator tests for equality; a single = is generally reserved for assignment, not comparison.",
+ misconception:"Students frequently confuse the assignment operator (=) with the equality comparison operator (==)."},
+
+{sec:'c2',comp:'C2',topic:'Comparison operators',diff:'adv',type:'mc',
+ stem:"Given integer age = 17, which expression correctly evaluates whether age is NOT equal to 18?",
+ opts:["age = 18","age == 18","age != 18","age <= 18"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> The != operator tests for inequality; age != 18 evaluates to true here since 17 does not equal 18.",
+ misconception:"Students sometimes reach for <= or >= when the requirement is strictly 'not equal,' overcomplicating a simple != check."},
+
+{sec:'c2',comp:'C2',topic:'Comparison operators',diff:'found',type:'mc',
+ stem:"Given integer score = 82, what does the expression score >= 80 evaluate to?",
+ opts:["true","false","82","An error"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Since 82 is greater than or equal to 80, the comparison evaluates to the boolean value true.",
+ misconception:"Students sometimes think a comparison expression evaluates to the numeric operand rather than to a boolean true/false."},
+
+// --- Logical operators (4) ---
+{sec:'c2',comp:'C2',topic:'Logical operators',diff:'found',type:'mc',
+ stem:"Which logical operator requires BOTH conditions to be true for the overall expression to be true?",
+ opts:["or","not","and","xor"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> The `and` operator only evaluates to true when both connected conditions are true.",
+ misconception:"Students sometimes confuse `and` with `or`, expecting either condition alone to satisfy the expression."},
+
+{sec:'c2',comp:'C2',topic:'Logical operators',diff:'inter',type:'mc',
+ stem:"Given boolean values a = true and b = false, what does (a or b) evaluate to?",
+ opts:["true","false","undefined","An error"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> `or` evaluates to true if at least one operand is true; since a is true, the expression is true regardless of b.",
+ misconception:"Students sometimes treat `or` like `and`, requiring both operands to be true."},
+
+{sec:'c2',comp:'C2',topic:'Logical operators',diff:'inter',type:'mc',
+ stem:"Given boolean value isRaining = false, what does not(isRaining) evaluate to?",
+ opts:["true","false","isRaining","An error, since not cannot be applied to booleans"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> The `not` operator inverts a boolean value; not(false) evaluates to true.",
+ misconception:"Students sometimes think `not` only applies to numeric or comparison expressions rather than boolean values directly."},
+
+{sec:'c2',comp:'C2',topic:'Logical operators',diff:'adv',type:'mc',
+ stem:"A discount applies if a customer is a member AND has spent over $50, OR if the customer has a coupon. Which expression correctly captures this rule?",
+ opts:["(isMember and spent > 50) or hasCoupon","isMember and (spent > 50 or hasCoupon)","isMember or spent > 50 and hasCoupon","not(isMember) and (spent > 50 or hasCoupon)"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> The rule requires (membership AND spending threshold) as one path, OR a coupon as an independent second path — matching operator precedence, `and` binds tighter than `or`, so the parentheses in option A correctly group the intended logic.",
+ misconception:"Students often misplace parentheses or rely on default precedence incorrectly, producing a rule that requires the coupon condition alongside membership rather than as an independent alternative."},
+
+// --- Assignment & compound assignment (3) ---
+{sec:'c2',comp:'C2',topic:'Assignment and compound assignment',diff:'found',type:'mc',
+ stem:"Given integer total = 5, what is the value of total after executing total += 3?",
+ opts:["3","5","8","15"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> The compound assignment total += 3 is shorthand for total = total + 3, so 5 + 3 = 8.",
+ misconception:"Students sometimes think += replaces the current value rather than adding to it."},
+
+{sec:'c2',comp:'C2',topic:'Assignment and compound assignment',diff:'found',type:'mc',
+ stem:"Which statement correctly decreases the value of integer variable count by 1?",
+ opts:["count =+ 1","count -= 1","count == count - 1","count =- count"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> count -= 1 is shorthand for count = count - 1, correctly decreasing the value by one.",
+ misconception:"Students sometimes reverse the compound operator symbols (writing =+ or =- instead of += or -=), which changes the meaning or causes a syntax error in most languages."},
+
+{sec:'c2',comp:'C2',topic:'Assignment and compound assignment',diff:'inter',type:'mc',
+ stem:"Given integer price = 10, what is the final value of price after executing: price *= 2, then price -= 5?",
+ opts:["5","10","15","20"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> price *= 2 makes price 20 (10 * 2), then price -= 5 makes it 15 (20 - 5).",
+ misconception:"Students sometimes apply the two compound operations out of order or forget that each statement uses the updated value from the prior line."},
+
+// --- Operator precedence (3) ---
+{sec:'c2',comp:'C2',topic:'Operator precedence',diff:'inter',type:'mc',
+ stem:"Given the expression 2 + 3 * 4, what is the result, assuming standard operator precedence?",
+ opts:["20","14","24","9"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Multiplication is evaluated before addition under standard precedence rules: 3 * 4 = 12, then 2 + 12 = 14.",
+ misconception:"Students sometimes evaluate strictly left to right, ignoring that multiplication has higher precedence than addition."},
+
+{sec:'c2',comp:'C2',topic:'Operator precedence',diff:'adv',type:'mc',
+ stem:"Given the expression (2 + 3) * 4 versus 2 + 3 * 4, why do these two expressions produce different results?",
+ opts:["They do not actually produce different results","Parentheses override default operator precedence, forcing the addition to happen before the multiplication in the first expression","Multiplication always happens first regardless of parentheses","Addition always happens first regardless of parentheses"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Parentheses have the highest precedence and force the enclosed operation to be evaluated first, which is why (2+3)*4 = 20 while 2+3*4 = 14.",
+ misconception:"Students sometimes think parentheses are only stylistic and do not actually change the order of evaluation."},
+
+{sec:'c2',comp:'C2',topic:'Operator precedence',diff:'found',type:'mc',
+ stem:"Which operator generally has the highest precedence among the following?",
+ opts:["Addition (+)","Multiplication (*)","Parentheses ( )","Comparison (==)"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Expressions inside parentheses are always evaluated first, before any other operator is applied.",
+ misconception:"Students sometimes assume multiplication always has the absolute highest precedence, forgetting parentheses override it."},
+
+// --- Conditional logic (4) ---
+{sec:'c2',comp:'C2',topic:'Conditional logic',diff:'found',type:'mc',
+ stem:"In an if/elif/else chain, when does the code inside the `else` block execute?",
+ opts:["Every time, regardless of the conditions above it","Only when none of the preceding if/elif conditions evaluated to true","Only when the first if condition is true","Never — else blocks are optional and unreachable"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The else block executes only as a fallback, when none of the preceding if/elif conditions were true.",
+ misconception:"Students sometimes think else runs in addition to a true branch above it rather than only as a fallback."},
+
+{sec:'c2',comp:'C2',topic:'Conditional logic',diff:'inter',type:'mc',
+ stem:"Given integer x = 15, trace the code below. What is output?",
+ code:true,
+ stemCode:"if x > 20\n   Put \"High\" to output\nelseif x > 10\n   Put \"Medium\" to output\nelse\n   Put \"Low\" to output",
+ opts:["High","Medium","Low","HighMedium"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> x > 20 is false (15 is not greater than 20), so the chain checks the elseif: x > 10 is true (15 > 10), so \"Medium\" is output and the chain stops.",
+ misconception:"Students sometimes continue checking conditions after one elseif branch is already true, incorrectly outputting multiple branches."},
+
+{sec:'c2',comp:'C2',topic:'Conditional logic',diff:'inter',type:'mc',
+ stem:"A nested conditional checks eligibility: an outer if verifies age >= 18, and only if true, an inner if checks hasID == true. If age = 16, what happens to the inner if statement?",
+ opts:["It still executes and is checked independently", "It never executes, because the outer condition was false", "It causes a runtime error", "It automatically evaluates to true"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> In a nested conditional, the inner if only executes when the outer condition is true; since age >= 18 is false here, the inner check is skipped entirely.",
+ misconception:"Students sometimes think nested conditionals are evaluated independently of their enclosing condition."},
+
+{sec:'c2',comp:'C2',topic:'Conditional logic',diff:'adv',type:'mc',
+ stem:"Given integer temp = 32, trace the code below. What is output?",
+ code:true,
+ stemCode:"if temp <= 32\n   Put \"Freezing \" to output\nif temp <= 50\n   Put \"Cold \" to output\nelse\n   Put \"Warm \" to output",
+ opts:["Freezing", "Freezing Cold", "Cold", "Freezing Warm"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> These are two separate, independent if statements rather than one if/elif chain. temp <= 32 is true, so \"Freezing \" outputs; then temp <= 50 is also true (independently evaluated), so \"Cold \" outputs. The else only pairs with the second if.",
+ misconception:"Students often treat two back-to-back if statements as if they were a single if/elif chain, missing that both independent conditions can fire."},
+
+// --- For loops (4) ---
+{sec:'c2',comp:'C2',topic:'For loops',diff:'found',type:'mc',
+ stem:"Which loop type is generally best suited for iterating a known, fixed number of times?",
+ opts:["A while loop with no counter","A for loop","An if statement","A function call"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A for loop is designed for iterating a known or countable number of times, typically using a counter variable.",
+ misconception:"Students sometimes default to while loops even when the number of iterations is already known in advance."},
+
+{sec:'c2',comp:'C2',topic:'For loops',diff:'found',type:'mc',
+ stem:"Trace the code below. How many times does the loop body execute?",
+ code:true,
+ stemCode:"for i = 0; i < 5; i = i + 1\n   Put i to output",
+ opts:["4","5","6","Infinite"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> i starts at 0 and the loop continues while i < 5, executing for i = 0,1,2,3,4 — five total iterations.",
+ misconception:"Students often miscount by one, forgetting that the loop starts at 0 and stops before i reaches the bound."},
+
+{sec:'c2',comp:'C2',topic:'For loops',diff:'inter',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"integer sum = 0\nfor i = 1; i <= 4; i = i + 1\n   sum = sum + i\nPut sum to output",
+ opts:["6","10","9","4"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The loop adds 1+2+3+4 to sum: sum starts at 0, then becomes 1, 3, 6, and finally 10.",
+ misconception:"Students sometimes forget to include the final iteration (i = 4) since the condition is <= rather than <, undercounting the sum."},
+
+{sec:'c2',comp:'C2',topic:'For loops',diff:'inter',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"for i = 10; i > 0; i = i - 2\n   Put i to output\n   Put \" \" to output",
+ opts:["10 8 6 4 2","10 8 6 4 2 0","10 9 8 7 6 5 4 3 2 1","2 4 6 8 10"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Starting at 10 and decreasing by 2 each iteration while i > 0 (strictly greater than 0), the loop outputs 10, 8, 6, 4, 2 and stops before reaching 0.",
+ misconception:"Students sometimes include 0 in the output, missing that the condition i > 0 is strict and excludes 0."},
+
+// --- While loops & sentinel (4) ---
+{sec:'c2',comp:'C2',topic:'While loops and sentinel values',diff:'adv',type:'mc',
+ stem:"A loop should keep reading input values and adding them to a total until the user enters -1, which should not be added. Which loop structure correctly implements this sentinel pattern?",
+ opts:["A for loop with a fixed range of 10 iterations","A while loop that reads a value before the loop starts, checks it against the sentinel in the loop condition, and reads the next value at the end of the loop body","A single if statement with no loop", "A while loop with no condition at all"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The standard sentinel pattern reads an initial value before the loop, tests it in the while condition, processes it in the body, and reads the next value at the end of the body so the condition is re-checked with fresh input each pass.",
+ misconception:"Students often forget the priming read before the loop or forget to read a new value at the end of the loop body, causing an infinite loop or a missed/extra iteration."},
+
+{sec:'c2',comp:'C2',topic:'While loops and sentinel values',diff:'found',type:'mc',
+ stem:"What is a 'sentinel value' in the context of a while loop that reads user input?",
+ opts:["The very first value entered by the user, with no special meaning","A special value entered by the user that signals the loop should stop", "The total number of iterations the loop will run", "A value that always causes an error"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A sentinel value is a designated input, such as -1 or 0, that tells the loop to stop reading further input.",
+ misconception:"Students sometimes think the sentinel value must always be processed like ordinary input rather than recognizing it should typically be excluded from processing."},
+
+{sec:'c2',comp:'C2',topic:'While loops and sentinel values',diff:'found',type:'mc',
+ stem:"Trace the code below. How many times is \"Hi \" output?",
+ code:true,
+ stemCode:"integer count = 0\nwhile count < 3\n   Put \"Hi \" to output\n   count = count + 1",
+ opts:["2","3","4","Infinite"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The loop runs while count < 3, executing for count = 0, 1, 2 — three total iterations — before count reaches 3 and the loop exits.",
+ misconception:"Students sometimes forget that count starts at 0, leading to an off-by-one miscount."},
+
+{sec:'c2',comp:'C2',topic:'While loops and sentinel values',diff:'inter',type:'mc',
+ stem:"What is the primary problem with the loop below?",
+ code:true,
+ stemCode:"integer x = 5\nwhile x > 0\n   Put x to output",
+ opts:["It will not execute at all", "It is an infinite loop, because x is never updated inside the loop body", "It will output x exactly once", "It causes a syntax error"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Since x is never modified inside the loop body, the condition x > 0 remains true forever, creating an infinite loop.",
+ misconception:"Students often focus on the initial value of x rather than checking whether the loop body actually updates the variable the condition depends on."},
+
+// --- Loop control: break/continue (3) ---
+{sec:'c2',comp:'C2',topic:'Loop control (break/continue)',diff:'inter',type:'mc',
+ stem:"What does a `break` statement do when executed inside a loop?",
+ opts:["Skips the current iteration and continues the loop","Immediately exits the loop entirely, regardless of the loop's condition", "Pauses the program until user input is given", "Restarts the loop from the beginning"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> `break` immediately terminates the loop it is inside, transferring control to the first statement after the loop.",
+ misconception:"Students sometimes confuse `break` with `continue`, thinking it skips only the current iteration rather than exiting the loop entirely."},
+
+{sec:'c2',comp:'C2',topic:'Loop control (break/continue)',diff:'adv',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"for i = 1; i <= 5; i = i + 1\n   if i == 3\n      continue\n   Put i to output\n   Put \" \" to output",
+ opts:["1 2 3 4 5", "1 2 4 5", "1 2 3", "1 2"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> `continue` skips the rest of the current iteration's body — when i == 3, the Put statements are skipped, but the loop continues to i = 4 and 5, producing 1 2 4 5.",
+ misconception:"Students sometimes confuse `continue` with `break`, assuming the loop stops entirely once i reaches 3 rather than just skipping that one iteration."},
+
+{sec:'c2',comp:'C2',topic:'Loop control (break/continue)',diff:'found',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"for i = 1; i <= 10; i = i + 1\n   if i == 4\n      break\n   Put i to output",
+ opts:["1 2 3", "1 2 3 4", "1 2 3 4 5 6 7 8 9 10", "4"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> The loop outputs i for 1, 2, 3, and then when i == 4, `break` exits the loop immediately before that value is output.",
+ misconception:"Students sometimes think the value that triggers the break is still output before the loop exits."},
+
+// --- Functions (4) ---
+{sec:'c2',comp:'C2',topic:'Functions',diff:'found',type:'mc',
+ stem:"What is the purpose of a `return` statement in a function?",
+ opts:["To permanently stop the entire program","To send a value back to the code that called the function, and exit the function","To declare a new variable inside the function","To print a value to the screen"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A return statement sends a result back to the caller and ends the function's execution at that point.",
+ misconception:"Students sometimes confuse `return` with an output statement (like Put ... to output), thinking it always displays something to the user rather than passing a value back to calling code."},
+
+{sec:'c2',comp:'C2',topic:'Functions',diff:'inter',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"Function AddOne(integer num) returns integer result\n   result = num + 1\n\nFunction Main() returns nothing\n   integer x\n   x = AddOne(5)\n   Put x to output",
+ opts:["5", "6", "1", "Error: result is not returned"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> AddOne(5) computes result = 5 + 1 = 6 and returns it, so x is assigned 6, which is what outputs.",
+ misconception:"Students sometimes forget the function adds to the argument, outputting the unmodified input value instead."},
+
+{sec:'c2',comp:'C2',topic:'Functions',diff:'inter',type:'mc',
+ stem:"A function is declared as: Function Square(integer n) returns integer. Which best describes `n` in this declaration?",
+ opts:["A return value", "A parameter that receives an argument when the function is called", "A global constant", "A loop counter"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> `n` is a parameter — a placeholder variable that receives the value of whatever argument is passed in when the function is called.",
+ misconception:"Students sometimes conflate 'parameter' and 'argument,' though the parameter is the declared placeholder and the argument is the actual value supplied at the call site."},
+
+{sec:'c2',comp:'C2',topic:'Functions',diff:'adv',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"Function Multiply(integer a, integer b) returns integer product\n   product = a * b\n\nFunction Main() returns nothing\n   integer result\n   result = Multiply(Multiply(2, 3), 4)\n   Put result to output",
+ opts:["9", "20", "24", "Error: cannot nest function calls"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> The inner call Multiply(2, 3) evaluates first, returning 6; then Multiply(6, 4) evaluates to 24, which is assigned to result and output.",
+ misconception:"Students sometimes assume function calls cannot be nested as arguments to another function call, or evaluate the outer call before the inner one resolves."},
+
+// --- String indexing/slicing/methods (4) ---
+{sec:'c2',comp:'C2',topic:'String indexing, slicing, and methods',diff:'found',type:'mc',
+ stem:"Given string word = \"Python\", what is the index of the first character, 'P'?",
+ opts:["1", "0", "-1", "Undefined"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> String indexing is zero-based, so the first character is at index 0.",
+ misconception:"Students coming from everyday counting habits often assume indexing starts at 1 instead of 0."},
+
+{sec:'c2',comp:'C2',topic:'String indexing, slicing, and methods',diff:'found',type:'mc',
+ stem:"Given string s = \"hello\", which built-in operation would typically return the number of characters in the string?",
+ opts:["s.length or len(s), depending on the language", "s.index()", "s.slice()", "s.type()"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> A length function or property (commonly `len(s)` or `s.length`) returns the number of characters in a string.",
+ misconception:"Students sometimes confuse a length operation with an indexing or slicing operation, which return characters or substrings, not a count."},
+
+{sec:'c2',comp:'C2',topic:'String indexing, slicing, and methods',diff:'inter',type:'mc',
+ stem:"Given string s = \"programming\", what does the slice s[0:4] typically return in most languages that use this slicing convention?",
+ opts:["\"prog\"", "\"progr\"", "\"ramming\"", "\"gram\""],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> The slice s[0:4] returns characters starting at index 0 up to, but not including, index 4 — which is \"prog\".",
+ misconception:"Students often assume the ending index in a slice is inclusive, adding one extra character to the result."},
+
+{sec:'c2',comp:'C2',topic:'String indexing, slicing, and methods',diff:'inter',type:'mc',
+ stem:"Given string s = \"Data\", which expression accesses the last character of the string using a negative index (in languages that support it)?",
+ opts:["s[4]", "s[-1]", "s[0]", "s.last()"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A negative index of -1 refers to the last character of the string in languages that support negative indexing.",
+ misconception:"Students sometimes try to access the last character using the string's length as a positive index, which is out of range since indexing is zero-based."},
+
+// --- Lists/arrays creation/indexing/ops (4) ---
+{sec:'c2',comp:'C2',topic:'Lists and arrays',diff:'adv',type:'mc',
+ stem:"A list `scores` contains [72, 85, 91, 68]. After executing scores.sort(), then scores.append(100), what is the final contents of scores?",
+ code:true,
+ opts:["[68, 72, 85, 91, 100]", "[100, 68, 72, 85, 91]", "[72, 85, 91, 68, 100]", "[68, 72, 85, 91]"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> sort() rearranges the list into ascending order first ([68, 72, 85, 91]), and append(100) then adds 100 to the end.",
+ misconception:"Students sometimes apply append() before mentally applying sort(), or forget that sort() reorders the existing elements before the new one is added."},
+
+{sec:'c2',comp:'C2',topic:'Lists and arrays',diff:'found',type:'mc',
+ stem:"Given list fruits = [\"apple\", \"banana\", \"cherry\"], what is fruits[1]?",
+ code:true,
+ opts:["\"apple\"", "\"banana\"", "\"cherry\"", "Index out of range"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Using zero-based indexing, index 1 refers to the second element, which is \"banana\".",
+ misconception:"Students sometimes assume index 1 refers to the first element rather than the second, forgetting indexing starts at 0."},
+
+{sec:'c2',comp:'C2',topic:'Lists and arrays',diff:'found',type:'mc',
+ stem:"Which built-in operation adds a new element to the end of a list?",
+ opts:["remove()", "append()", "sort()", "index()"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> append() adds a new element to the end of an existing list.",
+ misconception:"Students sometimes confuse append() with insert(), which requires specifying a position rather than always adding to the end."},
+
+{sec:'c2',comp:'C2',topic:'Lists and arrays',diff:'inter',type:'mc',
+ stem:"Given list nums = [4, 8, 15, 16], what does len(nums) return?",
+ code:true,
+ opts:["3", "4", "5", "16"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> len(nums) returns the number of elements in the list, which is 4.",
+ misconception:"Students sometimes confuse len() with the value of the last element or the last valid index rather than the count of elements."},
+
+// --- Error/exception handling basics (2) ---
+{sec:'c2',comp:'C2',topic:'Error and exception handling basics',diff:'inter',type:'mc',
+ stem:"What is the primary purpose of a try/except block?",
+ opts:["To make the program run faster", "To catch and handle runtime errors gracefully instead of letting the program crash", "To declare new variables", "To replace the need for conditionals entirely"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A try/except block lets a program attempt an operation that might fail and respond gracefully to an error rather than crashing.",
+ misconception:"Students sometimes think exception handling prevents errors from occurring rather than catching and responding to them after they occur."},
+
+{sec:'c2',comp:'C2',topic:'Error and exception handling basics',diff:'adv',type:'mc',
+ stem:"A program attempts to open a file that does not exist, wrapped in a try/except block that catches FileNotFoundError. What happens when the file is missing?",
+ opts:["The program crashes immediately with no message", "The except block runs, allowing the program to handle the missing file gracefully instead of crashing", "The try block is skipped entirely and nothing happens", "A new file is automatically created with no error"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because the error is caught by the except block matching FileNotFoundError, control passes to that block's handling code instead of the program crashing.",
+ misconception:"Students sometimes assume a caught exception still crashes the program, missing that the entire point of except is to prevent that outcome."},
+
+],
+
+c3: [
+// --- Algorithm definition/properties (4) ---
+{sec:'c3',comp:'C3',topic:'Algorithm definition and properties',diff:'found',type:'mc',
+ stem:"Which of the following is a required property of a valid algorithm?",
+ opts:["It must be written in English","It must eventually terminate after a finite number of steps","It must use recursion","It must produce no output"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A valid algorithm must terminate after a finite number of steps; an algorithm that never ends fails this core property.",
+ misconception:"Students sometimes think any set of instructions qualifies as an algorithm regardless of whether it terminates."},
+
+{sec:'c3',comp:'C3',topic:'Algorithm definition and properties',diff:'found',type:'mc',
+ stem:"Which term describes an algorithm whose steps are clear and free of interpretation, so every step has exactly one meaning?",
+ opts:["Redundant","Unambiguous","Recursive","Heuristic"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> An unambiguous algorithm has precisely defined steps that can be followed the same way every time, with no room for interpretation.",
+ misconception:"Students sometimes confuse 'unambiguous' with 'efficient,' which relate to different algorithm qualities."},
+
+{sec:'c3',comp:'C3',topic:'Algorithm definition and properties',diff:'inter',type:'mc',
+ stem:"Which of these is NOT typically considered a required property of a well-formed algorithm?",
+ opts:["Executable — each step can actually be carried out", "Unambiguous — each step has a single clear meaning", "Terminating — the algorithm eventually finishes", "Written in a specific programming language"],
+ ans:3,
+ rationale:"<strong>D is correct.</strong> An algorithm can be expressed in pseudocode, plain language, or a flowchart; it does not need to be written in any specific programming language to be valid.",
+ misconception:"Students sometimes conflate 'algorithm' with 'program,' assuming an algorithm must already be implemented in code."},
+
+{sec:'c3',comp:'C3',topic:'Algorithm definition and properties',diff:'inter',type:'mc',
+ stem:"A set of instructions for making coffee includes the step 'add coffee until it tastes right.' Why does this violate the unambiguous property of a valid algorithm?",
+ opts:["It has too many steps", "It is subjective and different people would interpret 'tastes right' differently, so the step has no single clear meaning", "It does not terminate", "It cannot be written in pseudocode"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A subjective condition like 'tastes right' can be interpreted differently by different people, which violates the requirement that each step have one precise, unambiguous meaning.",
+ misconception:"Students sometimes focus on whether a step is possible to do (executability) rather than whether it is precisely and objectively defined (unambiguity)."},
+
+// --- Pseudocode tracing / output prediction (5) ---
+{sec:'c3',comp:'C3',topic:'Pseudocode tracing',diff:'adv',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"integer x = 3\ninteger y = 0\nwhile x > 0\n   y = y + x\n   x = x - 1\nPut y to output",
+ opts:["3", "5", "6", "9"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Tracing: x=3,y=3; x=2,y=5; x=1,y=6; then x becomes 0 and the loop stops. Final y = 6 (3+2+1).",
+ misconception:"Students sometimes forget to trace every iteration precisely and instead guess based on the starting value of x alone."},
+
+{sec:'c3',comp:'C3',topic:'Pseudocode tracing',diff:'found',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"integer a = 4\ninteger b = a + 2\nPut b to output",
+ opts:["4", "6", "2", "Error"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> b is assigned the value of a (4) plus 2, so b = 6, which is what outputs.",
+ misconception:"Students sometimes output the value of a instead of tracing the full expression assigned to b."},
+
+{sec:'c3',comp:'C3',topic:'Pseudocode tracing',diff:'found',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"integer x = 10\nx = x - 3\nx = x * 2\nPut x to output",
+ opts:["7", "14", "20", "17"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> x starts at 10, becomes 7 after subtracting 3, then becomes 14 after multiplying by 2.",
+ misconception:"Students sometimes apply the operations in the wrong order or forget that each line updates x sequentially rather than independently."},
+
+{sec:'c3',comp:'C3',topic:'Pseudocode tracing',diff:'inter',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"integer i = 1\ninteger product = 1\nwhile i <= 4\n   product = product * i\n   i = i + 1\nPut product to output",
+ opts:["10", "24", "12", "4"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Tracing: product=1*1=1,i=2; product=1*2=2,i=3; product=2*3=6,i=4; product=6*4=24,i=5, loop stops. Final product = 24.",
+ misconception:"Students sometimes compute a running sum instead of a running product, arriving at 10 (1+2+3+4) by mistake."},
+
+{sec:'c3',comp:'C3',topic:'Pseudocode tracing',diff:'inter',type:'mc',
+ stem:"Trace the code below. What is output?",
+ code:true,
+ stemCode:"string msg = \"\"\nfor i = 1; i <= 3; i = i + 1\n   msg = msg + \"go\"\nPut msg to output",
+ opts:["\"go\"", "\"gogo\"", "\"gogogo\"", "\"go go go\""],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> The loop runs 3 times, appending \"go\" to msg each time with no separator, producing \"gogogo\".",
+ misconception:"Students sometimes assume a space is automatically inserted between concatenated strings even though none is coded."},
+
+// --- Flowchart reading / decision branch tracing (4) ---
+{sec:'c3',comp:'C3',topic:'Flowchart reading',diff:'found',type:'mc',
+ stem:"In a flowchart, if a diamond's condition evaluates to false, what determines which path the flow takes next?",
+ opts:["The flow always stops", "The labeled 'No' (or false) branch leading out of the diamond", "The flow restarts from the beginning oval", "Nothing — false conditions have no defined path"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Each decision diamond has labeled branches (commonly Yes/No or True/False); a false result follows the branch labeled accordingly.",
+ misconception:"Students sometimes assume a false condition halts the flowchart rather than simply directing it down the other labeled branch."},
+
+{sec:'c3',comp:'C3',topic:'Flowchart reading',diff:'found',type:'mc',
+ stem:"A flowchart loop is drawn with an arrow leading from the bottom of a process rectangle back up to a decision diamond above it. What does this looping arrow represent?",
+ opts:["A one-time jump with no repetition", "Repeated execution of the steps between the diamond and the rectangle, as long as the decision condition allows it", "An error in the flowchart", "The end of the program"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A backward-pointing arrow to a decision diamond is the standard way a flowchart depicts a loop, repeating the enclosed steps while the condition holds.",
+ misconception:"Students sometimes read every arrow as strictly moving the flow forward, missing that a backward arrow specifically denotes iteration."},
+
+{sec:'c3',comp:'C3',topic:'Flowchart reading',diff:'inter',type:'mc',
+ stem:"A flowchart shows: Start → Get num → Diamond (num < 0?) → Yes path leads to Rectangle ('Put \"Negative\"') → merges to Rectangle ('Put \"Done\"') → Stop; No path leads directly to the same 'Done' rectangle. If num = 5, what is output?",
+ opts:["Negative\\nDone", "Done", "Negative", "Nothing is output"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Since num = 5 is not less than 0, the flow follows the No path directly to 'Done,' skipping the 'Negative' rectangle entirely.",
+ misconception:"Students sometimes trace both branches of a decision diamond instead of following only the single branch that matches the evaluated condition."},
+
+{sec:'c3',comp:'C3',topic:'Flowchart reading',diff:'inter',type:'mc',
+ stem:"A flowchart has a diamond labeled 'count < 5?' with the Yes branch looping back to a rectangle that increments count, and the No branch leading to Stop. If count starts at 2, how many times does the increment rectangle execute before reaching Stop?",
+ opts:["2", "3", "5", "Infinite"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> count is checked each pass: 2<5 (inc to 3), 3<5 (inc to 4), 4<5 (inc to 5), then 5<5 is false and the flow exits — three increments total.",
+ misconception:"Students often miscount by including or excluding the boundary check incorrectly, particularly around the value where the condition becomes false."},
+
+// --- Linear search mechanics (4) ---
+{sec:'c3',comp:'C3',topic:'Linear search',diff:'found',type:'mc',
+ stem:"How does a linear search locate a target value in a list?",
+ opts:["It repeatedly divides the list in half", "It checks each element one at a time, in order, until the target is found or the list ends", "It sorts the list first, then jumps to the middle", "It only checks the first and last elements"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Linear search examines each element sequentially from the start until it finds the target or exhausts the list.",
+ misconception:"Students sometimes confuse the mechanics of linear search with binary search's halving approach."},
+
+{sec:'c3',comp:'C3',topic:'Linear search',diff:'found',type:'mc',
+ stem:"Does a linear search require the list to be sorted beforehand?",
+ opts:["Yes, always", "No — linear search works on both sorted and unsorted lists", "Only if the list has more than 10 elements", "Only for lists of strings"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Linear search checks elements one at a time regardless of order, so it works on unsorted lists just as well as sorted ones.",
+ misconception:"Students sometimes assume all search algorithms require sorted data, a requirement that specifically applies to binary search."},
+
+{sec:'c3',comp:'C3',topic:'Linear search',diff:'inter',type:'mc',
+ stem:"In the worst case, how many comparisons does a linear search perform on a list of n elements when the target is not present?",
+ opts:["1", "log2(n)", "n", "n/2"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> If the target is absent, linear search must check all n elements before concluding it is not present.",
+ misconception:"Students sometimes report the average case (n/2) when asked specifically for the worst case."},
+
+{sec:'c3',comp:'C3',topic:'Linear search',diff:'inter',type:'mc',
+ stem:"A linear search is performed on list [12, 7, 44, 3, 9] looking for the value 44. How many comparisons are made before it is found?",
+ code:true,
+ opts:["1", "2", "3", "4"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Linear search checks 12 (no), 7 (no), then 44 (match) — three comparisons before the target is found.",
+ misconception:"Students sometimes count the index (2, since 44 is at index 2) rather than the number of comparisons made (3)."},
+
+// --- Binary search mechanics (4) ---
+{sec:'c3',comp:'C3',topic:'Binary search',diff:'found',type:'mc',
+ stem:"What precondition must be true about a list before binary search can be used correctly?",
+ opts:["The list must contain only integers", "The list must be sorted", "The list must have an even number of elements", "The list must be empty"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Binary search relies on repeatedly halving a sorted range; it does not work correctly on an unsorted list.",
+ misconception:"Students sometimes think binary search works on any list, missing the sorted precondition entirely."},
+
+{sec:'c3',comp:'C3',topic:'Binary search',diff:'found',type:'mc',
+ stem:"On each step, how does binary search decide which half of the remaining list to search next?",
+ opts:["It always searches the left half", "It compares the target to the middle element and eliminates the half that cannot contain the target", "It picks a half at random", "It searches both halves simultaneously and independently"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Binary search compares the target to the middle element; based on whether the target is smaller or larger, it discards the half of the list that cannot contain it.",
+ misconception:"Students sometimes think binary search checks every element in the smaller half rather than repeating the same halving process within it."},
+
+{sec:'c3',comp:'C3',topic:'Binary search',diff:'inter',type:'mc',
+ stem:"Given sorted list [2, 5, 8, 12, 16, 23, 38, 45], how many elements are eliminated after the first comparison of a binary search for the value 45?",
+ code:true,
+ opts:["0", "3", "4", "7"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> The middle element (index 3, value 12) is compared to 45; since 45 is larger, the left half including the middle (4 elements: 2, 5, 8, 12) is eliminated.",
+ misconception:"Students sometimes forget to include the middle element itself in the eliminated half, undercounting by one."},
+
+{sec:'c3',comp:'C3',topic:'Binary search',diff:'inter',type:'mc',
+ stem:"A binary search is run on sorted list [1, 4, 6, 9, 11, 15, 19] for the value 9. What is the sequence of middle elements compared?",
+ code:true,
+ opts:["1, 4, 6", "9 only", "9, then 6 or 11 depending on tie-breaking, then done", "19, 15, 11"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The first middle element checked (index 3) is 9, which immediately matches the target, so the search ends after a single comparison.",
+ misconception:"Students sometimes assume binary search always takes multiple steps regardless of where the target happens to land relative to the midpoint."},
+
+// --- Linear vs binary comparison (3) ---
+{sec:'c3',comp:'C3',topic:'Linear vs binary search comparison',diff:'found',type:'mc',
+ stem:"For a very large sorted list, which search algorithm is generally more efficient?",
+ opts:["Linear search, because it checks every element carefully", "Binary search, because it eliminates half the remaining elements with each comparison", "They are always equally efficient", "Neither can be used on a large list"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Binary search's halving approach scales much better on large sorted lists than linear search's element-by-element approach.",
+ misconception:"Students sometimes think 'checking every element' is inherently more thorough and therefore better, missing the efficiency tradeoff."},
+
+{sec:'c3',comp:'C3',topic:'Linear vs binary search comparison',diff:'inter',type:'mc',
+ stem:"A list of unsorted data must be searched exactly once for a single value, and sorting it first would take longer than simply scanning it. Which search approach is more appropriate here, and why?",
+ opts:["Binary search, because it is always faster", "Linear search, because the cost of sorting the data first would outweigh the benefit of a single binary search", "Neither approach works on unsorted data", "Binary search, because sorting is not actually required"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Since binary search requires sorted data and the data is unsorted, and sorting for a single search isn't worth the added cost, a direct linear search is the more practical choice here.",
+ misconception:"Students sometimes reach for binary search purely because it is theoretically faster, without accounting for the cost of sorting first."},
+
+{sec:'c3',comp:'C3',topic:'Linear vs binary search comparison',diff:'adv',type:'mc',
+ stem:"A phone book application performs thousands of searches per day on a contact list that rarely changes. Which search strategy makes the most sense, and why?",
+ opts:["Linear search every time, since it requires no setup", "Sort the list once, then use binary search repeatedly, since the one-time sorting cost is offset by the efficiency of many subsequent searches", "Avoid searching altogether", "Use binary search on the unsorted list directly"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because the list is searched frequently and changes rarely, the one-time cost of sorting is quickly outweighed by the repeated efficiency gains of binary search across many searches.",
+ misconception:"Students sometimes evaluate search strategy based only on a single search's cost, without factoring in how sorting cost amortizes over many repeated searches."},
+
+// --- Selection sort step-by-step (4) ---
+{sec:'c3',comp:'C3',topic:'Selection sort',diff:'found',type:'mc',
+ stem:"What is the basic strategy of selection sort?",
+ opts:["Repeatedly swap adjacent out-of-order elements", "Repeatedly find the minimum (or maximum) of the unsorted portion and move it into its correct position", "Divide the list into two halves recursively", "Insert each element into its correct position one at a time from the front"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Selection sort repeatedly selects the smallest (or largest) remaining unsorted element and places it at the boundary of the sorted portion.",
+ misconception:"Students often confuse selection sort's 'find the minimum' strategy with bubble sort's adjacent-swap strategy."},
+
+{sec:'c3',comp:'C3',topic:'Selection sort',diff:'found',type:'mc',
+ stem:"After the first full pass of a selection sort (ascending order) on [5, 2, 8, 1], what does the list look like?",
+ code:true,
+ opts:["[1, 2, 5, 8]", "[1, 5, 8, 2]", "[2, 5, 8, 1]", "[5, 2, 8, 1]"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Selection sort finds the minimum of the whole list (1) and swaps it into the first position, leaving the rest in their original relative order: [1, 5, 8, 2].",
+ misconception:"Students sometimes assume the entire list is sorted after just one pass, rather than only the first position being finalized."},
+
+{sec:'c3',comp:'C3',topic:'Selection sort',diff:'inter',type:'mc',
+ stem:"Tracing selection sort (ascending) on [4, 1, 3, 2], what does the list look like after two full passes?",
+ code:true,
+ opts:["[1, 2, 3, 4]", "[1, 4, 3, 2]", "[1, 2, 4, 3]", "[4, 1, 3, 2]"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Pass 1: minimum is 1, swap into position 0: [1, 4, 3, 2]. Pass 2: minimum of remaining [4,3,2] is 2, swap into position 1: [1, 2, 4, 3].",
+ misconception:"Students sometimes complete the entire sort in their head instead of carefully tracing exactly two passes as asked."},
+
+{sec:'c3',comp:'C3',topic:'Selection sort',diff:'inter',type:'mc',
+ stem:"For a list of n elements, how many total passes does selection sort typically make to fully sort the list?",
+ opts:["1", "n", "n - 1", "n^2"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Selection sort makes n - 1 passes, since after placing the first n - 1 minimums correctly, the final element is automatically in place.",
+ misconception:"Students sometimes assume the number of passes equals n rather than n - 1, forgetting the last element needs no separate pass."},
+
+// --- Bubble sort step-by-step (4) ---
+{sec:'c3',comp:'C3',topic:'Bubble sort',diff:'adv',type:'mc',
+ stem:"Tracing one full pass of bubble sort (ascending, comparing and swapping adjacent elements left to right) on [5, 3, 8, 1], what is the list after this single pass?",
+ code:true,
+ opts:["[1, 3, 5, 8]", "[3, 5, 1, 8]", "[3, 5, 8, 1]", "[5, 3, 8, 1]"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Step by step: compare 5,3 → swap → [3,5,8,1]; compare 5,8 → no swap; compare 8,1 → swap → [3,5,1,8]... rechecking carefully: after comparing (5,3)→swap→[3,5,8,1], then (5,8)→no swap, then (8,1)→swap→[3,5,1,8]. The largest unsorted element (8) bubbles toward the end but has not yet reached its final position after only one pass, landing at [3,5,1,8].",
+ misconception:"Students often assume a single bubble sort pass fully sorts the list, when in fact only the largest element is guaranteed to reach its correct end position after one pass."},
+
+{sec:'c3',comp:'C3',topic:'Bubble sort',diff:'found',type:'mc',
+ stem:"What is the basic strategy of bubble sort?",
+ opts:["Repeatedly compare and swap adjacent elements that are out of order, passing through the list until no swaps are needed", "Find the minimum of the unsorted portion each pass", "Recursively divide the list in half", "Randomly shuffle elements until sorted"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Bubble sort compares adjacent pairs and swaps them if out of order, repeating passes through the list until it is fully sorted.",
+ misconception:"Students sometimes confuse bubble sort's adjacent-swap approach with selection sort's minimum-finding approach."},
+
+{sec:'c3',comp:'C3',topic:'Bubble sort',diff:'found',type:'mc',
+ stem:"In bubble sort (ascending order), what happens to the largest element in the list after the first complete pass?",
+ opts:["It moves to the front of the list", "It 'bubbles up' to its correct final position at the end of the list", "It is removed from the list", "Nothing changes for the largest element"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Repeated adjacent swaps push the largest element toward the end of the list, where it settles into its correct final position after one full pass.",
+ misconception:"Students sometimes think the smallest element moves into place first, confusing bubble sort's behavior with other algorithms."},
+
+{sec:'c3',comp:'C3',topic:'Bubble sort',diff:'inter',type:'mc',
+ stem:"A list of 6 elements is already sorted, but a naive bubble sort implementation with no early-exit check still runs its full number of passes. What is the main inefficiency this illustrates?",
+ opts:["Bubble sort cannot handle already-sorted lists", "The algorithm keeps making unnecessary comparisons and passes even though no swaps are occurring, wasting time", "Sorted lists cause bubble sort to produce an error", "Bubble sort works faster on sorted lists automatically with no extra code"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Without a check to stop early when a pass makes no swaps, a naive bubble sort keeps running its full number of passes even on data that is already sorted, wasting comparisons.",
+ misconception:"Students sometimes assume all sorting algorithms automatically detect and skip unnecessary work without an explicit optimization being coded in."},
+
+// --- Time complexity (5) ---
+{sec:'c3',comp:'C3',topic:'Time complexity',diff:'found',type:'mc',
+ stem:"Which Big O notation describes an algorithm whose runtime does not grow as the input size increases?",
+ opts:["O(n)", "O(1)", "O(n^2)", "O(log n)"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> O(1), or constant time, describes an algorithm whose runtime stays the same regardless of input size.",
+ misconception:"Students sometimes think O(1) means 'one operation' literally rather than 'runtime independent of input size.'"},
+
+{sec:'c3',comp:'C3',topic:'Time complexity',diff:'found',type:'mc',
+ stem:"Which Big O notation typically describes linear search's worst-case runtime?",
+ opts:["O(1)", "O(n)", "O(log n)", "O(n^2)"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Linear search's worst case grows directly in proportion to the number of elements n, which is O(n).",
+ misconception:"Students sometimes assign O(log n), the complexity of binary search, to linear search by mistake."},
+
+{sec:'c3',comp:'C3',topic:'Time complexity',diff:'inter',type:'mc',
+ stem:"Which Big O notation typically describes binary search's worst-case runtime?",
+ opts:["O(n)", "O(log n)", "O(n^2)", "O(1)"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because binary search halves the remaining elements each step, its worst-case runtime grows logarithmically with input size: O(log n).",
+ misconception:"Students sometimes think halving the list means O(n/2), not realizing that repeated halving corresponds to logarithmic growth."},
+
+{sec:'c3',comp:'C3',topic:'Time complexity',diff:'inter',type:'mc',
+ stem:"A nested loop structure where an outer loop runs n times and an inner loop also runs n times for each outer iteration typically has which time complexity?",
+ opts:["O(n)", "O(log n)", "O(n^2)", "O(1)"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Nested loops that each run proportional to n produce n * n total iterations, which is O(n^2).",
+ misconception:"Students sometimes add the two loop counts (giving O(2n), simplified to O(n)) instead of multiplying them, since the inner loop runs fully for every outer iteration."},
+
+{sec:'c3',comp:'C3',topic:'Time complexity',diff:'adv',type:'mc',
+ stem:"An algorithm's runtime is measured as it processes lists of increasing size: 10 elements takes roughly 1 unit of time, 100 elements takes roughly 2 units, and 1000 elements takes roughly 3 units. Which time complexity does this growth pattern most closely resemble?",
+ opts:["O(n)", "O(n^2)", "O(log n)", "O(1)"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Runtime increasing by a roughly constant amount each time the input size increases by a factor of 10 is the hallmark of logarithmic growth, O(log n).",
+ misconception:"Students sometimes assume any growth at all implies O(n), missing that the specific pattern here (small, steady increases for large multiplicative jumps in input) is distinctly logarithmic."},
+
+// --- Space complexity basics (3) ---
+{sec:'c3',comp:'C3',topic:'Space complexity',diff:'found',type:'mc',
+ stem:"What does 'space complexity' generally measure about an algorithm?",
+ opts:["How fast the algorithm runs", "How much additional memory the algorithm requires as a function of input size", "How many lines of code the algorithm has", "How many programmers wrote the algorithm"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Space complexity measures the amount of memory an algorithm needs, typically expressed as a function of the input size.",
+ misconception:"Students sometimes confuse space complexity with time complexity, which measures runtime rather than memory usage."},
+
+{sec:'c3',comp:'C3',topic:'Space complexity',diff:'inter',type:'mc',
+ stem:"An algorithm processes a list of n elements using only a few fixed variables and no additional data structures that grow with input size. What is its approximate space complexity?",
+ opts:["O(n)", "O(1)", "O(n^2)", "O(log n)"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because the extra memory used does not grow with the size of the input list, the algorithm's space complexity is constant, O(1).",
+ misconception:"Students sometimes assume space complexity must always scale with the input size, missing that an algorithm can process a large input while using only a fixed, small amount of extra memory."},
+
+{sec:'c3',comp:'C3',topic:'Space complexity',diff:'adv',type:'mc',
+ stem:"An algorithm creates a brand-new copy of the entire input list of size n before processing it, in addition to a few fixed variables. What is the resulting space complexity, and why?",
+ opts:["O(1), because the fixed variables dominate", "O(n), because the extra memory used for the copied list grows directly with the size of the input", "O(n^2), because copying always squares the memory need", "O(log n), because copying a list is a halving operation"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Creating a full copy of the input requires additional memory that scales directly (1-to-1) with input size n, giving O(n) space complexity, regardless of the few fixed variables also used.",
+ misconception:"Students sometimes only count the algorithm's fixed variables and overlook memory used by data structures like copied lists that scale with input size."},
+
+// --- Recursion (5) ---
+{sec:'c3',comp:'C3',topic:'Recursion',diff:'found',type:'mc',
+ stem:"What is a 'base case' in a recursive function?",
+ opts:["The first line of any function, recursive or not", "The condition under which the function stops calling itself and returns a value directly", "A case that always causes an error", "The slowest part of the recursive process"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The base case is the stopping condition that allows a recursive function to return a value directly instead of making another recursive call.",
+ misconception:"Students sometimes think any function statement can serve as a base case rather than recognizing it must be the specific condition that halts recursion."},
+
+{sec:'c3',comp:'C3',topic:'Recursion',diff:'found',type:'mc',
+ stem:"What is the 'recursive case' in a recursive function?",
+ opts:["The part of the function that solves a smaller version of the same problem and calls the function again", "The part of the function that never executes", "A synonym for the base case", "The part of the function that handles user input only"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> The recursive case breaks the problem into a smaller version of itself and calls the function again to solve that smaller piece.",
+ misconception:"Students sometimes think the recursive case must fully solve the problem in one call rather than reducing it and delegating to another call."},
+
+{sec:'c3',comp:'C3',topic:'Recursion',diff:'inter',type:'mc',
+ stem:"Trace the code below. What is Factorial(3)?",
+ code:true,
+ stemCode:"Function Factorial(integer n) returns integer result\n   if n == 0\n      result = 1\n   else\n      result = n * Factorial(n - 1)",
+ opts:["3", "6", "9", "0"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Factorial(3) = 3 * Factorial(2) = 3 * (2 * Factorial(1)) = 3 * 2 * (1 * Factorial(0)) = 3 * 2 * 1 * 1 = 6.",
+ misconception:"Students sometimes stop unwinding the recursive calls early or forget to multiply by every level down to the base case."},
+
+{sec:'c3',comp:'C3',topic:'Recursion',diff:'inter',type:'mc',
+ stem:"A recursive function is written without a properly reachable base case. What is the most likely result when it is called?",
+ opts:["It runs once and returns immediately", "It results in infinite recursion, typically ending in a stack overflow / runtime error", "It automatically converts itself into a loop", "It produces a compiler warning but still works correctly"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Without a reachable base case, a recursive function keeps calling itself indefinitely, which typically exhausts the call stack and crashes with a stack overflow error.",
+ misconception:"Students sometimes assume the program will simply run a long time rather than actually erroring out due to the finite call stack."},
+
+{sec:'c3',comp:'C3',topic:'Recursion',diff:'adv',type:'mc',
+ stem:"Trace the code below. What is output when CountDown(3) is called?",
+ code:true,
+ stemCode:"Function CountDown(integer n) returns nothing\n   if n <= 0\n      Put \"Done\" to output\n   else\n      Put n to output\n      Put \" \" to output\n      CountDown(n - 1)",
+ opts:["3 2 1 Done", "3 2 1 0 Done", "Done", "3"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Each call outputs n and recurses with n-1: 3, then 2, then 1, then when n=0 the base case fires and outputs \"Done\" — giving \"3 2 1 Done\".",
+ misconception:"Students sometimes trace one extra unnecessary call, outputting 0 before the base case triggers, when the base case actually fires exactly when n reaches 0 without a separate output step for it."},
+
+// --- Correctness / counterexample reasoning (3) ---
+{sec:'c3',comp:'C3',topic:'Algorithm correctness and counterexamples',diff:'found',type:'mc',
+ stem:"What does it mean for an algorithm to be 'correct'?",
+ opts:["It runs without any syntax errors", "It produces the expected, correct output for all valid inputs it is designed to handle", "It runs as fast as possible", "It uses the least amount of memory possible"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Correctness means the algorithm reliably produces the right output for every valid input, not just that it compiles or runs quickly.",
+ misconception:"Students sometimes equate 'runs without crashing' with 'correct,' missing that correctness is about producing the right result, not just executing."},
+
+{sec:'c3',comp:'C3',topic:'Algorithm correctness and counterexamples',diff:'inter',type:'mc',
+ stem:"A student claims an algorithm 'always finds the maximum value in a list' but it fails on a list containing negative numbers. What does this failing case represent?",
+ opts:["A proof that the algorithm is correct", "A counterexample, which disproves the claim of correctness for all inputs", "An irrelevant edge case that does not matter", "Evidence the algorithm has O(1) time complexity"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A single input for which the algorithm produces a wrong result is a counterexample, and a valid counterexample is sufficient to disprove a claim of full correctness.",
+ misconception:"Students sometimes think an algorithm can still be called 'correct' if it works for most inputs, when a single counterexample formally disproves general correctness."},
+
+{sec:'c3',comp:'C3',topic:'Algorithm correctness and counterexamples',diff:'adv',type:'mc',
+ stem:"An algorithm is claimed to correctly sort any list of integers, and it passes 50 test cases. Does this prove the algorithm is correct for all possible inputs?",
+ opts:["Yes, 50 passing tests is mathematical proof of correctness", "No — passing many test cases increases confidence but does not prove correctness for every possible input; only a single counterexample or formal proof settles the question", "No, because 50 tests is too few no matter what", "Yes, but only if the tests were run twice"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Passing test cases builds confidence but is not a mathematical guarantee; correctness for all inputs requires either a formal proof or an exhaustive check, and any single counterexample would disprove it.",
+ misconception:"Students often treat a large number of passing tests as equivalent to formal proof, conflating empirical confidence with logical certainty."},
+
+// --- Heuristic algorithms (2) ---
+{sec:'c3',comp:'C3',topic:'Heuristic algorithms',diff:'inter',type:'mc',
+ stem:"What is a heuristic algorithm generally designed to do?",
+ opts:["Guarantee the mathematically optimal solution every time", "Find a good, practical solution quickly, even if it is not guaranteed to be the absolute best", "Run in exactly O(1) time always", "Avoid using any comparisons"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Heuristic algorithms trade guaranteed optimality for speed and practicality, aiming for a solution that is good enough rather than provably perfect.",
+ misconception:"Students sometimes assume any algorithm that produces a reasonable answer is automatically 'optimal,' blurring the distinction between heuristic and exact algorithms."},
+
+{sec:'c3',comp:'C3',topic:'Heuristic algorithms',diff:'adv',type:'mc',
+ stem:"A delivery app uses a 'nearest neighbor first' heuristic to plan a driver's route instead of calculating every possible route combination. What tradeoff does this represent?",
+ opts:["It guarantees the shortest possible total route every time, with no downside", "It produces a route quickly that is usually good but not guaranteed to be the absolute shortest possible route", "It is mathematically identical to checking every possible route", "It only works if there is exactly one delivery stop"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A nearest-neighbor heuristic is fast and often produces a reasonably good route, but it does not guarantee the globally shortest possible route the way exhaustively checking every combination would.",
+ misconception:"Students sometimes assume a heuristic that works well in practice must also be mathematically optimal, missing the core speed-versus-optimality tradeoff heuristics make."},
+
+],
+
+ch1: [
+{sec:'ch1',comp:'C1',topic:'Variable declaration trace',diff:'inter',type:'challenge',
+ stem:"Trace the following and determine the final value of y.",
+ code:true,
+ stemCode:"integer x\ninteger y\nx = 5\ny = x\nx = 9\nPut y to output",
+ opts:["5", "9", "14", "Error"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> y is assigned the value of x (5) at the moment of assignment. Later changing x to 9 does not retroactively change y, since y already holds a copy of the value 5.",
+ misconception:"Students often think y stays linked to x and updates automatically whenever x changes, rather than understanding that assignment copies the value at that moment."},
+
+{sec:'ch1',comp:'C1',topic:'Constant reassignment bug',diff:'inter',type:'challenge',
+ stem:"Identify the bug in this pseudocode.",
+ code:true,
+ stemCode:"integer constant MAX = 10\ninteger score\nscore = 8\nMAX = score + 5\nPut MAX to output",
+ opts:["score is never declared", "MAX is a constant and cannot be reassigned after its initial declaration", "score should be a float", "Put statements cannot output constants"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> MAX is declared as a constant, meaning its value must be set once and never changed. The line MAX = score + 5 illegally attempts to reassign it.",
+ misconception:"Students sometimes overlook the `constant` keyword and treat MAX as an ordinary variable that can be freely reassigned."},
+
+{sec:'ch1',comp:'C1',topic:'Data type mismatch trace',diff:'adv',type:'challenge',
+ stem:"Trace the following. What is the most likely outcome?",
+ code:true,
+ stemCode:"integer age\nage = \"twenty\"\nPut age to output",
+ opts:["It outputs 20", "It outputs \"twenty\"", "It causes a type error, because a string literal is being assigned to an integer variable", "It outputs 0"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> age is declared as an integer, but the code attempts to assign it a string value (\"twenty\"), which is a data type mismatch that produces a type error in strongly-typed contexts.",
+ misconception:"Students sometimes assume the value will simply be auto-converted or that string literals can be silently stored in typed variables without consequence."},
+
+{sec:'ch1',comp:'C1',topic:'Scope trace',diff:'adv',type:'challenge',
+ stem:"Trace the following and determine what is output by the final Put statement in Main().",
+ code:true,
+ stemCode:"integer total\ntotal = 100\n\nFunction Reset() returns nothing\n   integer total\n   total = 0\n\nFunction Main() returns nothing\n   Reset()\n   Put total to output",
+ opts:["0", "100", "Error: total declared twice", "Nothing is output"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The `total` declared inside Reset() is a separate local variable that only exists within Reset()'s scope. It does not affect the global `total`, which remains 100 when Main()'s Put statement executes.",
+ misconception:"Students frequently assume the local `total` inside Reset() overwrites the global `total` simply because the names match."},
+
+{sec:'ch1',comp:'C1',topic:'Input/output trace',diff:'inter',type:'challenge',
+ stem:"Given the pseudocode below and an input of 42, trace the program and determine what is output.",
+ code:true,
+ stemCode:"integer num\nnum = Get next input\nPut \"You entered: \" to output\nPut num to output",
+ opts:["\"You entered: \"", "42", "\"You entered: 42\"", "\"You entered: \" then 42 on the same line, with no separator between the two Put statements"],
+ ans:3,
+ rationale:"<strong>D is correct.</strong> Each Put statement outputs its content in sequence with no automatic newline or space inserted between them, so the result reads as \"You entered: 42\" but is produced by two separate output statements.",
+ misconception:"Students sometimes assume each Put statement automatically starts a new line or adds spacing, when pseudocode Put statements simply append to the output stream."},
+
+{sec:'ch1',comp:'C1',topic:'Flowchart-to-pseudocode trace',diff:'inter',type:'challenge',
+ stem:"A flowchart's decision diamond reads 'temp > 90?' with the Yes branch leading to a rectangle 'Put \"Hot\"' and the No branch leading directly to Stop with no output. Which pseudocode correctly matches this flowchart?",
+ code:true,
+ stemCode:"integer temp\ntemp = Get next input",
+ opts:["if temp > 90\n   Put \"Hot\" to output\nelse\n   Put \"Hot\" to output", "if temp > 90\n   Put \"Hot\" to output", "while temp > 90\n   Put \"Hot\" to output", "Put \"Hot\" to output\nif temp > 90"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The flowchart only outputs 'Hot' on the Yes branch and does nothing on the No branch, which matches a simple if statement with no else clause.",
+ misconception:"Students often add an unnecessary else clause or use a loop structure when the flowchart shows a single one-time decision with no repetition."},
+
+{sec:'ch1',comp:'C1',topic:'Requirements-to-variable trace',diff:'adv',type:'challenge',
+ stem:"A requirements document specifies: 'Track how many times a button has been clicked, starting at zero.' Which declaration best matches this requirement, and why?",
+ code:true,
+ stemCode:"// Choose the best declaration for the click counter",
+ opts:["float clickCount = 0.0, because counts might need decimals eventually", "integer clickCount = 0, because a click count is always a whole, non-negative number starting at zero", "string clickCount = \"0\", because it will be displayed as text", "boolean clickCount = false, because it starts at a default state"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A click count is inherently a whole number that starts at zero and increases by whole increments, making integer the appropriate and most defensible type per the stated requirement.",
+ misconception:"Students sometimes over-engineer a data type choice (like float or string) for a value that the requirement clearly specifies as a simple whole-number count."},
+
+{sec:'ch1',comp:'C1',topic:'Variable state trace',diff:'inter',type:'challenge',
+ stem:"Trace the following and determine the final value of b.",
+ code:true,
+ stemCode:"integer a\ninteger b\na = 3\nb = 4\na = b\nb = a\nPut b to output",
+ opts:["3", "4", "7", "Error"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> a = b sets a to 4 (a is now 4, b is still 4). Then b = a sets b to a's current value, which is 4. Final b is 4.",
+ misconception:"Students often assume a and b swap values, as if this were a true swap operation, rather than tracing that both variables end up holding the same value."},
+
+{sec:'ch1',comp:'C1',topic:'Multiple declarations trace',diff:'adv',type:'challenge',
+ stem:"Identify the bug in the following pseudocode.",
+ code:true,
+ stemCode:"integer count\ninteger count\ncount = 5\nPut count to output",
+ opts:["count is declared twice in the same scope, which is invalid", "count = 5 is invalid syntax", "Put cannot output an integer", "There is no bug"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Declaring the same variable name twice within the same scope is invalid; a variable should be declared once before being used.",
+ misconception:"Students sometimes overlook duplicate declarations, especially when nothing else in the code appears obviously wrong."},
+
+{sec:'ch1',comp:'C1',topic:'IDE/tooling reasoning trace',diff:'inter',type:'challenge',
+ stem:"A student's code fails to run and the IDE highlights line 4 in red with the message 'undeclared variable: total.' What does this message most likely indicate about the code?",
+ code:true,
+ stemCode:"integer x\nx = 5\nPut x to output\ntotal = x + 1",
+ opts:["total was used on line 4 without ever being declared with a data type beforehand", "x was never assigned a value", "The IDE has a bug", "Put statements cannot be followed by other code"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> The variable `total` is used in an assignment on line 4 but was never declared earlier in the code, which is exactly what the IDE's error message is flagging.",
+ misconception:"Students sometimes assume an IDE error always points to a problem with the line's syntax rather than a missing declaration elsewhere in the logic."},
+
+{sec:'ch1',comp:'C1',topic:'Data type selection trace',diff:'inter',type:'challenge',
+ stem:"Given the requirement 'store a user's average quiz score, which may include decimals,' identify the bug in this declaration and assignment.",
+ code:true,
+ stemCode:"integer avgScore\navgScore = 87.5\nPut avgScore to output",
+ opts:["avgScore should be declared as a float to correctly store a decimal value like 87.5", "avgScore = 87.5 is invalid syntax entirely", "Put cannot output decimal values", "There is no bug in this code"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Because the requirement explicitly allows decimal values, avgScore should be declared as a float; declaring it as an integer risks losing precision or causing a type mismatch.",
+ misconception:"Students sometimes only check whether code runs without error rather than whether the chosen data type actually satisfies the stated requirement."},
+
+{sec:'ch1',comp:'C1',topic:'Pseudocode-to-flowchart trace',diff:'adv',type:'challenge',
+ stem:"Given this pseudocode, which flowchart shape sequence correctly represents its logic, in order?",
+ code:true,
+ stemCode:"integer score\nscore = Get next input\nif score >= 60\n   Put \"Pass\" to output\nelse\n   Put \"Fail\" to output",
+ opts:["Oval → Parallelogram → Diamond → (two Rectangles, one per branch) → Oval", "Oval → Diamond → Parallelogram → Oval", "Oval → Rectangle → Rectangle → Oval", "Parallelogram → Oval → Diamond → Oval"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Start (Oval) → input the score (Parallelogram) → decision on score (Diamond) → one of two output rectangles depending on the branch → Stop (Oval), correctly matching each pseudocode step to its flowchart symbol.",
+ misconception:"Students sometimes misorder the input and decision symbols, or forget that both branches of an if/else need their own processing shape before the flow converges."},
+
+{sec:'ch1',comp:'C1',topic:'Naming convention trace',diff:'inter',type:'challenge',
+ stem:"Identify the issue with the following variable declaration.",
+ code:true,
+ stemCode:"integer 2ndPlaceScore\n2ndPlaceScore = 88",
+ opts:["The variable name begins with a digit, which is not a valid identifier", "88 is not a valid integer", "The variable was never used in a Put statement", "There is no issue"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Valid identifiers generally cannot begin with a digit; `2ndPlaceScore` violates this naming rule and would need to be rewritten, such as `secondPlaceScore`.",
+ misconception:"Students sometimes focus on whether a name is descriptive while overlooking the more fundamental rule that identifiers cannot start with a numeral."},
+
+{sec:'ch1',comp:'C1',topic:'Compiled vs interpreted trace',diff:'adv',type:'challenge',
+ stem:"A student writes a script with a typo on line 40 of a 40-line file, but the script still runs and produces output for lines 1–39 before crashing at line 40. What does this behavior suggest about how the code is being executed?",
+ code:true,
+ stemCode:"// lines 1-39: valid statements\n// line 40: statement with a typo",
+ opts:["The code is being compiled ahead of time in full, since compilers always catch every error before execution", "The code is likely being interpreted, since execution proceeded through valid statements one at a time until it reached the erroring line", "The typo does not actually exist", "Interpreted and compiled languages always behave identically in this scenario"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because valid statements executed and produced output before the error surfaced, this behavior is consistent with interpretation, where each statement is translated and run in sequence rather than the whole file being checked and translated before any execution begins.",
+ misconception:"Students sometimes assume all languages behave identically regardless of whether they are compiled or interpreted, missing that this partial-execution-before-crash pattern is a specific signature of interpreted execution."},
+
+{sec:'ch1',comp:'C1',topic:'Boolean data trace',diff:'inter',type:'challenge',
+ stem:"Trace the following and determine what is output.",
+ code:true,
+ stemCode:"boolean isMember\nisMember = true\nif isMember\n   Put \"Member discount applied\" to output\nelse\n   Put \"No discount\" to output",
+ opts:["\"Member discount applied\"", "\"No discount\"", "true", "Error: booleans cannot be used in if statements"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Since isMember is set to true, the if condition evaluates directly to true (a boolean variable can be used directly as a condition), so \"Member discount applied\" is output.",
+ misconception:"Students sometimes think a boolean condition must be written as `isMember == true` explicitly, not realizing the variable alone is a valid condition."},
+],
+
+ch2: [
+{sec:'ch2',comp:'C2',topic:'Loop unrolling',diff:'inter',type:'challenge',
+ stem:"Trace the following loop and determine the final value of total.",
+ code:true,
+ stemCode:"integer total\ntotal = 0\nfor i = 1; i <= 5; i = i + 1\n   total = total + i\nPut total to output",
+ opts:["10", "15", "5", "20"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Unrolling the loop: total = 0+1=1, +2=3, +3=6, +4=10, +5=15. Final total is 15.",
+ misconception:"Students often forget to include the final iteration (i=5) or miscount how many times the loop body executes."},
+
+{sec:'ch2',comp:'C2',topic:'Operator precedence trace',diff:'adv',type:'challenge',
+ stem:"Trace the following and determine the value of result.",
+ code:true,
+ stemCode:"integer result\nresult = 4 + 2 * 3 - 1",
+ opts:["17", "9", "5", "8"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Following precedence, multiplication happens first: 2*3=6. Then left to right: 4+6=10, 10-1=9.",
+ misconception:"Students often evaluate strictly left to right (4+2=6, 6*3=18, 18-1=17), ignoring that multiplication has higher precedence than addition and subtraction."},
+
+{sec:'ch2',comp:'C2',topic:'Function tracing',diff:'inter',type:'challenge',
+ stem:"Trace the following program and determine what is output.",
+ code:true,
+ stemCode:"Function Double(integer n) returns integer result\n   result = n * 2\n\nFunction Main() returns nothing\n   integer x\n   x = Double(3)\n   x = Double(x)\n   Put x to output",
+ opts:["6", "12", "9", "3"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Double(3) returns 6, so x becomes 6. Then Double(x), i.e. Double(6), returns 12, so the final x is 12.",
+ misconception:"Students sometimes only trace the first function call and forget that the second call uses the already-updated value of x, not the original 3."},
+
+{sec:'ch2',comp:'C2',topic:'Nested loop unrolling',diff:'adv',type:'challenge',
+ stem:"Trace the following nested loop and determine how many times \"*\" is output in total.",
+ code:true,
+ stemCode:"for i = 1; i <= 3; i = i + 1\n   for j = 1; j <= 2; j = j + 1\n      Put \"*\" to output",
+ opts:["3", "2", "5", "6"],
+ ans:3,
+ rationale:"<strong>D is correct.</strong> The outer loop runs 3 times, and for each outer iteration the inner loop runs 2 times, giving 3 * 2 = 6 total outputs of \"*\".",
+ misconception:"Students often add the loop bounds (3+2=5) instead of multiplying them, forgetting the inner loop fully restarts and completes for every single outer iteration."},
+
+{sec:'ch2',comp:'C2',topic:'Bug identification: off-by-one',diff:'inter',type:'challenge',
+ stem:"Identify the bug in the following code, which is intended to output the numbers 1 through 5.",
+ code:true,
+ stemCode:"for i = 1; i < 5; i = i + 1\n   Put i to output\n   Put \" \" to output",
+ opts:["The loop never executes", "The condition should be i <= 5, since i < 5 causes the loop to stop before outputting 5", "The increment should be i = i - 1", "There is no bug"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> With i < 5, the loop stops as soon as i reaches 5, so it only outputs 1 through 4. Changing the condition to i <= 5 would correctly include 5.",
+ misconception:"Students sometimes assume the starting value is the source of an off-by-one bug rather than checking the boundary condition in the loop test."},
+
+{sec:'ch2',comp:'C2',topic:'Sentinel loop tracing',diff:'adv',type:'challenge',
+ stem:"Given the input sequence 4, 7, 2, -1 (in that order, where -1 is the sentinel), trace the following and determine the final value of total.",
+ code:true,
+ stemCode:"integer total\ninteger val\ntotal = 0\nval = Get next input\nwhile val != -1\n   total = total + val\n   val = Get next input\nPut total to output",
+ opts:["13", "12", "14", "2"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> val starts at 4 (total=4), then 7 (total=11), then 2 (total=13), then val becomes -1 and the loop stops before adding it. Final total is 13.",
+ misconception:"Students sometimes accidentally add the sentinel value (-1) to the total, producing 12 instead of correctly excluding it."},
+
+{sec:'ch2',comp:'C2',topic:'Break statement tracing',diff:'inter',type:'challenge',
+ stem:"Trace the following and determine what is output.",
+ code:true,
+ stemCode:"for i = 1; i <= 6; i = i + 1\n   if i == 4\n      break\n   Put i to output\n   Put \" \" to output",
+ opts:["1 2 3 4 5 6", "1 2 3", "1 2 3 4", "4 5 6"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The loop outputs 1, 2, 3, then when i reaches 4 the break statement immediately exits the loop before the Put statements for that iteration run.",
+ misconception:"Students sometimes think the value that triggers break is still output first before the loop exits."},
+
+{sec:'ch2',comp:'C2',topic:'String method tracing',diff:'adv',type:'challenge',
+ stem:"Trace the following, assuming standard zero-based indexing and slicing conventions. What is output?",
+ code:true,
+ stemCode:"string word\nword = \"algorithm\"\nPut word[0:3] to output",
+ opts:["\"alg\"", "\"algo\"", "\"lgo\"", "\"algorithm\""],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> word[0:3] returns characters at indices 0, 1, and 2 (up to, but not including, index 3), which are 'a', 'l', 'g' — producing \"alg\".",
+ misconception:"Students often assume the ending index in a slice is included, which would incorrectly add a fourth character to the result."},
+
+{sec:'ch2',comp:'C2',topic:'List operation tracing',diff:'inter',type:'challenge',
+ stem:"Trace the following and determine the final contents of the list.",
+ code:true,
+ stemCode:"list nums\nnums = [3, 1, 4]\nnums.append(1)\nnums.append(5)\nPut nums to output",
+ opts:["[3, 1, 4, 1, 5]", "[1, 3, 4, 1, 5]", "[3, 1, 4, 5]", "[5, 1, 3, 1, 4]"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> append() adds each new value to the end of the list in the order the calls occur: first 1 is appended, then 5, producing [3, 1, 4, 1, 5].",
+ misconception:"Students sometimes assume append() inserts values in sorted order or at the front of the list rather than always at the end."},
+
+{sec:'ch2',comp:'C2',topic:'Conditional chain tracing',diff:'adv',type:'challenge',
+ stem:"Given integer grade = 75, trace the following and determine what is output.",
+ code:true,
+ stemCode:"integer grade\ngrade = 75\nif grade >= 90\n   Put \"A\" to output\nelseif grade >= 80\n   Put \"B\" to output\nelseif grade >= 70\n   Put \"C\" to output\nelse\n   Put \"F\" to output",
+ opts:["\"A\"", "\"B\"", "\"C\"", "\"F\""],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> grade >= 90 is false, grade >= 80 is false, grade >= 70 is true (75 >= 70), so \"C\" is output and the chain stops there.",
+ misconception:"Students sometimes check the conditions out of order or fail to stop at the first true branch, potentially outputting the wrong letter grade."},
+
+{sec:'ch2',comp:'C2',topic:'Compound assignment tracing',diff:'inter',type:'challenge',
+ stem:"Trace the following and determine the final value of score.",
+ code:true,
+ stemCode:"integer score\nscore = 10\nscore += 5\nscore *= 2\nscore -= 4",
+ opts:["26", "21", "11", "30"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> score=10, then +=5 makes it 15, then *=2 makes it 30, then -=4 makes it 26.",
+ misconception:"Students sometimes apply the operations in a different order than they are written, or forget that *= 2 multiplies the already-updated value (15), not the original 10."},
+
+{sec:'ch2',comp:'C2',topic:'Function with multiple parameters',diff:'adv',type:'challenge',
+ stem:"Trace the following and determine what is output.",
+ code:true,
+ stemCode:"Function Calc(integer a, integer b, integer c) returns integer result\n   result = a * b + c\n\nFunction Main() returns nothing\n   integer x\n   x = Calc(2, 3, 4)\n   Put x to output",
+ opts:["10", "14", "9", "24"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Following operator precedence inside the function, a * b is evaluated first: 2*3=6, then +c: 6+4=10.",
+ misconception:"Students sometimes evaluate left to right ignoring precedence, computing (a*b)+c incorrectly as a*(b+c) = 2*7=14."},
+
+{sec:'ch2',comp:'C2',topic:'Bug identification: infinite loop',diff:'adv',type:'challenge',
+ stem:"Identify the bug in the following code, which is intended to count down from 5 to 1.",
+ code:true,
+ stemCode:"integer i\ni = 5\nwhile i > 0\n   Put i to output\n   Put \" \" to output",
+ opts:["The starting value of i should be 6", "i is never decremented inside the loop body, causing an infinite loop", "The condition should be i < 0", "There is no bug"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The loop body never updates i, so the condition i > 0 remains true forever — the loop needs a statement like i = i - 1 inside the body.",
+ misconception:"Students sometimes focus on the loop's starting value or condition operator rather than checking whether the loop variable is actually being updated inside the body."},
+
+{sec:'ch2',comp:'C2',topic:'Continue statement tracing',diff:'inter',type:'challenge',
+ stem:"Trace the following and determine what is output.",
+ code:true,
+ stemCode:"for i = 1; i <= 5; i = i + 1\n   if i % 2 == 0\n      continue\n   Put i to output\n   Put \" \" to output",
+ opts:["1 2 3 4 5", "1 3 5", "2 4", "1 2 3 4 5 skip"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The continue statement skips the Put statements whenever i is even (2 and 4), so only the odd values 1, 3, and 5 are output.",
+ misconception:"Students sometimes reverse the logic, outputting the even numbers instead of skipping them, by misreading the % 2 == 0 condition as odd rather than even."},
+
+{sec:'ch2',comp:'C2',topic:'Multiple return paths tracing',diff:'adv',type:'challenge',
+ stem:"Trace the following and determine what is output.",
+ code:true,
+ stemCode:"Function Classify(integer n) returns string label\n   if n < 0\n      label = \"negative\"\n   elseif n == 0\n      label = \"zero\"\n   else\n      label = \"positive\"\n\nFunction Main() returns nothing\n   Put Classify(-5) to output\n   Put \" \" to output\n   Put Classify(0) to output",
+ opts:["\"negative zero\"", "\"positive zero\"", "\"negative positive\"", "\"zero negative\""],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Classify(-5) evaluates n < 0 as true and returns \"negative\"; Classify(0) evaluates n < 0 as false, n == 0 as true, and returns \"zero\" — together producing \"negative zero\".",
+ misconception:"Students sometimes trace only the first function call and assume the second call reuses the same branch result rather than being evaluated independently with its own input."},
+],
+
+ch3: [
+{sec:'ch3',comp:'C3',topic:'Linear search trace',diff:'inter',type:'challenge',
+ stem:"Trace a linear search for the value 6 on the list below. How many comparisons are made before the target is found?",
+ code:true,
+ stemCode:"list nums = [9, 3, 6, 1, 8]\n// search for target = 6",
+ opts:["1", "2", "3", "4"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Linear search checks 9 (no match), 3 (no match), then 6 (match) — three comparisons total before the target is found.",
+ misconception:"Students sometimes report the index of the match (2) instead of the number of comparisons performed (3)."},
+
+{sec:'ch3',comp:'C3',topic:'Binary search trace',diff:'adv',type:'challenge',
+ stem:"Trace a binary search for the value 7 on the sorted list below. What are the middle values compared, in order?",
+ code:true,
+ stemCode:"list nums = [1, 3, 5, 7, 9, 11, 13]\n// search for target = 7",
+ opts:["7 only", "5, then 7", "1, 3, 5, 7", "13, 5, 7"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> The list has 7 elements, so the first middle index checked is index 3 (value 7), which immediately matches the target — the search ends after just one comparison.",
+ misconception:"Students sometimes assume binary search always needs multiple comparisons, without recognizing that the target can match on the very first middle check."},
+
+{sec:'ch3',comp:'C3',topic:'Selection sort trace',diff:'adv',type:'challenge',
+ stem:"Trace a selection sort (ascending) on the list below. What does the list look like after exactly one full pass?",
+ code:true,
+ stemCode:"list nums = [6, 2, 9, 1, 4]\n// ascending selection sort, one pass",
+ opts:["[1, 2, 6, 9, 4]", "[1, 2, 9, 6, 4]", "[1, 6, 2, 9, 4]", "[6, 2, 9, 1, 4]"],
+ ans:2,
+ rationale:"<strong>C is correct.</strong> Selection sort finds the minimum of the entire list (1, at index 3) and swaps it with the first element: swapping index 0 (6) and index 3 (1) gives [1, 2, 9, 6, 4].",
+ misconception:"Students sometimes reorder more than the two swapped elements, or mistakenly sort the whole list in a single traced pass rather than just placing one minimum correctly."},
+
+{sec:'ch3',comp:'C3',topic:'Bubble sort trace',diff:'adv',type:'challenge',
+ stem:"Trace one full pass of a bubble sort (ascending, adjacent swaps left to right) on the list below.",
+ code:true,
+ stemCode:"list nums = [4, 1, 5, 2]\n// ascending bubble sort, one full pass",
+ opts:["[1, 4, 2, 5]", "[1, 2, 4, 5]", "[1, 4, 5, 2]", "[4, 1, 5, 2]"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Step by step: compare(4,1)→swap→[1,4,5,2]; compare(4,5)→no swap; compare(5,2)→swap→[1,4,2,5]. After one full pass: [1, 4, 2, 5].",
+ misconception:"Students often assume the list is fully sorted after a single bubble sort pass, when only the largest unsorted element is guaranteed to reach its correct position each pass."},
+
+{sec:'ch3',comp:'C3',topic:'Recursion trace',diff:'inter',type:'challenge',
+ stem:"Trace the following recursive function. What is the value of Sum(4)?",
+ code:true,
+ stemCode:"Function Sum(integer n) returns integer result\n   if n == 0\n      result = 0\n   else\n      result = n + Sum(n - 1)",
+ opts:["4", "10", "16", "6"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Sum(4) = 4 + Sum(3) = 4 + (3 + Sum(2)) = 4+3+(2+Sum(1)) = 4+3+2+(1+Sum(0)) = 4+3+2+1+0 = 10.",
+ misconception:"Students sometimes stop unwinding the recursive calls early, forgetting to include every level down to the base case in the final sum."},
+
+{sec:'ch3',comp:'C3',topic:'Time complexity identification',diff:'inter',type:'challenge',
+ stem:"The following code contains a single loop that runs n times with no nested loop inside it. What is its time complexity?",
+ code:true,
+ stemCode:"integer sum\nsum = 0\nfor i = 1; i <= n; i = i + 1\n   sum = sum + i",
+ opts:["O(1)", "O(n)", "O(n^2)", "O(log n)"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A single loop that runs proportional to n, with constant work per iteration, has time complexity O(n).",
+ misconception:"Students sometimes assign O(n^2) reflexively to any loop involving arithmetic, without checking whether the loop is actually nested."},
+
+{sec:'ch3',comp:'C3',topic:'Algorithm trace: counting',diff:'adv',type:'challenge',
+ stem:"Trace the following and determine the final value of evenCount.",
+ code:true,
+ stemCode:"list nums = [3, 8, 5, 12, 7, 4]\ninteger evenCount\nevenCount = 0\nfor each n in nums\n   if n % 2 == 0\n      evenCount = evenCount + 1",
+ opts:["2", "3", "4", "6"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Tracing each element: 3(odd), 8(even,count=1), 5(odd), 12(even,count=2), 7(odd), 4(even,count=3). Final evenCount is 3.",
+ misconception:"Students sometimes miscount by skipping an element during the trace or misclassifying a number's parity."},
+
+{sec:'ch3',comp:'C3',topic:'Bug identification: search logic',diff:'adv',type:'challenge',
+ stem:"Identify the bug in the following linear search implementation, which is intended to return true if target is found in nums.",
+ code:true,
+ stemCode:"Function Contains(list nums, integer target) returns boolean found\n   found = false\n   for each n in nums\n      if n == target\n         found = true\n      else\n         found = false",
+ opts:["The loop should not use for each", "The else branch incorrectly resets found to false whenever the current element doesn't match, potentially overwriting an earlier true match", "target is never compared to anything", "There is no bug"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Once found is set to true after a match, a later non-matching element incorrectly resets it back to false via the else branch — the else branch should simply be removed so found stays true once set.",
+ misconception:"Students often trace only up to the first match and stop, missing that the loop continues and the flawed else branch can erase a correct earlier result."},
+
+{sec:'ch3',comp:'C3',topic:'Space complexity identification',diff:'inter',type:'challenge',
+ stem:"The following function creates a new list that is a reversed copy of the input list of size n. What is its space complexity?",
+ code:true,
+ stemCode:"Function ReverseCopy(list nums) returns list reversed\n   reversed = []\n   for i = nums.size - 1; i >= 0; i = i - 1\n      reversed.append(nums[i])",
+ opts:["O(1)", "O(n)", "O(n^2)", "O(log n)"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because a full new list proportional in size to the input (n elements) is created, the additional memory used scales directly with n, giving O(n) space complexity.",
+ misconception:"Students sometimes only consider time complexity for this kind of function and overlook that space complexity is a separate measure of the additional memory used."},
+
+{sec:'ch3',comp:'C3',topic:'Binary search precondition trace',diff:'inter',type:'challenge',
+ stem:"A binary search is run on the following unsorted list for the value 9. What is the most likely outcome?",
+ code:true,
+ stemCode:"list nums = [4, 9, 1, 12, 3]\n// binary search for target = 9, list NOT sorted",
+ opts:["It will always find 9 correctly, just like on a sorted list", "It may fail to find 9 even though it is present, because binary search's halving logic assumes sorted order", "It will run in O(1) time regardless", "It will automatically sort the list first"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Binary search's correctness depends entirely on the list being sorted; run on unsorted data, it may eliminate the half that actually contains the target, producing an incorrect result.",
+ misconception:"Students sometimes assume binary search will still work, just more slowly, on unsorted data rather than recognizing it can produce an outright incorrect result."},
+
+{sec:'ch3',comp:'C3',topic:'Nested loop trace',diff:'adv',type:'challenge',
+ stem:"Trace the following and determine how many total times the innermost Put statement executes.",
+ code:true,
+ stemCode:"for i = 1; i <= 4; i = i + 1\n   for j = 1; j <= i; j = j + 1\n      Put \"*\" to output",
+ opts:["16", "10", "8", "4"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The inner loop runs a variable number of times depending on i: 1+2+3+4 = 10 total executions of the Put statement.",
+ misconception:"Students often assume both loops run a fixed number of times (giving 4*4=16), missing that the inner loop bound depends on the current value of the outer loop variable i."},
+
+{sec:'ch3',comp:'C3',topic:'Recursion base case identification',diff:'adv',type:'challenge',
+ stem:"The following recursive function is intended to sum all integers from 1 to n, but it never terminates for any positive input. Identify the bug.",
+ code:true,
+ stemCode:"Function SumTo(integer n) returns integer result\n   result = n + SumTo(n - 1)",
+ opts:["The function has no base case, so it recurses infinitely with no stopping condition", "n - 1 is invalid syntax", "The function should not return a value", "There is no bug"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> There is no base case (such as checking if n == 0 or n == 1) to stop the recursion, so the function keeps calling itself indefinitely, eventually causing a stack overflow.",
+ misconception:"Students sometimes assume the recursive call itself is the bug, rather than recognizing the missing stopping condition as the actual issue."},
+
+{sec:'ch3',comp:'C3',topic:'Algorithm correctness trace',diff:'inter',type:'challenge',
+ stem:"The following function is claimed to find the maximum value in a list. Trace it on the list [3, -7, 5, -2] and determine whether it works correctly.",
+ code:true,
+ stemCode:"Function FindMax(list nums) returns integer maxVal\n   maxVal = 0\n   for each n in nums\n      if n > maxVal\n         maxVal = n",
+ opts:["It correctly returns 5", "It incorrectly returns 0, because maxVal is initialized to 0 instead of the list's first element, and no value in this list happens to exceed 0 except 5 — actually tracing shows 5 does exceed 0, so it returns 5 correctly here, but the bug still exists for all-negative lists", "It returns -7", "It causes an error"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Tracing this specific list, 5 does exceed the initial maxVal of 0, so it correctly returns 5 here — but the initialization bug still exists: for an all-negative list like [-3, -7, -2], this function would incorrectly return 0, since no element would ever exceed the flawed starting value.",
+ misconception:"Students often test an algorithm on one passing case and conclude it is correct, without checking whether an edge case (like an all-negative list) would expose a hidden bug."},
+
+{sec:'ch3',comp:'C3',topic:'Heuristic vs exact trace',diff:'inter',type:'challenge',
+ stem:"The following function picks the first item in a list priced under a budget, rather than checking all items for the cheapest option. Trace it on the list and budget given, then classify its approach.",
+ code:true,
+ stemCode:"list prices = [40, 15, 25, 10]\ninteger budget = 30\n// heuristic: return the FIRST price found under budget",
+ opts:["It returns 15, and this is a heuristic approach since it does not guarantee finding the overall cheapest qualifying price", "It returns 10, the actual cheapest, and is guaranteed optimal", "It returns 40, ignoring the budget", "It causes an error since 40 exceeds budget"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> Scanning in order, 40 exceeds budget, 15 is under budget and is returned immediately — this 'first fit' approach is a heuristic because it does not check whether a cheaper qualifying option (10) exists later in the list.",
+ misconception:"Students sometimes assume any algorithm that returns a valid answer must be finding the optimal one, without checking whether it actually compared all candidates."},
+
+{sec:'ch3',comp:'C3',topic:'Algorithm properties trace',diff:'inter',type:'challenge',
+ stem:"A student writes the following instructions: 'Keep guessing numbers between 1 and 100 randomly until you happen to guess the secret number.' Which required property of a valid algorithm does this most clearly risk violating?",
+ code:true,
+ stemCode:"// Guess randomly between 1 and 100 until correct",
+ opts:["Unambiguous, since random guessing is a precisely defined step", "Terminating, since there is no guarantee this process ever ends within a finite, predictable number of steps", "Executable, since each guess can technically be performed", "It violates no properties at all"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> While each guess is executable and the instruction itself is unambiguous, nothing guarantees the process terminates within a finite, bounded number of steps — purely random guessing could theoretically continue indefinitely.",
+ misconception:"Students sometimes assume 'it will probably work eventually' satisfies the termination requirement, when a valid algorithm needs a guaranteed, finite stopping point rather than just a likely one."},
+],
+
+sim: [
+{sec:'sim',comp:'mixed',topic:'Debugging a loop in production',diff:'adv',type:'sim',
+ scenario:"A junior developer at a retail company is debugging a script that is supposed to calculate the total price of items in a customer's cart. Customers are reporting the total is always missing the price of the last item they added.",
+ stem:"Given the snippet below, which change most directly fixes the reported bug?",
+ code:true,
+ stemCode:"integer total\ntotal = 0\nfor i = 0; i < cart.size - 1; i = i + 1\n   total = total + cart[i]",
+ opts:["Change the loop condition to i < cart.size, so the loop includes the final index instead of stopping one short", "Change total = 0 to total = 1", "Remove the for loop entirely", "Change i = i + 1 to i = i + 2"],
+ ans:0,
+ rationale:"<strong>A is correct.</strong> The condition i < cart.size - 1 causes the loop to stop one index early, skipping the last cart item — exactly matching the customers' report that the last item added is missing from the total.",
+ misconception:"Students sometimes suspect the initialization (total = 0) rather than tracing the loop boundary, missing that the described symptom points specifically to an off-by-one error in the loop condition."},
+
+{sec:'sim',comp:'mixed',topic:'Choosing a data type under a real constraint',diff:'adv',type:'sim',
+ scenario:"A hospital intake system stores patient ID numbers, which are always exactly 6 digits and sometimes begin with a leading zero (e.g., 004521). The IDs are never used in any calculation, only displayed and compared for exact matches.",
+ stem:"Which data type should the developer use for patient ID, and why?",
+ opts:["integer, because IDs are made of digits", "string, because leading zeros must be preserved and the values are never used arithmetically", "float, to allow for future decimal extensions", "boolean, since IDs are either valid or invalid"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because the ID must preserve a leading zero and is never used in arithmetic, storing it as a string avoids the integer type's tendency to silently drop leading zeros.",
+ misconception:"Students often default to a numeric type for anything that looks like a number, without checking whether the value's formatting (like a leading zero) needs to be preserved exactly."},
+
+{sec:'sim',comp:'mixed',topic:'Search strategy for a real system',diff:'adv',type:'sim',
+ scenario:"A library's catalog system holds 2 million book records sorted alphabetically by title, and users search for a specific title thousands of times per day. A new engineer proposes implementing the search using a simple linear scan through the records for simplicity.",
+ stem:"What is the strongest argument against the engineer's proposal?",
+ opts:["Linear search cannot be implemented in any language", "Because the data is already sorted and searched extremely frequently, binary search would offer dramatically better performance at scale, and the sorted order is already available to exploit", "Sorted data cannot be searched with linear search", "There is no meaningful performance difference at this scale"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Since the catalog is already sorted and searched very frequently, binary search's O(log n) performance would vastly outperform linear search's O(n) performance on 2 million records, and no additional sorting cost is even required since the data is already ordered.",
+ misconception:"Students sometimes think algorithmic complexity differences are only theoretical and don't matter at real-world scale, when a dataset this large searched this frequently is exactly where the difference becomes significant."},
+
+{sec:'sim',comp:'mixed',topic:'Function scope in a team codebase',diff:'adv',type:'sim',
+ scenario:"Two developers on a team each write a function for a shared payroll script. Developer A's function calculates overtime pay and uses a local variable named rate. Developer B's function calculates bonus pay and also uses a local variable named rate. Developer B is worried that Developer A's function might overwrite their rate value.",
+ stem:"Is Developer B's concern justified, and why?",
+ opts:["Yes, because any two variables with the same name anywhere in a program always conflict", "No, because each rate variable is local to its own function's scope and does not affect a same-named variable in a different function's scope", "Yes, but only if both functions are called on the same day", "No, because functions cannot contain variables"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Since each `rate` variable is declared locally within its own function, the two are entirely separate variables that happen to share a name — one function's local variable cannot overwrite the other's.",
+ misconception:"Students sometimes assume identical variable names anywhere in a codebase must refer to the same variable, without accounting for how local scope isolates variables declared inside different functions."},
+
+{sec:'sim',comp:'mixed',topic:'Sentinel loop in a real input scenario',diff:'adv',type:'sim',
+ scenario:"A data analyst is writing a script that reads temperature readings from a sensor log, one at a time, and averages them. The sensor outputs a special value of -999 to signal that no more readings are available. The analyst's first draft of the loop does not read a new value at the end of the loop body.",
+ stem:"What is the most likely consequence of this omission?",
+ code:true,
+ stemCode:"integer total\ninteger count\ninteger val\ntotal = 0\ncount = 0\nval = Get next input\nwhile val != -999\n   total = total + val\n   count = count + 1\n   // missing: val = Get next input",
+ opts:["The script will run correctly with no issues", "The script will enter an infinite loop, because val is never updated inside the loop body, so the sentinel condition can never be reached", "The script will immediately crash on the first line", "The script will only read exactly one value and stop, with no error"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because val is never re-read inside the loop body, its value never changes, so the while condition val != -999 remains true forever, producing an infinite loop.",
+ misconception:"Students sometimes focus on the priming read before the loop while overlooking that a matching read is also required at the end of the loop body to advance the sentinel check."},
+
+{sec:'sim',comp:'mixed',topic:'Recursion depth in a real application',diff:'adv',type:'sim',
+ scenario:"A developer writes a recursive function to calculate the factorial of a user-provided number for a scientific calculator app. During testing, entering a very large number (like 50,000) causes the app to crash with a stack overflow error, while small numbers work fine.",
+ stem:"What does this behavior most likely indicate about the recursive function?",
+ opts:["The function has no bugs and large inputs are simply unsupported by all computers", "The function's base case and recursive logic are likely correct for small inputs, but very deep recursion for large inputs exhausts the call stack's limited memory", "The function is using an infinite loop instead of recursion", "Stack overflow errors only occur with syntax errors"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because small inputs work correctly, the recursive logic and base case are likely sound; the crash on very large inputs is a classic symptom of exceeding the call stack's finite memory through excessively deep recursion, not a logic bug in the recursive steps themselves.",
+ misconception:"Students often assume a crash always means the algorithm's logic is wrong, rather than recognizing that recursion depth itself is a resource with real limits, separate from whether the logic is correct."},
+
+{sec:'sim',comp:'mixed',topic:'Choosing between selection and bubble sort in context',diff:'adv',type:'sim',
+ scenario:"A student is comparing selection sort and bubble sort for a class project sorting a small list of 8 exam scores. Their instructor notes that for very small lists, the practical performance difference between the two algorithms is often negligible, and code clarity matters more.",
+ stem:"Given the instructor's guidance, what is the most reasonable takeaway for the student's project?",
+ opts:["Always choose the algorithm with the better theoretical Big O complexity, regardless of context", "For a very small, one-time list like this, either algorithm is a reasonable choice, and factors like code clarity may matter more than raw performance at this scale", "Selection sort should never be used under any circumstances", "Bubble sort is always faster than selection sort on any input"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Both selection sort and bubble sort have similar O(n^2) worst-case complexity, and on a list as small as 8 elements the practical performance difference is negligible, making other factors like clarity reasonable tiebreakers, exactly as the instructor suggested.",
+ misconception:"Students sometimes treat Big O complexity as the only factor that ever matters, without recognizing that at small input sizes, constant-factor differences and code readability can reasonably outweigh asymptotic complexity."},
+
+{sec:'sim',comp:'mixed',topic:'Requirements gap causing a defect',diff:'adv',type:'sim',
+ scenario:"A team builds a shipping cost calculator based on a requirements document that only specifies 'domestic' shipping rates. After launch, customers entering international addresses receive an incorrect $0 shipping cost because no rate applies to their case.",
+ stem:"What is the most accurate diagnosis of the root cause here?",
+ opts:["A syntax error in the shipping calculation code", "An incomplete requirements analysis that failed to account for international addresses as a valid input case", "The compiler failed to catch the bug", "The variable names used in the code were too short"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The defect traces back to requirements analysis that did not anticipate or specify behavior for international addresses, not to a coding syntax issue — the code likely did exactly what the (incomplete) requirements described.",
+ misconception:"Students often assume all defects are code-level bugs, overlooking that many real-world defects originate from incomplete or unclear requirements gathered before any code was written."},
+
+{sec:'sim',comp:'mixed',topic:'Time complexity impacting a scaling decision',diff:'adv',type:'sim',
+ scenario:"A startup's app currently has 500 users and uses an O(n^2) algorithm to find duplicate entries in a user's contact list, which works fine. As the company plans to scale to 5 million users' contact lists, an engineer raises a concern in a design review.",
+ stem:"What is the engineer most likely concerned about?",
+ opts:["That the app will look visually different at scale", "That an O(n^2) algorithm's runtime grows dramatically faster than input size, which could become a serious performance bottleneck as contact list sizes grow", "That O(n^2) algorithms cannot be written in most languages", "That the algorithm will produce incorrect results at higher input sizes"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> An O(n^2) algorithm's runtime grows quadratically with input size, so what performs acceptably on small contact lists can become a severe performance bottleneck as list sizes grow substantially, which is precisely the scaling concern being raised.",
+ misconception:"Students sometimes assume time complexity only affects whether an algorithm gets the right answer, not how practically usable it remains as input size grows."},
+
+{sec:'sim',comp:'mixed',topic:'Constant vs variable in configuration code',diff:'adv',type:'sim',
+ scenario:"A developer is writing a tax calculation script for a specific U.S. state where the sales tax rate (7.25%) is fixed by law and does not change during a single run of the program, though it could theoretically change in future tax years.",
+ stem:"Which approach best balances the current requirement with realistic future maintenance?",
+ opts:["Hard-code 0.0725 directly into every calculation throughout the script with no named reference", "Declare it as a named constant, such as TAX_RATE = 0.0725, used throughout the script, so future rate changes only require updating one line", "Declare it as a variable that the user re-enters every time the program runs", "Store it as a string, since it will be displayed to the user"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A named constant fixes the value for the current tax year (satisfying that it should not change during execution) while keeping the value centralized in one place, making a future legal rate change a single, low-risk update rather than a scattered find-and-replace.",
+ misconception:"Students sometimes conflate 'might change someday' with 'should be an ordinary variable,' missing that a constant can still be updated in source code between versions — it simply should not change during a single execution."},
+
+{sec:'sim',comp:'mixed',topic:'Diagnosing a logic error from user reports',diff:'adv',type:'sim',
+ scenario:"A weather app's temperature classifier is supposed to label any reading of 32°F or below as 'Freezing.' Users report that a reading of exactly 32°F is being labeled 'Cold' instead.",
+ stem:"Given the snippet below, what is the most likely cause of the reported behavior?",
+ code:true,
+ stemCode:"integer temp\ntemp = 32\nif temp < 32\n   Put \"Freezing\" to output\nelse\n   Put \"Cold\" to output",
+ opts:["The variable temp was never declared", "The condition uses strict less-than (temp < 32) instead of less-than-or-equal (temp <= 32), so exactly 32 falls into the else branch", "The else branch should be removed entirely", "There is no bug; this is the intended behavior"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because the condition is temp < 32, a reading of exactly 32 does not satisfy it and falls through to the else branch labeled 'Cold' — matching the reported bug exactly. Using temp <= 32 would correctly include the boundary value.",
+ misconception:"Students sometimes assume boundary bugs like this must involve the wrong variable or a missing declaration, rather than checking whether a comparison operator excludes a boundary value it should include."},
+
+{sec:'sim',comp:'mixed',topic:'Choosing pseudocode abstraction level',diff:'adv',type:'sim',
+ scenario:"A senior developer reviewing a junior developer's pseudocode for a new feature finds it written in exact Python syntax, complete with colons, indentation-sensitive blocks, and Python-specific function names like `len()` and `.append()`.",
+ stem:"What is the most likely concern the senior developer would raise about this pseudocode?",
+ opts:["Pseudocode should not use any variables at all", "Writing pseudocode in exact target-language syntax defeats its purpose as a language-independent planning tool, and ties the design prematurely to one implementation language", "Python cannot be used for pseudocode under any circumstances", "There is no concern; this is the correct way to write pseudocode"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Pseudocode is meant to describe logic independent of any specific language's syntax; writing it in exact Python syntax removes that flexibility and ties early design decisions to one implementation before they need to be.",
+ misconception:"Students sometimes think 'more precise syntax' is always better for pseudocode, missing that its value comes specifically from being readable and language-independent during the planning phase."},
+
+{sec:'sim',comp:'mixed',topic:'Algorithm correctness under an edge case',diff:'adv',type:'sim',
+ scenario:"A grading script is designed to find the lowest score in a class to potentially drop it. A teaching assistant tests it on a roster of 25 students and it works perfectly every time. Before deploying it school-wide, another TA asks what happens if a class has exactly one student.",
+ stem:"Why is this a reasonable and important question to ask before deployment, even though 25 passing tests suggest the function works?",
+ opts:["It is not reasonable; 25 passing tests are sufficient proof the function is correct for all cases", "Passing many typical-sized tests does not guarantee correctness for edge cases like a single-element list, which behaves differently and should be explicitly checked", "A class can never have exactly one student, so the question is irrelevant", "The function's time complexity would change with only one student"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Passing tests on typical-sized inputs builds confidence but does not prove correctness for edge cases; a single-element list is a classic edge case where off-by-one or initialization bugs often surface, so it is a reasonable and important case to explicitly verify.",
+ misconception:"Students sometimes treat a good track record of passing tests as equivalent to proof of correctness, without separately considering whether edge cases were among those tests."},
+
+{sec:'sim',comp:'mixed',topic:'Heuristic tradeoff in a scheduling tool',diff:'adv',type:'sim',
+ scenario:"A university's course scheduling tool uses a heuristic that assigns each student to the first available time slot that doesn't conflict with their existing classes, rather than computing the mathematically optimal schedule across all students simultaneously, which would take far too long to compute for 40,000 students.",
+ stem:"What tradeoff does this design decision represent?",
+ opts:["The heuristic guarantees the best possible schedule for every student with no downside", "The heuristic produces a reasonably good schedule quickly, at the cost of not guaranteeing the mathematically optimal assignment for every student", "There is no tradeoff since heuristics and optimal algorithms always produce identical results", "The heuristic is slower than computing the fully optimal solution"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Choosing a fast 'first available slot' heuristic over an exhaustive optimal computation trades away a guarantee of the best possible outcome in exchange for a solution that can actually be computed in reasonable time for 40,000 students.",
+ misconception:"Students sometimes assume any algorithm that produces a working result must be optimal, missing that heuristics are explicitly chosen when computing the true optimum isn't practical."},
+
+{sec:'sim',comp:'mixed',topic:'Data type bug in a real form',diff:'adv',type:'sim',
+ scenario:"An online order form asks users to enter a promo code. A developer declares the promo code variable as an integer, reasoning that most promo codes at the company are numeric, like 2024. During testing, a code like 'SAVE10' causes the program to crash.",
+ stem:"What is the most defensible fix, and why?",
+ opts:["Keep the integer type, since most codes are numeric", "Change the promo code variable to a string type, since promo codes may contain letters and are never used in arithmetic, regardless of how many happen to look numeric", "Remove the promo code feature entirely", "Change the variable to a boolean type"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because promo codes can legitimately contain letters and are never used in calculations, a string type correctly accommodates all valid codes, including numeric-looking ones like '2024', without risking a crash on alphanumeric input.",
+ misconception:"Students sometimes choose a data type based on what most sample data looks like rather than what the full range of valid input actually requires."},
+
+{sec:'sim',comp:'mixed',topic:'Comparing search costs in a real pipeline',diff:'adv',type:'sim',
+ scenario:"A data pipeline processes a batch of 10,000 unsorted transaction IDs once per day and needs to check whether each of 200 flagged IDs appears anywhere in that day's batch. Sorting the 10,000 IDs would take noticeable time, but so would running 200 separate linear searches.",
+ stem:"Which analysis most accurately compares the two approaches?",
+ opts:["Linear search 200 times is always better regardless of context", "Sorting once (a one-time cost) followed by 200 binary searches is likely more efficient overall than 200 separate linear searches through unsorted data, since the sorting cost is paid once and amortized across all 200 lookups", "Sorting the data has no effect on search performance", "Binary search cannot be used on transaction ID data"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because the sorted list can be reused across all 200 lookups, the one-time sorting cost is amortized over many binary searches, which is typically more efficient overall than performing 200 independent full linear scans through unsorted data.",
+ misconception:"Students sometimes evaluate sorting cost against a single search only, without accounting for how that one-time cost is spread across many repeated lookups in the same batch."},
+
+{sec:'sim',comp:'mixed',topic:'IDE tooling saving debugging time',diff:'adv',type:'sim',
+ scenario:"A developer switches from writing code in a plain text editor to using a full IDE partway through a project. On their next bug, the IDE's debugger lets them step through the code line by line and inspect variable values at each step, which quickly reveals a variable was never updated inside a loop.",
+ stem:"What does this scenario best illustrate about the value of an IDE's integrated tooling?",
+ opts:["IDEs guarantee code has no bugs at all", "Integrated tools like a step-through debugger can make it faster to locate the exact point where program logic diverges from expected behavior, compared to reading code without such tooling", "Plain text editors are always faster for debugging", "The bug would not exist if written in a plain text editor"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> The scenario shows the debugger directly revealing where a variable failed to update, illustrating how integrated tooling can substantially speed up locating a bug compared to manually tracing code by eye.",
+ misconception:"Students sometimes think of an IDE as merely a nicer-looking editor, missing that its integrated debugging tools materially change how quickly certain classes of bugs can be found."},
+
+{sec:'sim',comp:'mixed',topic:'Recursion vs iteration tradeoff',diff:'adv',type:'sim',
+ scenario:"A developer needs to sum the numbers from 1 to n, where n could be very large (potentially in the millions). A colleague suggests a recursive solution, but the developer is concerned about the earlier stack overflow issue they experienced with deep recursion on a different feature.",
+ stem:"Given this concern, which approach is most defensible for this specific case?",
+ opts:["Always prefer recursion regardless of input size, since it is more elegant", "An iterative loop-based solution, since it avoids the call-stack depth risk that deep recursion carries for very large values of n", "Neither recursion nor iteration can sum a large range of numbers", "Recursion is required by definition for any summation task"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> Because very large n could produce extremely deep recursion and risk a stack overflow, an iterative loop-based approach avoids that risk entirely while accomplishing the same summation task.",
+ misconception:"Students sometimes treat recursion as inherently superior to iteration for any repetitive task, without weighing practical constraints like call-stack depth for large inputs."},
+
+{sec:'sim',comp:'mixed',topic:'Flowchart miscommunication on a team',diff:'adv',type:'sim',
+ scenario:"A business analyst hands a developer a flowchart for a discount calculation. The flowchart's decision diamond is labeled only 'Check discount?' with two unlabeled branches leading out of it, and the developer is unsure which branch represents 'yes' and which represents 'no.'",
+ stem:"What is the most accurate description of the problem with this flowchart?",
+ opts:["Diamonds should never be used for decisions", "The decision branches are ambiguous because they are not labeled, violating the goal of clearly communicating which path corresponds to which outcome of the condition", "Flowcharts cannot represent discount logic", "The flowchart has too many shapes"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> A decision diamond's branches must be clearly labeled (such as Yes/No) so the flowchart unambiguously communicates which path to follow for each outcome; unlabeled branches force the reader to guess.",
+ misconception:"Students sometimes focus on whether the correct shape (diamond) was used rather than whether the information on and around that shape is actually complete and unambiguous."},
+
+{sec:'sim',comp:'mixed',topic:'Testing before deployment: search edge case',diff:'adv',type:'sim',
+ scenario:"Before deploying a new feature, a QA engineer tests a binary search function on several sorted lists and it passes every time. Before sign-off, a second engineer asks what happens if the function is run on an empty list.",
+ stem:"Why is this follow-up question worth asking even though all prior tests passed?",
+ opts:["It is not worth asking, since an empty list is not a realistic input", "An empty list is a common edge case that can reveal bugs in boundary handling (like initial low/high index calculations) that typical-sized test lists would never expose", "Binary search cannot be implemented for any list, empty or not", "Passing tests on sorted lists already proves the empty list case works too"],
+ ans:1,
+ rationale:"<strong>B is correct.</strong> An empty list is a classic edge case for search and sort algorithms, since initial index calculations (like a starting high or low boundary) can behave unexpectedly when there are zero elements — something typical mid-sized test lists would never surface.",
+ misconception:"Students sometimes assume that because 'normal' inputs pass, boundary or degenerate inputs like an empty list are automatically safe too, rather than treating them as distinct cases worth explicit verification."},
+]
+
+};
+
+/* ============================================================
+   ENGINE — generic across all section types, reusable for
+   c2, c3, ch1, ch2, ch3, sim once those phases are built.
+   ============================================================ */
+
+const STATE = {};   // STATE[sec][i] = true|false|undefined
+const SELS  = {};   // SELS[sec][i]  = selected option index
+let currentSection = 'c1';
+let currentIndex = 0;
+
+SECTIONS.forEach(s => { STATE[s.key] = []; SELS[s.key] = []; });
+
+const compPillClass = { C1:'pill-c1', C2:'pill-c2', C3:'pill-c3', mixed:'pill-mixed' };
+const diffLabel = { found:'Foundational', inter:'Intermediate', adv:'Advanced' };
+
+function escapeHtml(str){
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function buildNav(){
+  const nav = document.getElementById('navToggle');
+  nav.innerHTML = '';
+  SECTIONS.forEach(s => {
+    const has = QUESTIONS[s.key] && QUESTIONS[s.key].length > 0;
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn' + (s.key === currentSection ? ' active' : '');
+    btn.textContent = s.label + (has ? ` (${QUESTIONS[s.key].length})` : ' — coming soon');
+    if(!has){ btn.disabled = true; }
+    btn.onclick = () => switchSection(s.key);
+    nav.appendChild(btn);
+  });
+}
+
+function switchSection(key){
+  if(!QUESTIONS[key] || QUESTIONS[key].length === 0) return;
+  currentSection = key;
+  currentIndex = 0;
+  buildNav();
+  renderSummary();
+  renderTabRow();
+  renderQuestion();
+  renderBreakdown();
+}
+
+function renderSummary(){
+  const grid = document.getElementById('summaryGrid');
+  grid.innerHTML = '';
+  SECTIONS.forEach(s => {
+    const data = QUESTIONS[s.key] || [];
+    if(data.length === 0) return;
+    const answered = STATE[s.key].filter(v => v !== undefined).length;
+    const correct = STATE[s.key].filter(v => v === true).length;
+    const pct = answered ? Math.round((correct/answered)*100) : null;
+    const div = document.createElement('div');
+    let cls = 'neutral';
+    if(pct !== null) cls = pct >= 80 ? 'pass' : 'fail';
+    div.className = 'summary-card ' + cls;
+    div.innerHTML = `<div class="t">${s.label}</div><div class="p">${pct === null ? '—' : pct+'%'}</div><div style="font-size:11px;color:var(--label-dark);">${answered}/${data.length} answered</div>`;
+    div.onclick = () => switchSection(s.key);
+    grid.appendChild(div);
+  });
+}
+
+function renderTabRow(){
+  const row = document.getElementById('tabRow');
+  row.innerHTML = '';
+  const data = QUESTIONS[currentSection];
+  data.forEach((q,i) => {
+    const t = document.createElement('div');
+    let cls = 'tab';
+    const st = STATE[currentSection][i];
+    if(st === true) cls += ' correct';
+    else if(st === false) cls += ' wrong';
+    if(i === currentIndex) cls += ' current';
+    t.className = cls;
+    t.textContent = i+1;
+    t.onclick = () => { currentIndex = i; renderTabRow(); renderQuestion(); };
+    row.appendChild(t);
+  });
+}
+
+function renderQuestion(){
+  const data = QUESTIONS[currentSection];
+  const q = data[currentIndex];
+  const card = document.getElementById('questionCard');
+  const sel = SELS[currentSection][currentIndex];
+  const locked = sel !== undefined;
+
+  let html = `<div class="qhead">
+    <span class="pill ${compPillClass[q.comp]}">${q.comp}</span>
+    <span class="pill pill-diff">${diffLabel[q.diff]}</span>
+    <span class="pill pill-diff">${q.topic}</span>
+    <span class="qcounter">Question ${currentIndex+1} of ${data.length}</span>
+  </div>`;
+
+  if(q.scenario){
+    html += `<div class="scenario"><strong>Scenario:</strong> ${q.scenario}</div>`;
+  }
+
+  html += `<div class="stem">${q.stem}</div>`;
+
+  if(q.code && q.stemCode){
+    html += `<pre class="code">${escapeHtml(q.stemCode)}</pre>`;
+  }
+
+  html += `<div class="opts">`;
+  q.opts.forEach((opt,i) => {
+    let cls = 'opt';
+    if(locked){
+      cls += ' locked';
+      if(i === q.ans) cls += ' reveal-correct';
+      else if(i === sel) cls += ' selected-wrong';
+    }
+    html += `<div class="${cls}" data-i="${i}">${String.fromCharCode(97+i)}. ${opt}</div>`;
+  });
+  html += `</div>`;
+
+  if(locked){
+    html += `<div class="feedback">
+      <div class="rationale">${q.rationale}</div>
+      <div class="misc">Instructor note: ${q.misconception}</div>
+    </div>`;
+  }
+
+  html += `<div class="navbtns">
+    <button id="prevBtn">← Previous</button>
+    <button id="nextBtn">Next →</button>
+  </div>`;
+
+  card.innerHTML = html;
+
+  card.querySelectorAll('.opt').forEach(el => {
+    el.addEventListener('click', () => {
+      if(SELS[currentSection][currentIndex] !== undefined) return;
+      const i = parseInt(el.dataset.i);
+      SELS[currentSection][currentIndex] = i;
+      STATE[currentSection][currentIndex] = (i === q.ans);
+      renderQuestion();
+      renderTabRow();
+      updateScoreboard();
+      renderSummary();
+      renderBreakdown();
+    });
+  });
+
+  document.getElementById('prevBtn').onclick = () => go(-1);
+  document.getElementById('nextBtn').onclick = () => go(1);
+}
+
+function go(dir){
+  const data = QUESTIONS[currentSection];
+  const next = currentIndex + dir;
+  if(next < 0 || next >= data.length) return;
+  currentIndex = next;
+  renderTabRow();
+  renderQuestion();
+}
+
+function updateScoreboard(){
+  let answered=0, correct=0, wrong=0, total=0;
+  SECTIONS.forEach(s => {
+    const data = QUESTIONS[s.key] || [];
+    total += data.length;
+    STATE[s.key].forEach(v => {
+      if(v !== undefined){ answered++; if(v) correct++; else wrong++; }
+    });
+  });
+  const pct = answered ? Math.round((correct/answered)*100) : 0;
+  document.getElementById('statAnswered').textContent = answered;
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statWrong').textContent = wrong;
+  document.getElementById('statPct').textContent = pct + '%';
+  const statusEl = document.getElementById('statStatus');
+  if(answered === 0){ statusEl.textContent = '—'; statusEl.style.color=''; }
+  else if(pct >= 80){ statusEl.textContent = 'PASS'; statusEl.style.color = 'var(--green)'; }
+  else { statusEl.textContent = 'FAIL'; statusEl.style.color = 'var(--red)'; }
+  document.getElementById('progressFill').style.width = total ? (answered/total*100)+'%' : '0%';
+}
+
+function renderBreakdown(){
+  const el = document.getElementById('breakdown');
+  el.innerHTML = '';
+  const data = QUESTIONS[currentSection];
+  const byComp = {};
+  data.forEach((q,i) => {
+    const key = q.topic;
+    if(!byComp[key]) byComp[key] = {correct:0, answered:0};
+    const st = STATE[currentSection][i];
+    if(st !== undefined){ byComp[key].answered++; if(st) byComp[key].correct++; }
+  });
+  const colorFor = (pct) => pct === null ? 'var(--label)' : pct >= 80 ? 'var(--green)' : pct >= 50 ? 'var(--amber)' : 'var(--red)';
+  Object.keys(byComp).forEach(topic => {
+    const b = byComp[topic];
+    const pct = b.answered ? Math.round((b.correct/b.answered)*100) : null;
+    const row = document.createElement('div');
+    row.className = 'breakdown-row';
+    row.innerHTML = `<div class="breakdown-label">${topic}</div>
+      <div class="breakdown-track"><div class="breakdown-fill" style="width:${pct||0}%;background:${colorFor(pct)}"></div></div>
+      <div class="breakdown-pct">${pct===null?'—':pct+'%'}</div>`;
+    el.appendChild(row);
+  });
+}
+
+// init
+buildNav();
+renderSummary();
+renderTabRow();
+renderQuestion();
+updateScoreboard();
+renderBreakdown();
+</script>
+</body>
+</html>
