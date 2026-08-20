@@ -1,5 +1,5 @@
 # D278 — Scripting and Programming Foundations
-## Full Practice Exam · WGU · Instructor: Dr. Mario Booker
+## Full Practice Exam · WGU · Instructor: Dr. Mario DeSean Booker
 
 > **215 questions across 7 sections — all auto-graded in the browser.
 > No login required. No installation. Works on any device.**
@@ -110,13 +110,6 @@ Include the following in your email:
 
 ---
 
-## For the Instructor
-
-The exam is a single self-contained HTML file (`d278_full_practice_exam.html`) with zero external dependencies. All questions, grading logic, rationale, and UI are bundled inline — no server, no database, no CDN calls required. GitHub Pages serves it as a static file.
-
-To update questions or add new sections, edit the `QUESTIONS` object directly in the HTML file and push to the `main` branch. GitHub Pages rebuilds automatically within 1–2 minutes.
-
----
 
 *D278: Scripting and Programming Foundations · Western Governors University*
 *Practice exam maintained by Dr. Mario Booker · mario.booker@wgu.edu*
