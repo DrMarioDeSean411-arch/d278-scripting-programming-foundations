@@ -1,8 +1,7 @@
 # D278 — Scripting and Programming Foundations
 ## Full Practice Exam · WGU · Instructor: Dr. Mario DeSean Booker
 
-> **215 questions across 7 sections — all auto-graded in the browser.
-> No login required. No installation. Works on any device.**
+> 155 practice questions with instant feedback, plus a 70-question timed simulation. No login. No installation. Works on any device.
 
 ---
 
@@ -22,94 +21,57 @@ There is **no login, no tracking, and no data sent anywhere** — everything run
 
 ---
 
-## Exam Structure
+Exam Structure
+#	Section	Questions	Format
+1	C1 — Identify Scripts and Program Requirements	50	Multiple choice, instant feedback
+2	C2 — Use Fundamental Programming Elements	62	Multiple choice, instant feedback
+3	C3 — Explain Logic and Outcome of Simple Algorithms	43	Multiple choice, instant feedback
+4	Simulation — Timed Exam	70 per attempt	Mixed order, 120 minutes, graded on submit
 
-| # | Section | Questions | Format | Difficulty Mix |
-|---|---------|-----------|--------|-----------------|
-| 1 | C1 — Program Requirements | 50 | Multiple choice | 40% Foundational / 40% Intermediate / 20% Advanced |
-| 2 | C2 — Programming Elements | 50 | Multiple choice | 40% Foundational / 40% Intermediate / 20% Advanced |
-| 3 | C3 — Logic & Algorithms | 50 | Multiple choice | 40% Foundational / 40% Intermediate / 20% Advanced |
-| 4 | C1 Challenge | 15 | Code-trace multiple choice | Intermediate / Advanced |
-| 5 | C2 Challenge | 15 | Code-trace multiple choice | Intermediate / Advanced |
-| 6 | C3 Challenge | 15 | Code-trace multiple choice | Intermediate / Advanced |
-| 7 | Simulation | 20 | Scenario-based multiple choice | Advanced |
-| | **Total** | **215** | | |
+Each practice section is about 40% Foundational, 40% Intermediate, and 20% Advanced.
 
----
+The simulation
 
-## How to Use This Exam
+The real D278 exam gives you 70 questions in mixed order with no hint about which competency each one tests. The simulation does the same:
 
-1. Click any section button at the top of the exam page
-2. Read each question carefully — many include pseudocode you must trace by hand before selecting an answer
-3. Click your answer
-4. The correct answer, full explanation, and instructor note appear immediately
-5. Use the tab row to jump between questions or track what you have answered
-6. Watch your competency breakdown bars at the bottom of each section — anything below 80% needs review
+23 questions from C1, 29 from C2, and 18 from C3, the same proportions as the official practice tests
+A 120-minute countdown that submits automatically at zero
+No feedback until you submit. You can change answers and flag questions before then.
+A results screen with your score, your score per competency, and a review of every question you missed
+Every attempt draws a new random set, so a retake is not the same exam. Some questions you saw in the practice sections may appear.
+How to Use This Exam
+Work through C1, C2, and C3. Trace every code question by hand on paper before you click an answer.
+Read the rationale and the instructor note on every question, including the ones you got right.
+Watch the breakdown bars under each section. Any topic below 80% needs more study.
+When all three sections are above 80%, take the timed simulation under real conditions: no notes, no pausing.
+Scoring Guide
+Score	What it means
+90–100%	Exam ready: schedule your assessment
+80–89%	Nearly ready: review your weak competency areas
+70–79%	Close: focus on the topics below 80%
+Below 70%	More preparation needed: revisit course material and redo the sections
 
-### Challenge sections (C1/C2/C3 Challenge)
-These questions test your ability to trace pseudocode by hand: predicting output, tracking variable state through a sequence of statements, identifying a specific bug, or unrolling a loop iteration by iteration. Work through the code on paper before selecting an answer — the rationale shows the full step-by-step trace so you can check your work.
+Passing threshold used in this tool: 80%
 
-### Simulation section
-Each simulation question opens with a short workplace or real-world scenario. Read the scenario carefully before answering — the correct answer and rationale are tied directly to details in that scenario, not to a generic rule.
+Topics Covered
 
----
+C1 — Identify Scripts and Program Requirements Bits, bytes, and binary · embedded computers and Moore's Law · compilers and interpreters · statically and dynamically typed languages · libraries · abstraction · classes, objects, and abstract data types · debugging by inspection and output statements · troubleshooting (problem, hypothesis, test, solution, ordering hypotheses, sub-hypotheses, binary-search troubleshooting) · identifiers and comments · data types · constants · variables and expressions
 
-## Scoring Guide
+C2 — Use Fundamental Programming Elements Operator precedence · integer and floating-point division · the modulo operator · assignment and swapping values · floating-point comparison · function definitions, calls, parameters, arguments, return values, stubs, and nested calls · random numbers and seeding · if / elseif / else and independent if statements · nested branches · boundary conditions and logical operators · while and for loops, sentinels, counters, and nested loops · arrays, indexes, sizes, and out-of-range errors · output and newlines
 
-| Score | What it means |
-|-------|---------------|
-| 90–100% | Exam ready — schedule your assessment |
-| 80–89% | Nearly ready — review your weak competency areas |
-| 70–79% | Close — focus study on the sections below 80% |
-| Below 70% | More preparation needed — revisit course material and redo the relevant sections |
+C3 — Explain Logic and Outcome of Simple Algorithms Algorithm definition, inputs, and outputs · ordering algorithm steps · finding a maximum or minimum · linear search and binary search (preconditions, traces, and runtime) · best, worst, and average cases · space complexity · efficiency tradeoffs · sorting and swaps · heuristics · NP-complete problems · tracing loop-based algorithms
 
-**Passing threshold for the official WGU assessment: 80%**
+After You Complete the Exam
 
-The colored breakdown bars at the bottom of each section show your score broken down by topic within that section, so you can target your remaining study time precisely.
+Email your results to your instructor:
 
----
+📧 mario.booker@wgu.edu
 
-## Topics Covered
+Subject line: D278 Practice Exam Results — [Your Name] — [Date]
 
-**Competency 1 — Program Requirements**
-Program vs. script distinction · compiled vs. interpreted languages · source, object, and machine code · assemblers, compilers, and interpreters · IDEs and development environments · pseudocode syntax and conventions · flowchart symbols (start/stop, process, decision, I/O) · requirements analysis · input/output identification · variable declaration, naming conventions, and scope · constants vs. variables · data type selection
+In the body of your email, include:
 
-**Competency 2 — Programming Elements**
-Primitive data types (int, float, string, boolean, char) · arithmetic operators including integer division and modulo · comparison and logical operators · assignment and compound assignment · operator precedence · conditional logic (if/elif/else, nested conditionals) · for loops · while loops and sentinel values · loop control (break/continue) · functions (parameters, arguments, return values) · string indexing, slicing, and methods · list/array creation, indexing, and common operations · basic error and exception handling
-
-**Competency 3 — Logic & Algorithms**
-Algorithm definition and required properties (unambiguous, executable, terminating) · pseudocode and flowchart tracing · linear search mechanics · binary search mechanics and preconditions · comparison of linear vs. binary search · selection sort and bubble sort step-by-step · time complexity (O(1), O(n), O(n²), O(log n)) · space complexity basics · recursion (base case, recursive case) · algorithm correctness and counterexample reasoning · heuristic algorithms
-
----
-
-## After You Complete the Exam
-
-**Email your results to your instructor:**
-
-📧 **mario.booker@wgu.edu**
-
-Include the following in your email:
-
-**Subject line:** `D278 Practice Exam Results — [Your Name] — [Date]`
-
-**In the body of your email, include:**
-1. Your overall score
-2. Your score for each of the three competencies (C1, C2, C3), including the Challenge and Simulation sections if completed
-3. The section or topic you found most challenging
-4. Any questions you have about topics you missed
-
-> Your instructor uses these results to identify common trouble spots across the class and can provide targeted feedback before you attempt the official assessment.
-
----
-
-## Resources
-
-| Resource | Link |
-|----------|------|
-| WGU Student Support | [my.wgu.edu](https://my.wgu.edu) |
-
----
-
-
-*D278: Scripting and Programming Foundations · Western Governors University*
-*Practice exam maintained by Dr. Mario Booker · mario.booker@wgu.edu*
+Your score for each practice section (C1, C2, C3)
+Your simulation score and your score for each competency from the results screen
+The topic you found most challenging
+Any questions about topics you missed
