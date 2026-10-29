@@ -58,6 +58,58 @@ button.btn.danger{background:var(--red);color:#fff;border-color:var(--red)}
 .review{border-top:0.5px solid var(--border);padding-top:14px;margin-top:14px}
 .review .ans{font-size:13px;margin:6px 0}
 @media(max-width:560px){.scoreboard{grid-template-columns:repeat(3,1fr)}.breakdown-label{width:110px}}
+.nav-break{flex-basis:100%;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--label);margin-top:4px}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed}.nav-btn.tool{border-style:dashed}
+button.btn.small{padding:5px 10px;font-size:12px}button.btn:disabled{opacity:.4;cursor:not-allowed}
+code{background:var(--hover);padding:1px 5px;border-radius:4px;font-family:'SF Mono',Consolas,Menlo,monospace;font-size:12.5px}
+.toolsrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.retbar{margin-bottom:12px}
+.toolhead{font-size:16px;font-weight:700}
+.sub-h{font-size:12px;font-weight:700;color:var(--label-dark);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.labrow{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin:10px 0}
+.labrow label{font-size:12px;font-weight:700;color:var(--label-dark);display:flex;flex-direction:column;gap:3px}
+.labbtns{display:flex;gap:6px}
+select,input.txt,textarea.codein{font:inherit;font-size:13px;border:0.5px solid var(--border);border-radius:8px;padding:7px 9px;background:#fff;color:var(--ink)}
+select{max-width:100%}
+textarea.codein{width:100%;min-height:280px;font-family:'SF Mono',Consolas,Menlo,monospace;line-height:1.5;white-space:pre;overflow:auto;resize:vertical;tab-size:3}
+.labgrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px}
+@media(max-width:700px){.labgrid{grid-template-columns:minmax(0,1fr)}}
+.labgrid>div{min-width:0}
+.labrow label{max-width:100%}.labrow select{width:100%}
+.listing{background:#1a1a1a;border-radius:8px;padding:8px 0;font-family:'SF Mono',Consolas,Menlo,monospace;font-size:13px;overflow:auto;max-height:420px}
+.ln{display:flex;color:#e7e7e2;white-space:pre;padding-right:10px}
+.ln .no{width:36px;text-align:right;padding-right:10px;color:#77776f;flex-shrink:0;user-select:none}
+.ln.cur{background:#5a4210}.ln.err{background:#6b1f1f}
+.frame{border:0.5px solid var(--border);border-radius:8px;margin-bottom:8px;overflow:hidden}.frame.top{border-color:var(--ink)}
+.fh{background:var(--hover);font-size:12px;font-weight:700;padding:5px 9px}
+table.vt{width:100%;border-collapse:collapse;font-family:'SF Mono',Consolas,Menlo,monospace;font-size:13px}
+table.vt td{padding:4px 9px;border-top:0.5px solid var(--border);word-break:break-word}
+table.vt td:first-child{width:38%;color:var(--label-dark)}table.vt tr.chg td{background:var(--green-bg)}
+.outbox{background:var(--hover);border-radius:8px;padding:8px 10px;margin:0;font-family:'SF Mono',Consolas,Menlo,monospace;font-size:13px;white-space:pre-wrap;min-height:38px;word-break:break-all;max-height:200px;overflow:auto}
+.stepnote{margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--hover);font-size:14px}
+.stepnote.error{background:var(--red-bg);color:var(--red)}.stepnote.done{background:var(--green-bg)}
+.scrub{width:100%;margin:12px 0 4px}
+.labctl{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.ghead{display:flex;align-items:center;gap:8px;cursor:pointer}
+.gtitle{font-weight:700;font-size:15px}.gcaret{margin-left:auto;font-weight:800;font-size:18px;color:var(--label-dark)}
+.gtopics{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.gbody{margin-top:6px}.gbody p,.gbody li{font-size:14px}.gbody ul{padding-left:20px;margin:6px 0}
+.gbody h4{margin:14px 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--label-dark)}
+.seg{display:flex;gap:4px}
+.cells{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0}
+.cellw{display:flex;flex-direction:column;align-items:center;width:44px}
+.cell{width:44px;height:38px;border:0.5px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;background:#fff}
+.cells.sm .cellw,.cells.sm .cell{width:34px}.cells.sm .cell{font-size:11px}
+.cell.off{opacity:.3;background:var(--hover)}.cell.seen{background:var(--hover);color:var(--label-dark)}
+.cell.now{background:var(--amber-bg);border-color:var(--amber);color:var(--amber)}.cell.hit{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.cidx{font-size:10px;color:var(--label)}.cmark{font-size:10px;font-weight:800;color:var(--purple);height:12px}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+table.scale{width:100%;border-collapse:collapse;font-size:13px}
+table.scale th,table.scale td{padding:6px 8px;border-top:0.5px solid var(--border);text-align:right}
+table.scale th:first-child,table.scale td:first-child{text-align:left}table.scale th{font-size:11px;color:var(--label-dark)}
+.scalewrap{overflow-x:auto}
+@media(max-width:560px){table.scale th,table.scale td{padding:6px 4px;font-size:12px}}
+
 </style>
 </head>
 <body>
@@ -94,6 +146,9 @@ button.btn.danger{background:var(--red);color:#fff;border-color:var(--red)}
   </div>
 
   <div id="sim" style="display:none"><div class="card" id="simCard"></div><div id="simExtra"></div></div>
+  <div id="lab" style="display:none"></div>
+  <div id="guide" style="display:none"></div>
+  <div id="search" style="display:none"></div>
 </div>
 
 <script>
@@ -2843,7 +2898,10 @@ const SECTIONS=[
  {key:'c1',label:'C1 — Scripts & Program Requirements',comp:'C1'},
  {key:'c2',label:'C2 — Fundamental Programming Elements',comp:'C2'},
  {key:'c3',label:'C3 — Logic & Outcome of Simple Algorithms',comp:'C3'},
- {key:'sim',label:'Simulation — Timed Exam',comp:'mixed'}
+ {key:'sim',label:'Simulation — Timed Exam',comp:'mixed'},
+ {key:'lab',label:'Trace Lab',comp:'tool',tool:true},
+ {key:'guide',label:'Study Guide',comp:'tool',tool:true},
+ {key:'search',label:'Search Lab',comp:'tool',tool:true}
 ];
 const PRACTICE=['c1','c2','c3'];
 const SIM_MIX={C1:23,C2:29,C3:18};   // 70 questions, proportioned like the official practice tests
@@ -2860,24 +2918,6 @@ function $(id){return document.getElementById(id)}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function optHtml(o){return escapeHtml(o)}
 
-function buildNav(){
-  const nav=$('navToggle');nav.innerHTML='';
-  SECTIONS.forEach(s=>{
-    const b=document.createElement('button');
-    b.className='nav-btn'+(s.key===currentSection?' active':'');
-    const n=s.key==='sim'?'70 Q · 120 min':QUESTIONS[s.key].length;
-    b.textContent=s.label+' ('+n+')';
-    b.onclick=()=>switchSection(s.key);nav.appendChild(b);
-  });
-}
-function switchSection(key){
-  currentSection=key;currentIndex=0;
-  buildNav();renderSummary();
-  const isSim=key==='sim';
-  $('practice').style.display=isSim?'none':'block';
-  $('sim').style.display=isSim?'block':'none';
-  if(isSim){renderSim()}else{renderTabRow();renderQuestion();renderBreakdown()}
-}
 function renderSummary(){
   const g=$('summaryGrid');g.innerHTML='';
   PRACTICE.forEach(k=>{
@@ -2887,7 +2927,7 @@ function renderSummary(){
     const d=document.createElement('div');
     d.className='summary-card '+(pct===null?'neutral':pct>=PASS?'pass':'fail');
     d.innerHTML='<div class="t">'+escapeHtml(s.label)+'</div><div class="p">'+(pct===null?'—':pct+'%')+'</div><div class="s">'+ans+'/'+data.length+' answered</div>';
-    d.onclick=()=>switchSection(k);g.appendChild(d);
+    d.onclick=()=>{if(!navLocked())switchSection(k)};g.appendChild(d);
   });
   const d=document.createElement('div');
   const last=SIM.last;
@@ -2921,9 +2961,9 @@ function renderQuestion(){
   const data=QUESTIONS[currentSection],q=data[currentIndex],sel=SELS[currentSection][currentIndex],locked=sel!==undefined;
   let h='<div class="qhead"><span class="pill '+compPill[q.comp]+'">'+q.comp+'</span><span class="pill pill-diff">'+diffLabel[q.diff]+'</span><span class="pill pill-diff">'+escapeHtml(q.topic)+'</span><span class="qcounter">Question '+(currentIndex+1)+' of '+data.length+'</span></div>';
   h+=qBody(q,locked,sel,'practice');
-  if(locked){h+='<div class="feedback"><div class="rationale"><strong>'+LETTERS[q.ans]+' is correct.</strong> '+escapeHtml(q.rationale)+'</div><div class="misc">Instructor note: '+escapeHtml(q.misconception)+'</div></div>'}
+  if(locked){h+='<div class="feedback"><div class="rationale"><strong>'+LETTERS[q.ans]+' is correct.</strong> '+escapeHtml(q.rationale)+'</div><div class="misc">Instructor note: '+escapeHtml(q.misconception)+'</div>'+toolsRow(q)+'</div>'}
   h+='<div class="navbtns"><button class="btn" id="prevBtn">← Previous</button><button class="btn" id="nextBtn">Next →</button></div>';
-  const card=$('questionCard');card.innerHTML=h;
+  const card=$('questionCard');card.innerHTML=h;bindTools(card,q,{section:currentSection,index:currentIndex});
   card.querySelectorAll('.opt').forEach(el=>el.addEventListener('click',()=>{
     if(SELS[currentSection][currentIndex]!==undefined)return;
     const i=parseInt(el.dataset.i);SELS[currentSection][currentIndex]=i;STATE[currentSection][currentIndex]=(i===q.ans);
@@ -2988,7 +3028,7 @@ function startSim(){
   SIM.qs=shuffle(qs);SIM.sels=[];SIM.flags=[];SIM.idx=0;SIM.phase='run';SIM.confirming=false;SIM.result=null;SIM.showAll=false;
   SIM.endAt=Date.now()+SIM_MINUTES*60*1000;
   if(SIM.timerId)clearInterval(SIM.timerId);
-  SIM.timerId=setInterval(tick,1000);
+  SIM.timerId=setInterval(tick,1000);buildNav();
   renderSim();
 }
 function remaining(){return Math.max(0,Math.round((SIM.endAt-Date.now())/1000))}
@@ -3029,7 +3069,7 @@ function submitSim(){
   SIM.qs.forEach((q,i)=>{byC[q.comp].n++;if(SIM.sels[i]===q.ans){cor++;byC[q.comp].c++}});
   const pct=Math.round(cor/SIM.qs.length*100);
   SIM.result={correct:cor,total:SIM.qs.length,pct:pct,byC:byC,used:used};
-  SIM.last=SIM.result;SIM.phase='done';
+  SIM.last=SIM.result;SIM.phase='done';buildNav();
   renderSummary();renderSim();
 }
 function renderSimResults(){
@@ -3050,14 +3090,1651 @@ function renderSimResults(){
     const sel=SIM.sels[i],ok=sel===q.ans;
     if(ok&&!SIM.showAll)return;
     shown++;
-    rv+='<div class="review"><div class="qhead"><span class="pill pill-diff">Question '+(i+1)+'</span><span class="pill '+compPill[q.comp]+'">'+q.comp+'</span><span class="pill pill-diff">'+escapeHtml(q.topic)+'</span><span class="pill" style="background:'+(ok?'var(--green-bg)':'var(--red-bg)')+';color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'Correct':sel===undefined?'Unanswered':'Incorrect')+'</span></div>';
+    rv+='<div class="review" data-qi="'+i+'"><div class="qhead"><span class="pill pill-diff">Question '+(i+1)+'</span><span class="pill '+compPill[q.comp]+'">'+q.comp+'</span><span class="pill pill-diff">'+escapeHtml(q.topic)+'</span><span class="pill" style="background:'+(ok?'var(--green-bg)':'var(--red-bg)')+';color:'+(ok?'var(--green)':'var(--red)')+'">'+(ok?'Correct':sel===undefined?'Unanswered':'Incorrect')+'</span></div>';
     rv+='<div class="stem">'+escapeHtml(q.stem)+'</div>'+(q.code&&q.stemCode?'<pre class="code">'+escapeHtml(q.stemCode)+'</pre>':'');
     rv+='<div class="ans"><strong>Your answer:</strong> '+(sel===undefined?'(none)':LETTERS[sel]+'. '+escapeHtml(q.opts[sel]).replace(/\n/g,'<br>'))+'</div>';
     rv+='<div class="ans"><strong>Correct answer:</strong> '+LETTERS[q.ans]+'. '+escapeHtml(q.opts[q.ans]).replace(/\n/g,'<br>')+'</div>';
-    rv+='<div class="feedback"><div class="rationale">'+escapeHtml(q.rationale)+'</div><div class="misc">Instructor note: '+escapeHtml(q.misconception)+'</div></div></div>';
+    rv+='<div class="feedback"><div class="rationale">'+escapeHtml(q.rationale)+'</div><div class="misc">Instructor note: '+escapeHtml(q.misconception)+'</div>'+toolsRow(q)+'</div></div>';
   });
   if(!shown)rv+='<div class="note" style="margin-top:10px">Nothing missed. Every question was answered correctly.</div>';
   $('simExtra').innerHTML=rv+'</div>';
+  $('simExtra').querySelectorAll('.review').forEach(r=>bindTools(r,SIM.qs[parseInt(r.dataset.qi,10)],{section:'sim'}));
+}
+
+/* Trace interpreter for the D278 course pseudocode. Records one step per executed line. */
+var TraceInterp = (function () {
+  'use strict';
+  var MAXSTEPS = 800, MAXDEPTH = 40;
+
+  function TErr(msg, line) { this.message = msg; this.line = line; }
+  TErr.prototype = Object.create(Error.prototype);
+  function Stop() {}
+
+  /* ---------- values: {k:'i'|'f'|'s'|'b'|'a'|'u', v} ---------- */
+  var U = { k: 'u', v: null };
+  function I(v) { return { k: 'i', v: v }; }
+  function Fl(v) { return { k: 'f', v: v }; }
+  function S(v) { return { k: 's', v: v }; }
+  function B(v) { return { k: 'b', v: v }; }
+  function fmtF(x) {
+    if (x !== x) return 'NaN';
+    if (x === Infinity) return 'Infinity';
+    if (x === -Infinity) return '-Infinity';
+    var s = String(parseFloat(x.toPrecision(12)));
+    if (!/[.e]/.test(s)) s += '.0';
+    return s;
+  }
+  function show(v) {
+    switch (v.k) {
+      case 'i': return String(v.v);
+      case 'f': return fmtF(v.v);
+      case 's': return v.v;
+      case 'b': return v.v ? 'true' : 'false';
+      case 'a': return '[' + v.v.map(showQ).join(', ') + ']';
+      default: return '?';
+    }
+  }
+  function showQ(v) {
+    if (v.k === 's') return '"' + v.v.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"';
+    return show(v);
+  }
+  function kindName(v) {
+    return { i: 'an integer', f: 'a float', s: 'a string', b: 'a true/false value', a: 'an array', u: 'an unassigned value' }[v.k];
+  }
+  function isNum(v) { return v.k === 'i' || v.k === 'f'; }
+  function defaultFor() { return U; }
+
+  /* ---------- tokenizer ---------- */
+  function stripComment(s) {
+    var inS = false, q = '';
+    for (var i = 0; i < s.length; i++) {
+      var c = s[i];
+      if (inS) { if (c === '\\') i++; else if (c === q) inS = false; }
+      else if (c === '"' || c === "'") { inS = true; q = c; }
+      else if (c === '/' && s[i + 1] === '/') return s.slice(0, i);
+    }
+    return s;
+  }
+  function tokenize(src, line) {
+    var t = [], i = 0;
+    while (i < src.length) {
+      var c = src[i];
+      if (c === ' ' || c === '\t') { i++; continue; }
+      if (/\d/.test(c)) {
+        var j = i; while (j < src.length && /\d/.test(src[j])) j++;
+        if (src[j] === '.' && /\d/.test(src[j + 1] || '')) {
+          j++; while (j < src.length && /\d/.test(src[j])) j++;
+          t.push({ t: 'num', v: src.slice(i, j), f: true });
+        } else t.push({ t: 'num', v: src.slice(i, j), f: false });
+        i = j; continue;
+      }
+      if (/[A-Za-z_]/.test(c)) {
+        var k = i; while (k < src.length && /[A-Za-z0-9_]/.test(src[k])) k++;
+        t.push({ t: 'id', v: src.slice(i, k) }); i = k; continue;
+      }
+      if (c === '"') {
+        var m = i + 1, str = '';
+        while (m < src.length && src[m] !== '"') {
+          if (src[m] === '\\' && m + 1 < src.length) {
+            var n = src[m + 1]; str += n === 'n' ? '\n' : n === 't' ? '\t' : n; m += 2;
+          } else { str += src[m]; m++; }
+        }
+        if (m >= src.length) throw new TErr('A string is missing its closing quote', line);
+        t.push({ t: 'str', v: str }); i = m + 1; continue;
+      }
+      if (c === "'") {
+        var e = src.indexOf("'", i + 1);
+        if (e < 0) throw new TErr('A character is missing its closing quote', line);
+        t.push({ t: 'str', v: src.slice(i + 1, e) }); i = e + 1; continue;
+      }
+      var two = src.substr(i, 2);
+      if (two === '==' || two === '!=' || two === '<=' || two === '>=') { t.push({ t: 'op', v: two }); i += 2; continue; }
+      if ('+-*/%<>=()[],.'.indexOf(c) >= 0) { t.push({ t: 'op', v: c }); i++; continue; }
+      throw new TErr('Unexpected character "' + c + '"', line);
+    }
+    return t;
+  }
+
+  /* ---------- expression parser ----------
+     Precedence, loosest to tightest: or, and, comparisons, + -, * / %, not / unary minus, postfix. */
+  var CMP = { '==': 1, '!=': 1, '<': 1, '>': 1, '<=': 1, '>=': 1 };
+  function EP(tokens, line) { this.t = tokens; this.p = 0; this.line = line; }
+  EP.prototype.peek = function () { return this.t[this.p]; };
+  EP.prototype.isOp = function (v) { var k = this.t[this.p]; return k && k.t === 'op' && k.v === v; };
+  EP.prototype.isId = function (v) { var k = this.t[this.p]; return k && k.t === 'id' && k.v === v; };
+  EP.prototype.fail = function (m) { throw new TErr(m, this.line); };
+  EP.prototype.expect = function (v) { if (!this.isOp(v)) this.fail('Expected "' + v + '"'); this.p++; };
+  EP.prototype.end = function () {
+    var k = this.peek();
+    if (!k) return;
+    if (k.t === 'op' && k.v === '=') this.fail('A single = assigns a value. To compare two values, use ==.');
+    this.fail('Unexpected "' + k.v + '" in this expression');
+  };
+  EP.prototype.parseOr = function () {
+    var l = this.parseAnd();
+    while (this.isId('or')) { this.p++; l = { n: 'bin', op: 'or', l: l, r: this.parseAnd() }; }
+    return l;
+  };
+  EP.prototype.parseAnd = function () {
+    var l = this.parseCmp();
+    while (this.isId('and')) { this.p++; l = { n: 'bin', op: 'and', l: l, r: this.parseCmp() }; }
+    return l;
+  };
+  EP.prototype.parseCmp = function () {
+    var l = this.parseAdd(), k = this.peek();
+    if (k && k.t === 'op' && CMP[k.v]) {
+      this.p++;
+      var r = this.parseAdd(), nx = this.peek();
+      if (nx && nx.t === 'op' && CMP[nx.v]) this.fail('Comparisons cannot be chained. Write each comparison separately and join them with and / or.');
+      return { n: 'bin', op: k.v, l: l, r: r };
+    }
+    return l;
+  };
+  EP.prototype.parseAdd = function () {
+    var l = this.parseMul();
+    for (;;) {
+      var k = this.peek();
+      if (k && k.t === 'op' && (k.v === '+' || k.v === '-')) { this.p++; l = { n: 'bin', op: k.v, l: l, r: this.parseMul() }; } else return l;
+    }
+  };
+  EP.prototype.parseMul = function () {
+    var l = this.parseUn();
+    for (;;) {
+      var k = this.peek();
+      if (k && k.t === 'op' && (k.v === '*' || k.v === '/' || k.v === '%')) { this.p++; l = { n: 'bin', op: k.v, l: l, r: this.parseUn() }; } else return l;
+    }
+  };
+  EP.prototype.parseUn = function () {
+    if (this.isOp('-')) { this.p++; return { n: 'un', op: '-', e: this.parseUn() }; }
+    if (this.isId('not')) { this.p++; return { n: 'un', op: 'not', e: this.parseUn() }; }
+    return this.parsePost();
+  };
+  EP.prototype.parsePost = function () {
+    var e = this.parsePrimary();
+    for (;;) {
+      if (this.isOp('[')) { this.p++; var ix = this.parseOr(); this.expect(']'); e = { n: 'idx', arr: e, i: ix }; }
+      else if (this.isOp('.')) {
+        this.p++; var k = this.peek();
+        if (k && k.t === 'id' && k.v === 'size') { this.p++; e = { n: 'size', arr: e }; } else this.fail('Only .size can follow a dot');
+      } else return e;
+    }
+  };
+  EP.prototype.parsePrimary = function () {
+    var k = this.t[this.p];
+    if (!k) this.fail('The expression ends too soon');
+    this.p++;
+    if (k.t === 'num') return { n: 'num', raw: k.v, f: k.f };
+    if (k.t === 'str') return { n: 'str', v: k.v };
+    if (k.t === 'id') {
+      if (k.v === 'true' || k.v === 'false') return { n: 'bool', v: k.v === 'true' };
+      if (k.v === 'and' || k.v === 'or') this.fail('"' + k.v + '" needs a value on each side');
+      if (k.v === 'Get') {
+        if (this.isId('next') && this.t[this.p + 1] && this.t[this.p + 1].v === 'input') { this.p += 2; return { n: 'input' }; }
+        this.fail('Did you mean "Get next input"?');
+      }
+      if (this.isOp('(')) {
+        this.p++; var args = [];
+        if (!this.isOp(')')) {
+          for (;;) { args.push(this.parseOr()); if (this.isOp(',')) this.p++; else break; }
+        }
+        this.expect(')');
+        return { n: 'call', name: k.v, args: args };
+      }
+      return { n: 'var', name: k.v };
+    }
+    if (k.v === '(') { var e = this.parseOr(); this.expect(')'); return { n: 'paren', e: e }; }
+    this.fail('Unexpected "' + k.v + '"');
+  };
+  function parseExprText(text, line) {
+    var p = new EP(tokenize(text, line), line), e = p.parseOr(); p.end(); return e;
+  }
+
+  /* ---------- statement parser (indentation-based) ---------- */
+  function splitTop(s, sep) {
+    var out = [], depth = 0, cur = '', inS = false, q = '';
+    for (var i = 0; i < s.length; i++) {
+      var c = s[i];
+      if (inS) { cur += c; if (c === q) inS = false; continue; }
+      if (c === '"' || c === "'") { inS = true; q = c; cur += c; continue; }
+      if (c === '(' || c === '[') depth++;
+      if (c === ')' || c === ']') depth--;
+      if (c === sep && depth === 0) { out.push(cur); cur = ''; } else cur += c;
+    }
+    out.push(cur); return out;
+  }
+  function parseAssignText(text, line) {
+    var toks = tokenize(text, line), eq = -1, depth = 0;
+    for (var i = 0; i < toks.length; i++) {
+      var t = toks[i];
+      if (t.t === 'op') {
+        if (t.v === '(' || t.v === '[') depth++;
+        else if (t.v === ')' || t.v === ']') depth--;
+        else if (t.v === '=' && depth === 0) { eq = i; break; }
+      }
+    }
+    if (eq < 1) throw new TErr('This line is not a statement the Trace Lab understands: ' + text.trim(), line);
+    var lhs = toks.slice(0, eq), rhs = toks.slice(eq + 1);
+    if (lhs[0].t !== 'id') throw new TErr('The left side of = must be a variable', line);
+    var node = { n: 'assign', name: lhs[0].v, idx: null, line: line };
+    if (lhs.length > 1) {
+      if (!(lhs[1].v === '[' && lhs[lhs.length - 1].v === ']')) throw new TErr('The left side of = must be a variable or an array element', line);
+      var ip = new EP(lhs.slice(2, lhs.length - 1), line); node.idx = ip.parseOr(); ip.end();
+    }
+    if (!rhs.length) throw new TErr('Nothing follows the = sign', line);
+    var rp = new EP(rhs, line); node.rhs = rp.parseOr(); rp.end();
+    return node;
+  }
+
+  var TYPES = '(integer|float|string|character|boolean)';
+  var RE_FUNC = /^Function\s+([A-Za-z_]\w*)\s*\((.*)\)\s*returns\s+(\w+)(?:\s+([A-Za-z_]\w*))?\s*$/;
+  var RE_PARAM = new RegExp('^' + TYPES + '\\s+(?:(array)\\s*(?:\\([^)]*\\))?\\s+)?([A-Za-z_]\\w*)$');
+  var RE_DECL = new RegExp('^' + TYPES + '\\s+(?:array\\s*\\(\\s*([^)]*?)\\s*\\)\\s*)?([A-Za-z_]\\w*)\\s*(?:=\\s*(.+))?$');
+
+  function parseProgram(src) {
+    var raw = src.replace(/\r/g, '').split('\n'), items = [];
+    raw.forEach(function (r, idx) {
+      var t = stripComment(r);
+      if (!t.trim()) return;
+      items.push({ indent: t.length - t.replace(/^\s+/, '').length, text: t.trim(), line: idx });
+    });
+    var pos = 0;
+    function block(minIndent) {
+      var stmts = [];
+      if (pos >= items.length || items[pos].indent < minIndent) return stmts;
+      var ind = items[pos].indent;
+      while (pos < items.length && items[pos].indent === ind) stmts.push(stmt(ind));
+      if (pos < items.length && items[pos].indent > ind) throw new TErr('This line is indented more than the lines around it', items[pos].line);
+      return stmts;
+    }
+    function body(ind) { return (pos < items.length && items[pos].indent > ind) ? block(ind + 1) : []; }
+    function stmt(ind) {
+      var it = items[pos++], text = it.text, line = it.line, m;
+      if ((m = RE_FUNC.exec(text))) {
+        var params = [];
+        if (m[2].trim()) {
+          m[2].split(',').forEach(function (ps) {
+            var pm = RE_PARAM.exec(ps.trim());
+            if (!pm) throw new TErr('Cannot read the parameter "' + ps.trim() + '"', line);
+            params.push({ type: pm[1], isArr: !!pm[2], name: pm[3] });
+          });
+        }
+        if (m[3] !== 'nothing' && !m[4]) throw new TErr('A function that returns a value must name its return variable', line);
+        return { n: 'func', name: m[1], params: params, rtype: m[3], ret: m[3] === 'nothing' ? null : m[4], body: body(ind), line: line };
+      }
+      if (/^if\s/.test(text)) {
+        var node = { n: 'if', branches: [{ cond: parseExprText(text.slice(2), line), line: line, kw: 'if', body: body(ind) }], elseBody: null, elseLine: null, line: line };
+        while (pos < items.length && items[pos].indent === ind && /^(elseif\s|else$)/.test(items[pos].text)) {
+          var nx = items[pos++];
+          if (nx.text === 'else') { node.elseLine = nx.line; node.elseBody = body(ind); break; }
+          node.branches.push({ cond: parseExprText(nx.text.slice(6), nx.line), line: nx.line, kw: 'elseif', body: body(ind) });
+        }
+        return node;
+      }
+      if (/^(elseif\s|else$)/.test(text)) throw new TErr('"' + text.split(' ')[0] + '" must follow an if', line);
+      if (/^while\s/.test(text)) return { n: 'while', cond: parseExprText(text.slice(5), line), body: body(ind), line: line };
+      if (/^for\s/.test(text)) {
+        var parts = splitTop(text.slice(4), ';');
+        if (parts.length !== 3) throw new TErr('A for loop needs three parts separated by semicolons', line);
+        return { n: 'for', init: parseAssignText(parts[0], line), cond: parseExprText(parts[1], line), step: parseAssignText(parts[2], line), body: body(ind), line: line };
+      }
+      if ((m = /^Put\s+([\s\S]+?)\s+to\s+output$/.exec(text))) return { n: 'put', e: parseExprText(m[1], line), line: line };
+      if ((m = RE_DECL.exec(text))) {
+        return { n: 'decl', type: m[1], size: m[2] === undefined ? null : m[2], name: m[3], init: m[4] ? parseExprText(m[4], line) : null, line: line };
+      }
+      var toks = tokenize(text, line);
+      if (toks.length > 2 && toks[0].t === 'id' && toks[1].v === '(' && toks[toks.length - 1].v === ')') {
+        var ep = new EP(toks, line), c = ep.parseOr();
+        if (c.n === 'call' && !ep.peek()) return { n: 'callstmt', call: c, line: line };
+      }
+      return parseAssignText(text, line);
+    }
+    var all = block(0);
+    if (pos < items.length) throw new TErr('This line is not indented like the rest of the program', items[pos].line);
+    return all;
+  }
+
+  /* ---------- display of expressions with values substituted ---------- */
+  function parseInputs(text) {
+    return String(text || '').split(/[\s,]+/).filter(Boolean).map(function (tok) {
+      if (/^-?\d+$/.test(tok)) return I(parseInt(tok, 10));
+      if (/^-?\d+\.\d+$/.test(tok)) return Fl(parseFloat(tok));
+      return S(tok);
+    });
+  }
+
+  /* ---------- the run ---------- */
+  function run(src, inputText) {
+    var prog;
+    try { prog = parseProgram(src); }
+    catch (e) { if (e instanceof TErr) return { steps: [], parseError: e.message, errorLine: e.line }; throw e; }
+
+    var steps = [], out = '', inputs = parseInputs(inputText), inPos = 0, ctxLine = null;
+    var funcs = {}, nextId = 1, lastSnap = new Map(), inputUsed = new Map();
+    var glob = { id: 0, label: 'Program (top level)', isGlobal: true, vars: new Map(), types: new Map() };
+    var stack = [glob];
+
+    try {
+      prog.forEach(function (s) {
+        if (s.n === 'func') {
+          if (funcs[s.name]) throw new TErr('The function ' + s.name + ' is defined twice', s.line);
+          funcs[s.name] = s;
+        }
+      });
+    } catch (e) { return { steps: [], parseError: e.message, errorLine: e.line }; }
+
+    function rec(line, note, kind) {
+      if (steps.length >= MAXSTEPS) throw new Stop();
+      var frames = [];
+      for (var i = stack.length - 1; i >= 0; i--) {
+        var f = stack[i];
+        if (f.isGlobal && f.vars.size === 0 && stack.length > 1) continue;
+        var prev = lastSnap.get(f.id) || new Map(), cur = new Map(), vars = [];
+        f.vars.forEach(function (v, name) {
+          var s = showQ(v); cur.set(name, s); vars.push({ n: name, v: s, c: prev.get(name) !== s });
+        });
+        lastSnap.set(f.id, cur);
+        frames.push({ name: f.label, vars: vars, top: i === stack.length - 1 });
+      }
+      steps.push({ line: line, note: note, kind: kind, out: out, frames: frames });
+    }
+
+    function lookup(name) {
+      var f = stack[stack.length - 1];
+      if (f.vars.has(name)) return f.vars.get(name);
+      if (glob.vars.has(name)) return glob.vars.get(name);
+      throw new TErr(name + ' has no value yet. A variable must be assigned before it is used.', ctxLine);
+    }
+    function coerce(type, v) { return (type === 'float' && v.k === 'i') ? Fl(v.v) : v; }
+
+    function srcSub(n) {
+      switch (n.n) {
+        case 'num': return n.raw;
+        case 'str': return showQ(S(n.v));
+        case 'bool': return n.v ? 'true' : 'false';
+        case 'var': try { return showQ(lookup(n.name)); } catch (e) { return n.name; }
+        case 'idx': try { return showQ(evalNoSide(n)); } catch (e) { return srcSub(n.arr) + '[...]'; }
+        case 'size': try { return showQ(evalNoSide(n)); } catch (e) { return srcSub(n.arr) + '.size'; }
+        case 'call': return n.name + '(' + n.args.map(srcSub).join(', ') + ')';
+        case 'input': return inputUsed.has(n) ? showQ(inputUsed.get(n)) : 'Get next input';
+        case 'paren': return '(' + srcSub(n.e) + ')';
+        case 'un': return n.op === 'not' ? 'not ' + srcSub(n.e) : '-' + srcSub(n.e);
+        case 'bin': return srcSub(n.l) + ' ' + n.op + ' ' + srcSub(n.r);
+      }
+      return '?';
+    }
+    function evalNoSide(n) { // idx / size lookups for display only
+      if (n.n === 'idx') {
+        var a = evalExpr(n.arr), i = evalExpr(n.i);
+        return a.v[i.v];
+      }
+      return I(evalExpr(n.arr).v.length);
+    }
+
+    function arith(op, a, b) {
+      if (op === '+' && a.k === 's' && b.k === 's') return S(a.v + b.v);
+      if (!isNum(a) || !isNum(b)) throw new TErr('The operator ' + op + ' needs two numbers, but it got ' + kindName(a) + ' and ' + kindName(b), ctxLine);
+      var bothInt = a.k === 'i' && b.k === 'i', x = a.v, y = b.v, r;
+      switch (op) {
+        case '+': r = x + y; break;
+        case '-': r = x - y; break;
+        case '*': r = x * y; break;
+        case '/':
+          if (bothInt) { if (y === 0) throw new TErr('Integer division by zero', ctxLine); return I(Math.trunc(x / y)); }
+          return Fl(x / y);
+        case '%':
+          if (!bothInt) throw new TErr('The % operator needs two integers', ctxLine);
+          if (y === 0) throw new TErr('Remainder by zero', ctxLine);
+          return I(x % y);
+      }
+      return bothInt ? I(r) : Fl(r);
+    }
+    function compare(op, a, b) {
+      if (isNum(a) && isNum(b)) {
+        var x = a.v, y = b.v;
+        return B(op === '==' ? x === y : op === '!=' ? x !== y : op === '<' ? x < y : op === '>' ? x > y : op === '<=' ? x <= y : x >= y);
+      }
+      if (a.k === 's' && b.k === 's') {
+        return B(op === '==' ? a.v === b.v : op === '!=' ? a.v !== b.v : op === '<' ? a.v < b.v : op === '>' ? a.v > b.v : op === '<=' ? a.v <= b.v : a.v >= b.v);
+      }
+      if (a.k === 'b' && b.k === 'b' && (op === '==' || op === '!=')) return B(op === '==' ? a.v === b.v : a.v !== b.v);
+      throw new TErr('Cannot compare ' + kindName(a) + ' with ' + kindName(b), ctxLine);
+    }
+    function needBool(v, n) {
+      if (v.k !== 'b') throw new TErr('and, or, and not need true/false values, but ' + srcSub(n) + ' is ' + kindName(v), ctxLine);
+      return v.v;
+    }
+
+    function evalExpr(n) {
+      switch (n.n) {
+        case 'num': return n.f ? Fl(parseFloat(n.raw)) : I(parseInt(n.raw, 10));
+        case 'str': return S(n.v);
+        case 'bool': return B(n.v);
+        case 'paren': return evalExpr(n.e);
+        case 'var':
+          var v = lookup(n.name);
+          if (v.k === 'u') throw new TErr(n.name + ' was declared but has not been assigned a value yet.', ctxLine);
+          return v;
+        case 'input':
+          if (inPos >= inputs.length) throw new TErr('Get next input has no more values. Add more values to the input box.', ctxLine);
+          var iv = inputs[inPos++]; inputUsed.set(n, iv); return iv;
+        case 'size':
+          var sa = evalExpr(n.arr);
+          if (sa.k !== 'a') throw new TErr('.size only works on an array', ctxLine);
+          return I(sa.v.length);
+        case 'idx':
+          var arr = evalExpr(n.arr), ix = evalExpr(n.i);
+          if (arr.k !== 'a') throw new TErr('Only an array can be indexed with [ ]', ctxLine);
+          if (ix.k !== 'i') throw new TErr('An array index must be an integer', ctxLine);
+          if (ix.v < 0 || ix.v >= arr.v.length) throw new TErr('Index ' + ix.v + ' is out of range. This array has ' + arr.v.length + ' element' + (arr.v.length === 1 ? '' : 's') + ', so the valid indexes are 0 through ' + (arr.v.length - 1) + '.', ctxLine);
+          var el = arr.v[ix.v];
+          if (el.k === 'u') throw new TErr('Element ' + ix.v + ' has not been assigned a value yet.', ctxLine);
+          return el;
+        case 'un':
+          var e1 = evalExpr(n.e);
+          if (n.op === '-') { if (!isNum(e1)) throw new TErr('The minus sign needs a number', ctxLine); return e1.k === 'i' ? I(-e1.v) : Fl(-e1.v); }
+          if (e1.k !== 'b') throw new TErr('not applies only to the value right after it, and ' + srcSub(n.e) + ' is ' + kindName(e1) + '. Put the whole condition in parentheses, as in not(x - 3 > 0).', ctxLine);
+          return B(!e1.v);
+        case 'bin':
+          if (n.op === 'and') { var la = needBool(evalExpr(n.l), n.l); return B(la ? needBool(evalExpr(n.r), n.r) : false); }
+          if (n.op === 'or') { var lo = needBool(evalExpr(n.l), n.l); return B(lo ? true : needBool(evalExpr(n.r), n.r)); }
+          var l = evalExpr(n.l), r = evalExpr(n.r);
+          if (CMP[n.op]) return compare(n.op, l, r);
+          return arith(n.op, l, r);
+        case 'call':
+          var res = evalCall(n);
+          if (res === null) throw new TErr(n.name + ' does not return a value, so it cannot be used inside an expression.', ctxLine);
+          return res;
+      }
+      throw new TErr('Cannot evaluate this expression', ctxLine);
+    }
+
+    function builtin(name, args) {
+      var nums = function (cnt) {
+        if (args.length !== cnt) throw new TErr(name + ' needs ' + cnt + ' argument' + (cnt > 1 ? 's' : ''), ctxLine);
+        args.forEach(function (a) { if (!isNum(a)) throw new TErr(name + ' needs numbers', ctxLine); });
+      };
+      if (name === 'SquareRoot') { nums(1); if (args[0].v < 0) throw new TErr('SquareRoot needs a value that is 0 or greater', ctxLine); return Fl(Math.sqrt(args[0].v)); }
+      if (name === 'AbsoluteValue') { nums(1); return Fl(Math.abs(args[0].v)); }
+      if (name === 'RaiseToPower') { nums(2); return Fl(Math.pow(args[0].v, args[1].v)); }
+      if (name === 'RandomNumber' || name === 'SeedRandomNumbers') throw new TErr(name + ' gives different results on each run, so the Trace Lab does not run it.', ctxLine);
+      return undefined;
+    }
+
+    function evalCall(n) {
+      var fn = funcs[n.name];
+      if (!fn) {
+        var args0 = n.args.map(evalExpr), b = builtin(n.name, args0);
+        if (b !== undefined) return b;
+        throw new TErr('There is no function named ' + n.name + ' in this program.', ctxLine);
+      }
+      if (n.args.length !== fn.params.length) throw new TErr(n.name + ' has ' + fn.params.length + ' parameter' + (fn.params.length === 1 ? '' : 's') + ', but this call gives ' + n.args.length + ' argument' + (n.args.length === 1 ? '' : 's') + '.', ctxLine);
+      var args = n.args.map(evalExpr), callLine = ctxLine;
+      if (stack.length >= MAXDEPTH) throw new TErr('Too many nested function calls', ctxLine);
+      var frame = { id: nextId++, label: n.name, isGlobal: false, vars: new Map(), types: new Map() }, binds = [];
+      fn.params.forEach(function (p, i) {
+        var a = args[i];
+        if (p.isArr && a.k !== 'a') throw new TErr(p.name + ' is an array parameter, so the call must pass an array.', callLine);
+        if (!p.isArr && a.k === 'a') throw new TErr(p.name + ' is not an array parameter', callLine);
+        frame.vars.set(p.name, p.isArr ? a : coerce(p.type, a)); frame.types.set(p.name, p.type);
+        binds.push(p.name + ' = ' + (a.k === 'a' ? 'the array' : showQ(a)));
+      });
+      if (fn.ret) { frame.vars.set(fn.ret, U); frame.types.set(fn.ret, fn.rtype); }
+      stack.push(frame);
+      rec(callLine, 'Call ' + n.name + '(' + args.map(function (a) { return a.k === 'a' ? 'array' : showQ(a); }).join(', ') + ')' + (binds.length ? ': ' + binds.join(', ') : ''), 'call');
+      execBlock(fn.body);
+      var result = null;
+      if (fn.rtype !== 'nothing') {
+        var rv = frame.vars.get(fn.ret);
+        if (!rv || rv.k === 'u') { ctxLine = fn.line; throw new TErr(n.name + ' never assigned a value to its return variable ' + fn.ret + ', so it has nothing to return.', fn.line); }
+        result = rv;
+      }
+      ctxLine = callLine;
+      rec(callLine, n.name + (result ? ' returns ' + showQ(result) : ' is finished') + '. Execution goes back to the caller.', 'return');
+      stack.pop();
+      return result;
+    }
+
+    function setVar(name, val) {
+      var f = stack[stack.length - 1];
+      var target = f.vars.has(name) ? f : (f !== glob && glob.vars.has(name) && !f.types.has(name) ? glob : f);
+      target.vars.set(name, coerce(target.types.get(name), val));
+    }
+    function condBool(n, s) {
+      var v = evalExpr(n);
+      if (v.k !== 'b') throw new TErr('A condition must be true or false, but ' + srcSub(n) + ' is ' + kindName(v) + '.', ctxLine);
+      return v.v;
+    }
+    function assignNote(s, val, target) {
+      if (s.rhs.n === 'input') return 'Get next input reads ' + showQ(inputUsed.get(s.rhs)) + ', so ' + target + ' is now ' + showQ(val);
+      var sub = srcSub(s.rhs), vs = showQ(val);
+      return sub === vs ? target + ' is now ' + vs : target + ' = ' + sub + ' gives ' + vs + ', so ' + target + ' is now ' + vs;
+    }
+    function doAssign(s, kind, prefix) {
+      ctxLine = s.line;
+      var val = evalExpr(s.rhs), target = s.name;
+      if (s.idx) {
+        var arr = lookup(s.name), ix = evalExpr(s.idx);
+        if (arr.k !== 'a') throw new TErr(s.name + ' is not an array', ctxLine);
+        if (ix.k !== 'i') throw new TErr('An array index must be an integer', ctxLine);
+        if (ix.v < 0 || ix.v >= arr.v.length) throw new TErr('Index ' + ix.v + ' is out of range. This array has ' + arr.v.length + ' element' + (arr.v.length === 1 ? '' : 's') + ', so the valid indexes are 0 through ' + (arr.v.length - 1) + '.', ctxLine);
+        target = s.name + '[' + ix.v + ']';
+        var note = assignNote(s, val, target);
+        arr.v[ix.v] = coerce(stack[stack.length - 1].types.get(s.name) === 'float' ? 'float' : null, val);
+        rec(s.line, (prefix || '') + note, kind);
+      } else {
+        var n2 = assignNote(s, val, target);
+        setVar(s.name, val);
+        rec(s.line, (prefix || '') + n2, kind);
+      }
+    }
+
+    function execBlock(list) { for (var i = 0; i < list.length; i++) exec(list[i]); }
+    function exec(s) {
+      switch (s.n) {
+        case 'func': return;
+        case 'decl': {
+          ctxLine = s.line;
+          var f = stack[stack.length - 1];
+          if (s.size !== null) {
+            if (s.size === '?' || s.size === '') throw new TErr('An array declaration needs a size', s.line);
+            var sz = evalExpr(parseExprText(s.size, s.line));
+            if (sz.k !== 'i' || sz.v < 0) throw new TErr('An array size must be a whole number', s.line);
+            var cells = []; for (var i = 0; i < sz.v; i++) cells.push(defaultFor());
+            f.vars.set(s.name, { k: 'a', v: cells }); f.types.set(s.name, s.type);
+            rec(s.line, 'Declare an ' + s.type + ' array named ' + s.name + ' with ' + sz.v + ' elements (indexes 0 through ' + (sz.v - 1) + '). No element has a value yet.', 'decl');
+          } else {
+            f.types.set(s.name, s.type);
+            if (s.init) {
+              var iv = evalExpr(s.init); f.vars.set(s.name, coerce(s.type, iv));
+              rec(s.line, 'Declare ' + s.name + ' as ' + s.type + ' and set it to ' + showQ(iv), 'decl');
+            } else {
+              f.vars.set(s.name, U);
+              rec(s.line, 'Declare the ' + s.type + ' variable ' + s.name + '. It has no value yet.', 'decl');
+            }
+          }
+          return;
+        }
+        case 'assign': doAssign(s, 'assign', ''); return;
+        case 'put': {
+          ctxLine = s.line;
+          var v = evalExpr(s.e), txt = show(v);
+          out += txt;
+          rec(s.line, 'Output ' + (v.k === 's' ? showQ(v) : txt), 'put');
+          return;
+        }
+        case 'callstmt': ctxLine = s.line; evalCall(s.call); return;
+        case 'if': {
+          for (var bi = 0; bi < s.branches.length; bi++) {
+            var br = s.branches[bi]; ctxLine = br.line;
+            var tv = condBool(br.cond), sub = srcSub(br.cond);
+            rec(br.line, br.kw + ' ' + sub + ' is ' + tv + (tv ? ', so this branch runs.' : ', so skip it.'), 'test');
+            if (tv) { execBlock(br.body); return; }
+          }
+          if (s.elseBody) { ctxLine = s.elseLine; rec(s.elseLine, 'No condition above was true, so the else branch runs.', 'test'); execBlock(s.elseBody); }
+          return;
+        }
+        case 'while': {
+          for (;;) {
+            ctxLine = s.line;
+            var wv = condBool(s.cond);
+            rec(s.line, 'while ' + srcSub(s.cond) + ' is ' + wv + (wv ? ', so the loop body runs.' : ', so the loop ends.'), 'test');
+            if (!wv) return;
+            execBlock(s.body);
+          }
+        }
+        case 'for': {
+          doAssign(s.init, 'assign', 'for loop setup: ');
+          for (;;) {
+            ctxLine = s.line;
+            var fv = condBool(s.cond);
+            rec(s.line, 'Test ' + srcSub(s.cond) + ' is ' + fv + (fv ? ', so the loop body runs.' : ', so the loop ends.'), 'test');
+            if (!fv) return;
+            execBlock(s.body);
+            doAssign(s.step, 'assign', 'Update after the body: ');
+          }
+        }
+      }
+    }
+
+    var error = null, truncated = false;
+    try {
+      rec(null, 'Ready. Press Next to run the first line.', 'start');
+      prog.forEach(function (s) { if (s.n !== 'func') exec(s); });
+      if (funcs.Main) { ctxLine = funcs.Main.line; evalCall({ n: 'call', name: 'Main', args: [] }); }
+      rec(null, 'The program is finished.', 'done');
+    } catch (e) {
+      if (e instanceof Stop) truncated = true;
+      else if (e instanceof TErr) {
+        error = e.message;
+        try { rec(e.line === undefined ? ctxLine : e.line, 'Error: ' + e.message, 'error'); } catch (e2) { if (!(e2 instanceof Stop)) throw e2; }
+      } else throw e;
+    }
+    return { steps: steps, error: error, truncated: truncated, finalOut: out };
+  }
+
+  return { run: run, parseProgram: parseProgram, parseInputs: parseInputs, MAXSTEPS: MAXSTEPS };
+})();
+if (typeof module !== 'undefined' && module.exports) module.exports = TraceInterp;
+
+/* Pure data and helpers for the Trace Lab, Study Guide, and Search Lab. No DOM access in this file. */
+var L = function () { return Array.prototype.slice.call(arguments).join('\n'); };
+
+var LAB_PROGS = [
+  { id: 'vars', comp: 'C1', topic: 'Variables and expressions', title: 'Declaring variables and a commented-out line',
+    desc: 'Declare three integer variables, assign them, and watch the commented line get skipped. The comment never becomes a step.',
+    input: '',
+    code: L('// Declare the variables',
+      'integer price',
+      'integer count',
+      'integer total',
+      '',
+      'price = 5',
+      '//price = 8',
+      'count = 2',
+      'total = price * count',
+      'Put total to output') },
+  { id: 'debug', comp: 'C1', topic: 'Debugging', title: 'Debug output statements as checkpoints',
+    desc: 'Two debug lines report a value right after it is computed, which is how output-statement debugging narrows down a fault. Inputs: 4 and 5.',
+    input: '4 5',
+    code: L('integer a',
+      'integer b',
+      'integer total',
+      'a = Get next input',
+      'b = Get next input',
+      'Put "after reading, a = " to output',
+      'Put a to output',
+      'Put "\\n" to output',
+      'total = a * 3 + b',
+      'Put "after computing, total = " to output',
+      'Put total to output',
+      'Put "\\n" to output') },
+  { id: 'swap', comp: 'C2', topic: 'Expressions', title: 'Swapping two values',
+    desc: 'A temporary variable holds one value while the other moves. Try deleting the tmp lines and use a = b, then b = a, to see both variables end up equal.',
+    input: '',
+    code: L('integer a',
+      'integer b',
+      'integer tmp',
+      'a = 3',
+      'b = 9',
+      'tmp = a',
+      'a = b',
+      'b = tmp',
+      'Put a to output',
+      'Put " " to output',
+      'Put b to output') },
+  { id: 'intdiv', comp: 'C2', topic: 'Expressions', title: 'Integer division and remainder',
+    desc: 'Dividing two integers drops the fraction. The % operator gives what was left over.',
+    input: '',
+    code: L('integer total = 47',
+      'integer groups = 6',
+      'Put total / groups to output',
+      'Put " remainder " to output',
+      'Put total % groups to output') },
+  { id: 'precedence', comp: 'C2', topic: 'Expressions', title: 'Order of operations',
+    desc: 'Multiplication happens before addition, parentheses override that, and equal-level operators go left to right. Watch the substituted values in the step notes.',
+    input: '',
+    code: L('integer a = 2',
+      'integer b = 3',
+      'integer c = 4',
+      'integer plain = a + b * c',
+      'integer grouped = (a + b) * c',
+      'integer chain = c - b - a',
+      'Put plain to output',
+      'Put " " to output',
+      'Put grouped to output',
+      'Put " " to output',
+      'Put chain to output') },
+  { id: 'float', comp: 'C2', topic: 'Floating-point', title: 'Integer division stored in a float',
+    desc: 'Both operands of the first division are integers, so the fraction is already gone before the result reaches the float variable. Making one operand a float keeps it. The Trace Lab prints floats in its own format, which may differ from the course software.',
+    input: '',
+    code: L('integer total = 7',
+      'integer count = 2',
+      'float truncated = total / count',
+      'float exact = total / 2.0',
+      'Put truncated to output',
+      'Put " " to output',
+      'Put exact to output') },
+  { id: 'func', comp: 'C2', topic: 'Functions', title: 'Nested function calls',
+    desc: 'The inner call Square(2) finishes first, its result plus 3 becomes the argument to the outer call. The Variables panel shows one frame per active call.',
+    input: '',
+    code: L('Function Square(integer n) returns integer s',
+      '   s = n * n',
+      '',
+      'Function Main() returns nothing',
+      '   integer y',
+      '   y = Square(Square(2) + 3)',
+      '   Put y to output') },
+  { id: 'noreturn', comp: 'C2', topic: 'Functions', title: 'A function that never sets its return variable',
+    desc: 'PrintSum prints but never assigns sum, so there is no value to hand back. This program is meant to fail; read the error.',
+    input: '',
+    code: L('Function PrintSum(integer a, integer b) returns integer sum',
+      '   Put a + b to output',
+      '',
+      'Function Main() returns nothing',
+      '   integer r',
+      '   r = PrintSum(2, 3)',
+      '   Put r to output') },
+  { id: 'branch', comp: 'C2', topic: 'Branches', title: 'if / elseif / else chain',
+    desc: 'Only one branch of a chain runs. The "!" after the chain runs no matter what. Try the inputs 5, 10, 19, and 20.',
+    input: '17',
+    code: L('integer x',
+      'x = Get next input',
+      'if x < 10',
+      '   Put "A" to output',
+      'elseif x < 20',
+      '   Put "B" to output',
+      'else',
+      '   Put "C" to output',
+      'Put "!" to output') },
+  { id: 'indep', comp: 'C2', topic: 'Branches', title: 'Independent if statements',
+    desc: 'The first if and the second if are separate decisions, so one input can trigger text from both. Try 4, 15, and 30.',
+    input: '4',
+    code: L('integer x',
+      'x = Get next input',
+      'Put "Score: " to output',
+      'if x < 20',
+      '   Put "low " to output',
+      'if x < 10',
+      '   Put "tiny " to output',
+      'else',
+      '   Put "ok " to output') },
+  { id: 'sentinel', comp: 'C2', topic: 'Loops', title: 'Sentinel loop: add inputs until 0',
+    desc: 'The first value is read before the loop, and the next value is read at the bottom of each pass. The 0 ends the loop and is never added. Inputs: 5, 8, 2, 0.',
+    input: '5 8 2 0',
+    code: L('integer total = 0',
+      'integer n',
+      'n = Get next input',
+      'while n != 0',
+      '   total = total + n',
+      '   n = Get next input',
+      'Put total to output') },
+  { id: 'forcount', comp: 'C2', topic: 'Loops', title: 'A for loop that counts by 3',
+    desc: 'The update i = i + 3 runs after the body, so i keeps its last value, one step past where the condition failed. Input: 7.',
+    input: '7',
+    code: L('integer i',
+      'integer x',
+      'x = Get next input',
+      'for i = 0; i < x; i = i + 3',
+      '   Put i to output',
+      '   Put " " to output',
+      'Put "| i ends at " to output',
+      'Put i to output') },
+  { id: 'table', comp: 'C2', topic: 'Loops', title: 'Nested loops',
+    desc: 'The inner loop runs all the way through for every pass of the outer loop. Change 3 to 4 in either loop and count the output.',
+    input: '',
+    code: L('integer r',
+      'integer c',
+      'for r = 1; r <= 3; r = r + 1',
+      '   for c = 1; c <= 3; c = c + 1',
+      '      Put r * c to output',
+      '      Put " " to output',
+      '   Put "\\n" to output') },
+  { id: 'forever', comp: 'C2', topic: 'Loops', title: 'A loop that never ends',
+    desc: 'Nothing in the body changes i, so the condition stays true. The Trace Lab stops after 800 steps. This program is meant to be stopped.',
+    input: '',
+    code: L('integer i = 0',
+      'while i < 5',
+      '   Put i to output') },
+  { id: 'arrsum', comp: 'C2', topic: 'Arrays', title: 'Summing an array',
+    desc: 'Indexes run from 0 to size - 1. The loop condition i < data.size stops before the index that does not exist.',
+    input: '',
+    code: L('integer array(5) data',
+      'integer i',
+      'integer total = 0',
+      'data[0] = 4',
+      'data[1] = 12',
+      'data[2] = 9',
+      'data[3] = 15',
+      'data[4] = 20',
+      'for i = 0; i < data.size; i = i + 1',
+      '   total = total + data[i]',
+      'Put total to output') },
+  { id: 'oob', comp: 'C2', topic: 'Arrays', title: 'Index out of range',
+    desc: 'The condition uses <= instead of <, so the loop reaches index 3 in an array that stops at index 2. This program is meant to fail.',
+    input: '',
+    code: L('integer array(3) vals',
+      'integer i',
+      'vals[0] = 5',
+      'vals[1] = 6',
+      'vals[2] = 7',
+      'for i = 0; i <= vals.size; i = i + 1',
+      '   Put vals[i] to output',
+      '   Put " " to output') },
+  { id: 'max', comp: 'C3', topic: 'Algorithm tracing', title: 'Largest value in an array',
+    desc: 'The best-so-far variable starts as the first element and changes only when something larger appears. The array parameter is declared with (?) because any size is allowed.',
+    input: '',
+    code: L('Function MaxOf(integer array(?) list) returns integer best',
+      '   integer i',
+      '   best = list[0]',
+      '   for i = 1; i < list.size; i = i + 1',
+      '      if list[i] > best',
+      '         best = list[i]',
+      '',
+      'Function Main() returns nothing',
+      '   integer array(6) nums',
+      '   nums[0] = 7',
+      '   nums[1] = 19',
+      '   nums[2] = 3',
+      '   nums[3] = 19',
+      '   nums[4] = 11',
+      '   nums[5] = 2',
+      '   Put MaxOf(nums) to output') },
+  { id: 'linear', comp: 'C3', topic: 'Linear and binary search', title: 'Linear search',
+    desc: 'The loop stops as soon as the target is found. Change the target to 100 and count how many comparisons a failed search needs.',
+    input: '',
+    code: L('Function LinearSearch(integer array(?) list, integer target) returns integer pos',
+      '   integer i',
+      '   pos = -1',
+      '   i = 0',
+      '   while (i < list.size) and (pos == -1)',
+      '      if list[i] == target',
+      '         pos = i',
+      '      i = i + 1',
+      '',
+      'Function Main() returns nothing',
+      '   integer array(6) nums',
+      '   nums[0] = 14',
+      '   nums[1] = 3',
+      '   nums[2] = 27',
+      '   nums[3] = 9',
+      '   nums[4] = 41',
+      '   nums[5] = 8',
+      '   Put LinearSearch(nums, 9) to output') },
+  { id: 'binary', comp: 'C3', topic: 'Linear and binary search', title: 'Binary search on a sorted list',
+    desc: 'Each pass looks at the middle element and throws away half the range. The output lists the elements that were compared, then the index found. Try the target 3, then 100.',
+    input: '',
+    code: L('Function BinarySearch(integer array(?) list, integer target) returns integer pos',
+      '   integer low',
+      '   integer high',
+      '   integer mid',
+      '   low = 0',
+      '   high = list.size - 1',
+      '   pos = -1',
+      '   while (low <= high) and (pos == -1)',
+      '      mid = (low + high) / 2',
+      '      Put list[mid] to output',
+      '      Put " " to output',
+      '      if list[mid] == target',
+      '         pos = mid',
+      '      elseif list[mid] < target',
+      '         low = mid + 1',
+      '      else',
+      '         high = mid - 1',
+      '',
+      'Function Main() returns nothing',
+      '   integer array(8) nums',
+      '   nums[0] = 3',
+      '   nums[1] = 8',
+      '   nums[2] = 12',
+      '   nums[3] = 19',
+      '   nums[4] = 25',
+      '   nums[5] = 31',
+      '   nums[6] = 44',
+      '   nums[7] = 50',
+      '   integer pos',
+      '   pos = BinarySearch(nums, 31)',
+      '   Put "index " to output',
+      '   Put pos to output') },
+  { id: 'reverse', comp: 'C3', topic: 'Sorting', title: 'Reversing an array with swaps',
+    desc: 'Swap the first element with the last, the second with the second-to-last, and stop at the middle. Six elements need three swaps.',
+    input: '',
+    code: L('integer array(6) a',
+      'integer i',
+      'integer tmp',
+      'a[0] = 2',
+      'a[1] = 4',
+      'a[2] = 6',
+      'a[3] = 8',
+      'a[4] = 10',
+      'a[5] = 12',
+      'for i = 0; i < a.size / 2; i = i + 1',
+      '   tmp = a[i]',
+      '   a[i] = a[a.size - 1 - i]',
+      '   a[a.size - 1 - i] = tmp',
+      'for i = 0; i < a.size; i = i + 1',
+      '   Put a[i] to output',
+      '   Put " " to output') },
+  { id: 'bubble', comp: 'C3', topic: 'Sorting', title: 'Bubble sort (enrichment)',
+    desc: 'Enrichment only. This practice bank tests sorted order and swaps, not writing a sorting algorithm. Each pass pushes the largest remaining value to the end.',
+    input: '',
+    code: L('integer array(5) a',
+      'integer i',
+      'integer pass',
+      'integer tmp',
+      'a[0] = 5',
+      'a[1] = 2',
+      'a[2] = 9',
+      'a[3] = 1',
+      'a[4] = 6',
+      'for pass = 1; pass < a.size; pass = pass + 1',
+      '   for i = 0; i < a.size - pass; i = i + 1',
+      '      if a[i] > a[i + 1]',
+      '         tmp = a[i]',
+      '         a[i] = a[i + 1]',
+      '         a[i + 1] = tmp',
+      'for i = 0; i < a.size; i = i + 1',
+      '   Put a[i] to output',
+      '   Put " " to output') },
+  { id: 'divisors', comp: 'C3', topic: 'Algorithm tracing', title: 'Divisors with the remainder operator',
+    desc: 'When x % i is 0, i divides x evenly. Note which values of i the loop tests, and which it never reaches. Input: 18.',
+    input: '18',
+    code: L('integer x',
+      'integer i',
+      'x = Get next input',
+      'for i = 1; i < x; i = i + 1',
+      '   if x % i == 0',
+      '      Put i to output',
+      '      Put " " to output') },
+  { id: 'limit', comp: 'C3', topic: 'Algorithm tracing', title: 'Add inputs until the total would pass a limit',
+    desc: 'The loop condition looks ahead: it tests the total plus the next value before adding anything. Inputs: 6, 7, 5, 9.',
+    input: '6 7 5 9',
+    code: L('integer calc = 0',
+      'integer limit = 20',
+      'integer userVal',
+      'userVal = Get next input',
+      'while (calc + userVal) <= limit',
+      '   calc = calc + userVal',
+      '   userVal = Get next input',
+      'Put calc to output') },
+  { id: 'guess', comp: 'C3', topic: 'Algorithm tracing', title: 'Counting guesses until a match',
+    desc: 'The loop keeps going while the guess is wrong. count starts at 1 because the first guess is read before the loop. Inputs: 3, 9, 7.',
+    input: '3 9 7',
+    code: L('integer secret = 7',
+      'integer guess',
+      'integer count = 1',
+      'guess = Get next input',
+      'while not(guess == secret)',
+      '   guess = Get next input',
+      '   count = count + 1',
+      'Put count to output') }
+];
+
+/* ---------- Study Guide ---------- */
+var GUIDE = [
+  { id: 'bits', comp: 'C1', title: 'Bits, bytes, and binary', topics: ['Bits, bytes, binary', 'Computing history'],
+    body: ["A bit holds a 0 or a 1. A byte is 8 bits. Hardware stores every value as a pattern of bits: integers, characters, and instructions alike. With n bits there are 2^n distinct patterns, so one byte can represent 256 different values (0 through 255)."],
+    points: [
+      "Binary place values run right to left: 1, 2, 4, 8, 16, 32, 64, 128. The binary number 1101 is 8 + 4 + 0 + 1 = 13.",
+      "Decimal to binary: find the largest place value that fits, write a 1 there, subtract it, and repeat. 10 = 8 + 2, so 10 in 4 bits is 1010.",
+      "A character is stored as a numeric code. In ASCII, 'A' is 65.",
+      "An embedded computer is a computer built into another device, such as a car, a thermostat, or a microwave oven.",
+      "Moore's Law is an observation about manufacturing, not a law of physics: the number of transistors on a chip has roughly doubled about every two years."
+    ],
+    traps: [
+      "Reading binary as if the leftmost bit were worth 1. The rightmost bit is worth 1.",
+      "Dropping the leading zeros when a question asks for a fixed width. 6 as a 4-bit number is 0110, not 110."
+    ] },
+  { id: 'translate', comp: 'C1', title: 'Compilers, interpreters, languages, and libraries', topics: ['Compilers and interpreters', 'Programming languages', 'Libraries'],
+    body: ["A compiler translates a whole program into machine code before the program runs. An interpreter reads the program and carries out one statement at a time without first producing a separate machine-code file. C is usually compiled. Python is usually interpreted."],
+    points: [
+      "Statically typed: each variable's type is fixed and checked before the program runs. C and Java work this way.",
+      "Dynamically typed: a variable can hold different types as the program runs, and types are checked while it runs. Python and JavaScript work this way.",
+      "A library is a collection of prewritten, tested routines, such as square root or random numbers. A program calls them instead of rewriting them, and one program can use several libraries."
+    ],
+    traps: [
+      "Mixing up two separate ideas. Compiled versus interpreted is about when code is translated. Static versus dynamic typing is about when types are checked."
+    ] },
+  { id: 'abstraction', comp: 'C1', title: 'Abstraction, objects, and abstract data types', topics: ['Abstraction', 'Objects and ADTs'],
+    body: ["Abstraction shows the essential features of something and hides the details of how it works. A driver uses a steering wheel and pedals without knowing how the engine runs. In programs, an abstract data type (ADT) is defined by the operations it offers. A class is the usual way to implement an ADT, and an object is one instance of a class, holding data together with the operations that work on it."],
+    points: [
+      "A Stack ADT offers push, pop, and isEmpty. Code that uses a Stack relies on those operations and never touches how the items are stored.",
+      "When deciding what belongs in an object type, ask whether the item describes the thing being modeled. An order total belongs to a CustomerOrder. A shelf count in the inventory system does not.",
+      "A screen that shows less than the system stores is an abstraction: the extra detail is still there, only hidden from the user."
+    ],
+    traps: [
+      "Treating a class and an object as the same thing. The class is the blueprint, and each object built from it is a separate instance."
+    ] },
+  { id: 'debug', comp: 'C1', title: 'Debugging and troubleshooting', topics: ['Debugging', 'Troubleshooting'],
+    body: ["Debugging is finding and fixing mistakes in a program, and it is a normal part of programming. Two basic techniques are visual inspection (reading the code without running it) and output statements (printing values at chosen points). On a large program, start with checkpoints at the major stages, then narrow down to the region that goes wrong.",
+      "Troubleshooting is the general process behind it. State the problem, form a hypothesis about its cause, test the hypothesis, and read the result."],
+    points: [
+      "Problem: what you observe (the lamp will not turn on). Hypothesis: a possible cause (the bulb burned out). Test: an action that would confirm or rule out that cause. Solution: the fix, once the cause is confirmed.",
+      "A test that does not support the hypothesis rules that cause out. Move on to the next hypothesis.",
+      "Order hypotheses by how likely they are and how easy they are to test. Check the likely, easy ones first.",
+      "A sub-hypothesis is a narrower cause inside a hypothesis and must still explain the same problem. If the hypothesis is 'the sum formula is wrong,' a sub-hypothesis is about the formula, not about the paper size.",
+      "Binary-search troubleshooting applies when the fault sits somewhere in an ordered sequence, such as a 64-slide deck that crashes. Test the middle to decide which half holds the fault.",
+      "A debug output statement goes right after the line that computes the value you want to inspect."
+    ],
+    traps: [
+      "Confusing the hypothesis with the test or the fix. 'The cartridge was empty' is the hypothesis. 'Install a new cartridge' is the test or fix."
+    ],
+    labs: ['debug'] },
+  { id: 'names', comp: 'C1', title: 'Identifiers and comments', topics: ['Identifiers and naming', 'Comments'],
+    body: ["An identifier is a name the programmer chooses for a variable, constant, or function. In this course's pseudocode, an identifier can use letters, digits, and underscores, and it cannot start with a digit, so 7thGrade is invalid and seventh_grade is fine. Spaces and hyphens are not allowed. Choose names that say what the value means: totalPrice tells the reader more than x.",
+      "A comment starts with // and is ignored when the program runs. A statement that is commented out does nothing."],
+    points: [
+      "Use comments to explain why, not to repeat what the code already says.",
+      "When tracing, skip every commented line."
+    ],
+    code: L('// price is in dollars',
+      'price = 5',
+      '//price = 8',
+      'count = 2',
+      'total = price * count   // total ends as 10'),
+    traps: [
+      "Counting a commented-out assignment as a real one while tracing."
+    ],
+    labs: ['vars'] },
+  { id: 'types', comp: 'C1', title: 'Data types, constants, and variables', topics: ['Data types', 'Constants', 'Variables and expressions'],
+    body: ["A variable is a named memory location whose value can change. Its data type says what kind of value it holds: integer for whole numbers, float for numbers with a fractional part, string for text, character for a single symbol such as 'b', and boolean for true or false. An array holds an ordered group of values of one type.",
+      "A constant is a named value that must not change while the program runs. By convention its name is written in capital letters with underscores, such as DAYS_IN_WEEK."],
+    points: [
+      "Match the type to the data. A height of 1.82 meters is a float. Whether a store is open is a boolean. A month of closing prices is an array of floats.",
+      "An expression combines values, variables, and operators and evaluates to a value: a * 4 + b. In z = x + y, the names x, y, and z are variables.",
+      "Assigning to a constant is an error. If MAX_USERS is a constant, MAX_USERS = count + 1 must not execute.",
+      "Declaring a variable gives it a name and a type. Constants are not counted as variables."
+    ],
+    traps: [
+      "Choosing integer for a value that can have a fractional part, or float for a value that is only ever a whole count."
+    ],
+    labs: ['vars'] },
+
+  { id: 'expr', comp: 'C2', title: 'Expressions, precedence, and floating-point numbers', topics: ['Expressions', 'Floating-point'],
+    body: ["In an arithmetic expression, parentheses are evaluated first, then multiplication, division, and remainder from left to right, then addition and subtraction from left to right. In a condition, arithmetic is evaluated before the comparison, and and is evaluated before or. When in doubt, add parentheses. For not, always parenthesize the whole condition: not(x - 3 > 0)."],
+    points: [
+      "Integer division drops the fraction: 7 / 2 is 3. A chain goes left to right, so 120 / 10 / 3 is 12 / 3, which is 4.",
+      "The % operator gives the remainder: 47 % 6 is 5, because 6 fits into 47 seven times (42) with 5 left over.",
+      "If both operands are integers, the result is an integer even when it is stored in a float variable. Make one operand a float to keep the fraction: 7 / 2.0 is 3.5.",
+      "Assignment copies the value on the right into the variable on the left. To swap a and b, copy one into a temporary variable first.",
+      "A float often cannot store a decimal such as 0.7 exactly, so do not test floats with ==. Test whether the difference is tiny: AbsoluteValue(x - 2.5) < 0.0001."
+    ],
+    traps: [
+      "Reading 120 / 10 / 3 as 120 / (10 / 3).",
+      "Swapping with a = b followed by b = a. After the first line both variables hold the same value."
+    ],
+    labs: ['precedence', 'intdiv', 'swap', 'float'] },
+  { id: 'output', comp: 'C2', title: 'Output and random numbers', topics: ['Output', 'Random numbers'],
+    body: ["Put expression to output prints a value. It does not add a new line. To start a new line, output the newline character \"\\n\". RandomNumber(low, high) returns an integer from low through high, with both ends included. Calling SeedRandomNumbers(value) once, before any RandomNumber call, makes the sequence repeatable."],
+    points: [
+      "RandomNumber(2, 9) can return 2, 3, 4, 5, 6, 7, 8, or 9: eight possible values.",
+      "To simulate a die, use RandomNumber(1, 6).",
+      "Adding a constant shifts the whole range. RandomNumber(0, 6) + -3 produces values from -3 through 3.",
+      "Using the same seed again produces the same sequence of numbers.",
+      "The Trace Lab does not run RandomNumber, because its results change from run to run."
+    ],
+    traps: [
+      "Expecting two Put statements to land on separate lines. Without \"\\n\" the output runs together."
+    ],
+    labs: ['table'] },
+  { id: 'functions', comp: 'C2', title: 'Functions', topics: ['Functions'],
+    body: ["A function is a named, reusable group of statements. In this course's pseudocode, a definition looks like Function Name(type param, ...) returns type retVar. The function's result is whatever its return variable holds when the function ends; there is no separate return statement. A function that gives nothing back says returns nothing."],
+    points: [
+      "Parameters are the names in the definition. Arguments are the values in the call. They are matched by position.",
+      "A nested call works from the inside out. For Square(Square(2) + 3), the inner call gives 4, then 4 + 3 is 7, then Square(7) is 49.",
+      "A function must assign a value to its return variable. If it never does, it has nothing to return.",
+      "A stub is a placeholder definition that lets the rest of the program be written and tested before the real body exists.",
+      "Count definitions, parameters, and calls separately. A definition is not a call."
+    ],
+    code: L('Function Area(integer w, integer h) returns integer a',
+      '   a = w * h',
+      '',
+      'Function Main() returns nothing',
+      '   Put Area(2, 3) to output'),
+    traps: [
+      "Calling a function in an expression when it returns nothing.",
+      "Counting a parameter as an argument. Parameters belong to the definition."
+    ],
+    labs: ['func', 'noreturn'] },
+  { id: 'branches', comp: 'C2', title: 'Branches', topics: ['Branches'],
+    body: ["An if statement runs its body only when its condition is true. When elseif and else are attached, they form one chain: the first true condition runs and the rest are skipped. Separate if statements are independent, so more than one of them can run."],
+    points: [
+      "Order matters in a chain. In 'if x > 50, elseif x > 80,' the second branch can never run, because every x above 80 is already above 50.",
+      "Boundaries decide who is included. age >= 65 includes 65, and age > 65 does not.",
+      "For 'if x > 60 / elseif x > 30,' the second branch runs for integers 31 through 60.",
+      "A nested if is tested only when the outer condition is true.",
+      "and needs both sides true. or needs at least one. not(...) reverses a condition, as in not(key == 'x').",
+      "To make evaluation order explicit, add parentheses: (n < 5) or (not(m == 3))."
+    ],
+    traps: [
+      "Treating two separate if statements as an if/else chain.",
+      "Using > where the problem says 'or more.'"
+    ],
+    labs: ['branch', 'indep'] },
+  { id: 'loops', comp: 'C2', title: 'Loops', topics: ['Loops'],
+    body: ["A while loop repeats its body as long as its condition is true, and the condition is tested before every pass, including the first. A for loop packs three parts into one line: for init; condition; update. The update runs after each pass of the body."],
+    points: [
+      "A loop whose body never changes anything its condition depends on runs forever.",
+      "A sentinel is a special input value, such as 0 or -1, that tells the loop to stop. Read the first value before the loop, and read the next value at the bottom of each pass.",
+      "In 'for i = 0; i < x; i = i + 3' with x equal to 7, i takes the values 0, 3, 6, and then 9. The loop ends with i equal to 9.",
+      "Nested loops: the inner loop runs completely for every pass of the outer loop. 3 outer passes with 4 inner passes each is 12 inner passes.",
+      "To keep going until a value appears, write the condition as not(value == target)."
+    ],
+    traps: [
+      "Reporting the loop variable's value before the last update. The update happens, then the test fails.",
+      "Placing the 'read next input' line at the top of the loop body, so the sentinel gets processed as data."
+    ],
+    labs: ['sentinel', 'forcount', 'table', 'forever'] },
+  { id: 'arrays', comp: 'C2', title: 'Arrays', topics: ['Arrays'],
+    body: ["integer array(5) vals creates five elements with indexes 0 through 4. vals.size gives the number of elements. Using an index below 0 or at or above the size is an out-of-range error."],
+    points: [
+      "The first element is vals[0] and the last is vals[vals.size - 1].",
+      "The right loop condition is i < vals.size. Writing i <= vals.size makes one pass too many.",
+      "A function that accepts any size of array declares the parameter as integer array(?) nums.",
+      "A common pattern: loop over every index and accumulate something, such as a total or a count of values over 10."
+    ],
+    traps: [
+      "Thinking an array of size 5 has an element at index 5."
+    ],
+    labs: ['arrsum', 'oob'] },
+
+  { id: 'algorithms', comp: 'C3', title: 'Algorithms, inputs, outputs, and steps', topics: ['Algorithms', 'Problem input and output', 'Algorithm steps', 'Problem solving'],
+    body: ["An algorithm is a sequence of steps that solves a problem. Describe the problem by its inputs (what is given) and its outputs (what must be produced), then choose steps that turn one into the other. The order of the steps matters: a step that uses a value has to come after the step that creates it."],
+    points: [
+      "A sound algorithm is unambiguous (each step has one meaning), finite (it ends), and correct for every valid input.",
+      "Work a small example by hand before generalizing. If the by-hand steps are clear, the algorithm usually is too.",
+      "When ordering steps, find the output first and work backward: what does the last step need, and which step produces it?"
+    ],
+    traps: [
+      "Listing the right steps in the wrong order, such as printing a total before the loop that computes it."
+    ] },
+  { id: 'efficiency', comp: 'C3', title: 'Efficiency, runtime, and space', topics: ['Efficiency', 'Runtime', 'Space complexity'],
+    body: ["Efficiency is judged in two ways: runtime (how much work, or time, as the input grows) and space (how much memory). An algorithm that is better on both measures is more efficient. When one is faster but uses more memory, there is a tradeoff and neither is simply better."],
+    points: [
+      "Runtime complexity counts operations as a function of the input size N. The worst case for a linear search is N comparisons.",
+      "Best case is the least work any input can cause, such as the target being first. Worst case is the most work, such as the target being last or absent.",
+      "Space complexity counts memory locations. A function that sums a list of N values with two extra variables, i and total, needs N + 2.",
+      "Swapping two integers with one temporary variable uses 3 locations no matter what, so the space is constant.",
+      "If a comparison takes 1 microsecond, 3,000,000 comparisons take 3 seconds."
+    ],
+    traps: [
+      "Counting the input list when the question asks only for the extra memory, or the other way around. Read what the question counts."
+    ],
+    search: true },
+  { id: 'search', comp: 'C3', title: 'Linear and binary search', topics: ['Linear and binary search'],
+    body: ["Linear search checks elements one after another until it finds the target or reaches the end, and it works on any list. Binary search requires a sorted list. It compares the target with the middle element, discards the half that cannot contain the target, and repeats on what remains."],
+    points: [
+      "The middle index is (low + high) / 2 with integer division, so it rounds down.",
+      "If the middle element is larger than the target, discard the upper half. If it is smaller, discard the lower half.",
+      "Linear search: best case 1 comparison, worst case N. Binary search: the worst case is floor(log2 N) + 1 comparisons, counting the comparison that finds the target. For 64 elements that is 7.",
+      "Doubling the list doubles linear search's worst case and adds just one comparison to binary search's.",
+      "Binary search is not valid on an unsorted list. The middle comparison only tells you which half to discard when the order is known.",
+      "A sorted list is the right situation for binary search, such as a dictionary. An unsorted pile of mail calls for linear search."
+    ],
+    traps: [
+      "Running binary search on data that is not sorted and trusting the answer.",
+      "Treating 'faster in the worst case' as 'faster for every target.' Finding the first element is quickest with linear search."
+    ],
+    labs: ['linear', 'binary'], search: true },
+  { id: 'sorting', comp: 'C3', title: 'Sorting and tracing algorithms', topics: ['Sorting', 'Algorithm tracing'],
+    body: ["A list is sorted in ascending order when no element is larger than the one after it, and in descending order when no element is smaller than the one after it. A swap exchanges two elements and needs a temporary variable. Tracing means carrying out an algorithm by hand and recording every variable after each statement."],
+    points: [
+      "Reversing a list of n elements takes n / 2 swaps (rounded down). Six elements take three.",
+      "To trace a loop, build a table with one column per variable and one row per pass.",
+      "Check the first pass, the last pass, and the exit condition. Most tracing mistakes happen at the boundaries.",
+      "A loop like 'for i = 1; i < x' never tests i equal to x. Whether the endpoint is included changes the output."
+    ],
+    traps: [
+      "Stopping a trace one pass early or one pass late.",
+      "Updating a variable in the trace table before the statement that changes it."
+    ],
+    labs: ['reverse', 'divisors', 'limit', 'guess', 'max', 'bubble'] },
+  { id: 'heuristics', comp: 'C3', title: 'Heuristics and NP-complete problems', topics: ['Heuristics', 'NP-complete problems'],
+    body: ["A heuristic algorithm follows a quick rule of thumb to find a good answer without guaranteeing the best one. It is used when finding the exact answer would take too long. NP-complete problems have no known efficient (polynomial-time) algorithm, yet a proposed solution can be checked quickly. They are linked: an efficient algorithm for any one NP-complete problem would give an efficient algorithm for all of them."],
+    points: [
+      "A heuristic trades guaranteed optimality for speed. Taking the first open parking space on the block nearest the destination is a heuristic.",
+      "The decision version of the traveling-salesman problem is NP-complete.",
+      "Whether a fast algorithm exists for NP-complete problems is an open question."
+    ],
+    traps: [
+      "Saying NP-complete problems cannot be solved. They can be solved exactly, but the known methods are too slow as the input grows."
+    ] }
+];
+
+/* ---------- helpers shared with the page ---------- */
+function bitsLen(n) { var k = 0, p = 1; while (p <= n) { p *= 2; k++; } return k; } // floor(log2 n) + 1 for n >= 1
+
+function guessInputs(stem) {
+  var m = /inputs? (?:is|are|was|were)\s+(-?\d[^?]*)/i.exec(stem || '');
+  if (!m) return '';
+  var t = m[1].replace(/,\s*(what|how|which|does|is|are)\b.*$/i, '');
+  return (t.match(/-?\d+(?:\.\d+)?/g) || []).join(' ');
+}
+
+function parseList(text) {
+  var parts = String(text || '').split(/[\s,]+/).filter(Boolean);
+  if (!parts.length) return { err: 'Enter at least one whole number.' };
+  if (parts.length > 64) return { err: 'The Search Lab shows at most 64 elements.' };
+  var out = [];
+  for (var i = 0; i < parts.length; i++) {
+    if (!/^-?\d+$/.test(parts[i])) return { err: '"' + parts[i] + '" is not a whole number. Separate values with commas or spaces.' };
+    out.push(parseInt(parts[i], 10));
+  }
+  return { list: out };
+}
+function isSortedAsc(list) { for (var i = 1; i < list.length; i++) if (list[i - 1] > list[i]) return false; return true; }
+
+function linearSteps(list, t) {
+  var s = [{ cmp: 0, idx: -1, found: null, text: 'Ready. Linear search starts at index 0 and checks each element in order.' }];
+  for (var i = 0; i < list.length; i++) {
+    var hit = list[i] === t;
+    s.push({ cmp: i + 1, idx: i, found: hit ? i : null,
+      text: 'Compare list[' + i + '] = ' + list[i] + ' with ' + t + (hit ? ': they match. Found at index ' + i + ' after ' + (i + 1) + ' comparison' + (i ? 's' : '') + '.' : ': not equal, so move to the next element.') });
+    if (hit) return s;
+  }
+  s.push({ cmp: list.length, idx: -1, found: -1, end: true,
+    text: t + ' is not in the list. Linear search made ' + list.length + ' comparison' + (list.length === 1 ? '' : 's') + ', one for every element.' });
+  return s;
+}
+
+function binarySteps(list, t) {
+  var low = 0, high = list.length - 1, cmp = 0;
+  var s = [{ cmp: 0, low: low, high: high, mid: -1, found: null, text: 'Ready. The search range is index 0 through ' + high + '.' }];
+  while (low <= high) {
+    var mid = Math.floor((low + high) / 2), v = list[mid];
+    cmp++;
+    var head = 'mid = (' + low + ' + ' + high + ') / 2 = ' + mid + '. list[' + mid + '] = ' + v;
+    if (v === t) {
+      s.push({ cmp: cmp, low: low, high: high, mid: mid, found: mid, text: head + ' equals ' + t + '. Found at index ' + mid + ' after ' + cmp + ' comparison' + (cmp > 1 ? 's' : '') + '.' });
+      return s;
+    }
+    if (v < t) {
+      s.push({ cmp: cmp, low: low, high: high, mid: mid, found: null, text: head + ' is less than ' + t + ', so discard indexes ' + low + ' through ' + mid + ' and search ' + (mid + 1) + ' through ' + high + '.' });
+      low = mid + 1;
+    } else {
+      s.push({ cmp: cmp, low: low, high: high, mid: mid, found: null, text: head + ' is greater than ' + t + ', so discard indexes ' + mid + ' through ' + high + ' and search ' + low + ' through ' + (mid - 1) + '.' });
+      high = mid - 1;
+    }
+  }
+  s.push({ cmp: cmp, low: low, high: high, mid: -1, found: -1, end: true, text: 'The range is empty, so ' + t + ' is not in the list. Binary search made ' + cmp + ' comparison' + (cmp === 1 ? '' : 's') + '.' });
+  return s;
+}
+
+function fmtDuration(us) {
+  if (us < 1000) return us + ' \u00b5s';
+  if (us < 1e6) return +(us / 1000).toFixed(1) + ' ms';
+  var s = us / 1e6;
+  if (s < 60) return +s.toFixed(1) + ' s';
+  if (s < 3600) return +(s / 60).toFixed(1) + ' min';
+  return +(s / 3600).toFixed(1) + ' hours';
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { LAB_PROGS: LAB_PROGS, GUIDE: GUIDE, bitsLen: bitsLen, guessInputs: guessInputs, parseList: parseList,
+    isSortedAsc: isSortedAsc, linearSteps: linearSteps, binarySteps: binarySteps, fmtDuration: fmtDuration };
+}
+
+/* ================= Study tools: Trace Lab, Study Guide, Search Lab ================= */
+const TOOL_KEYS=['lab','guide','search'];
+const RET={v:null};
+function rich(s){return escapeHtml(s).replace(/`([^`]+)`/g,'<code>$1</code>')}
+function navLocked(){return SIM.phase==='run'}
+function guideFor(topic){for(const c of GUIDE)if(c.topics.indexOf(topic)>=0)return c.id;return null}
+function guideById(id){return GUIDE.find(c=>c.id===id)}
+function progById(id){return LAB_PROGS.find(p=>p.id===id)}
+function canTrace(q){
+  if(!(q.code&&q.stemCode))return false;
+  try{TraceInterp.parseProgram(q.stemCode);return true}catch(e){return false}
+}
+function firstOf(topic){
+  for(const k of PRACTICE){
+    const i=QUESTIONS[k].findIndex(q=>q.topic===topic);
+    if(i>=0)return {sec:k,i:i,n:QUESTIONS[k].filter(q=>q.topic===topic).length};
+  }
+  return null;
+}
+function toolsRow(q){
+  const gid=guideFor(q.topic),g=gid&&guideById(gid),parts=[];
+  if(gid)parts.push('<button class="btn small" data-act="guide" data-g="'+gid+'">Review this concept</button>');
+  if(canTrace(q))parts.push('<button class="btn small" data-act="lab">Open in Trace Lab</button>');
+  if(g&&g.search)parts.push('<button class="btn small" data-act="search">Open Search Lab</button>');
+  return parts.length?'<div class="toolsrow">'+parts.join('')+'</div>':'';
+}
+function bindTools(root,q,ret){
+  root.querySelectorAll('.toolsrow button').forEach(b=>{
+    b.onclick=()=>{
+      RET.v=ret;const a=b.dataset.act;
+      if(a==='guide')openGuide(b.dataset.g);
+      else if(a==='lab')openLabWithCode(q.stemCode,guessInputs(q.stem),'From the question on '+q.topic.toLowerCase());
+      else if(a==='search')switchSection('search');
+    };
+  });
+}
+function retBar(){
+  return RET.v?'<div class="retbar"><button class="btn small" id="retBtn">← Back to your question</button></div>':'';
+}
+function bindRet(root){
+  const b=root.querySelector('#retBtn');
+  if(b)b.onclick=()=>{const r=RET.v;RET.v=null;switchSection(r.section,r.index)};
+}
+
+/* ---------------- navigation ---------------- */
+function buildNav(){
+  const nav=$('navToggle');nav.innerHTML='';
+  const locked=navLocked();
+  SECTIONS.forEach(s=>{
+    if(s.tool&&!nav.querySelector('.nav-break')){
+      const br=document.createElement('div');br.className='nav-break';br.textContent='Study tools';nav.appendChild(br);
+    }
+    const b=document.createElement('button');
+    b.className='nav-btn'+(s.key===currentSection?' active':'')+(s.tool?' tool':'');
+    let n='';
+    if(s.key==='sim')n=' (70 Q · 120 min)';else if(!s.tool)n=' ('+QUESTIONS[s.key].length+')';
+    b.textContent=s.label+n;
+    if(locked&&s.key!=='sim'){b.disabled=true;b.title='Unavailable while the timed exam is running'}
+    b.onclick=()=>switchSection(s.key);
+    nav.appendChild(b);
+  });
+  if(locked){
+    const m=document.createElement('div');m.className='nav-break';m.style.textTransform='none';m.style.letterSpacing='0';
+    m.textContent='The practice sections and study tools are locked until you submit the exam.';nav.appendChild(m);
+  }
+}
+function switchSection(key,idx){
+  if(navLocked()&&key!=='sim')return;
+  stopLabPlay();stopSearchPlay();
+  currentSection=key;currentIndex=idx||0;
+  if(!TOOL_KEYS.includes(key))RET.v=null;
+  buildNav();renderSummary();
+  const show={practice:PRACTICE.includes(key),sim:key==='sim',lab:key==='lab',guide:key==='guide',search:key==='search'};
+  Object.keys(show).forEach(id=>{$(id).style.display=show[id]?'block':'none'});
+  if(show.sim)renderSim();
+  else if(show.practice){renderTabRow();renderQuestion();renderBreakdown()}
+  else if(show.lab)renderLab();
+  else if(show.guide)renderGuide();
+  else if(show.search)renderSearchLab();
+}
+
+/* ---------------- Trace Lab ---------------- */
+const LAB={prog:null,code:'',input:'',mode:'edit',res:null,cur:0,timer:null,note:''};
+function stopLabPlay(){if(LAB.timer){clearInterval(LAB.timer);LAB.timer=null}}
+function normCode(c){return c.replace(/\r/g,'').replace(/\t/g,'   ')}
+function traceNow(){
+  LAB.code=normCode(LAB.code);
+  LAB.res=TraceInterp.run(LAB.code,LAB.input);
+  LAB.cur=0;LAB.mode='trace';
+}
+function loadProg(id){
+  const p=progById(id);if(!p)return;
+  stopLabPlay();LAB.prog=id;LAB.code=p.code;LAB.input=p.input;LAB.note='';traceNow();
+}
+function openLabWithCode(code,input,note){
+  stopLabPlay();LAB.prog=null;LAB.code=code;LAB.input=input||'';LAB.note=note||'';traceNow();switchSection('lab');
+}
+function labLast(){return LAB.res&&LAB.res.steps?LAB.res.steps.length-1:0}
+function stepLab(d){
+  const n=Math.max(0,Math.min(labLast(),LAB.cur+d));
+  if(n===LAB.cur)return false;
+  LAB.cur=n;updateLabView();return true;
+}
+function renderLab(){
+  const el=$('lab');
+  let opts='<option value="">Custom code</option>';
+  ['C1','C2','C3'].forEach(c=>{
+    opts+='<optgroup label="'+c+'">';
+    LAB_PROGS.filter(p=>p.comp===c).forEach(p=>{opts+='<option value="'+p.id+'"'+(LAB.prog===p.id?' selected':'')+'>'+escapeHtml(p.title)+'</option>'});
+    opts+='</optgroup>';
+  });
+  const p=LAB.prog?progById(LAB.prog):null;
+  let h=retBar()+'<div class="card"><div class="toolhead">Trace Lab</div>'+
+    '<p class="note" style="margin:4px 0 10px">Run pseudocode one line at a time and watch every variable change. Nothing here is graded. A <code>?</code> means a variable or array element has no value yet. The Trace Lab prints decimals in its own format, which may differ from the course software, and it does not run <code>RandomNumber</code>.</p>'+
+    '<div class="labrow"><label>Program<select id="labSel">'+opts+'</select></label>'+
+    '<label>Input values<input class="txt" id="labInput" type="text" placeholder="e.g. 5 8 2 0" style="width:200px"></label>'+
+    '<div class="labbtns"><button class="btn primary small" id="labRun">'+(LAB.mode==='trace'?'Re-run':'Trace it')+'</button>'+
+    (LAB.mode==='trace'?'<button class="btn small" id="labEdit">Edit code</button>':'')+'</div></div>'+
+    (p?'<p class="note" style="margin:0">'+rich(p.desc)+'</p>':(LAB.note?'<p class="note" style="margin:0">'+escapeHtml(LAB.note)+'. Edit the code or the input to experiment.</p>':''))+
+    '</div>';
+  if(LAB.mode==='edit'){
+    h+='<div class="card"><textarea class="codein" id="labCode" spellcheck="false" placeholder="Type or paste pseudocode here. Indent with 3 spaces."></textarea></div>';
+  }else{
+    h+='<div class="card"><div class="labgrid"><div><div class="sub-h">Code</div><div class="listing" id="labListing"></div></div>'+
+      '<div><div class="sub-h">Variables</div><div id="labVars"></div><div class="sub-h" style="margin-top:12px">Output</div><pre class="outbox" id="labOut"></pre></div></div>'+
+      '<div class="stepnote" id="labNote"></div><div id="labBanner"></div>'+
+      '<input type="range" class="scrub" id="labScrub" min="0" max="0" value="0" aria-label="Step position">'+
+      '<div class="labctl"><button class="btn small" id="labReset">↺ Start</button><button class="btn small" id="labBack">← Back</button>'+
+      '<button class="btn small primary" id="labNext">Next →</button><button class="btn small" id="labPlay">Play</button><button class="btn small" id="labEnd">End ⇥</button>'+
+      '<span class="note" id="labCount" style="margin-left:auto"></span></div></div>';
+  }
+  el.innerHTML=h;bindRet(el);
+  $('labInput').value=LAB.input;
+  if(LAB.mode==='edit')$('labCode').value=LAB.code;
+  $('labSel').onchange=e=>{
+    const id=e.target.value;
+    if(id){loadProg(id);renderLab()}
+    else{stopLabPlay();LAB.prog=null;LAB.mode='edit';LAB.note='';renderLab()}
+  };
+  const run=()=>{
+    stopLabPlay();
+    if(LAB.mode==='edit')LAB.code=$('labCode').value;
+    LAB.input=$('labInput').value;
+    if(!LAB.code.trim()){return}
+    const keep=LAB.mode==='trace';traceNow();
+    if(keep){updateLabView();$('labRun').textContent='Re-run'}else renderLab();
+  };
+  $('labRun').onclick=run;
+  $('labInput').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();run()}};
+  if(LAB.mode==='trace'){
+    $('labEdit').onclick=()=>{stopLabPlay();LAB.input=$('labInput').value;LAB.mode='edit';renderLab()};
+    $('labBack').onclick=()=>stepLab(-1);
+    $('labNext').onclick=()=>stepLab(1);
+    $('labEnd').onclick=()=>{stopLabPlay();LAB.cur=labLast();updateLabView()};
+    $('labReset').onclick=()=>{stopLabPlay();LAB.cur=0;updateLabView()};
+    $('labScrub').oninput=e=>{LAB.cur=parseInt(e.target.value,10);updateLabView()};
+    $('labPlay').onclick=()=>{
+      if(LAB.timer){stopLabPlay();updateLabView();return}
+      if(LAB.cur>=labLast())LAB.cur=0;
+      LAB.timer=setInterval(()=>{if(!stepLab(1))stopLabPlay(),updateLabView()},700);
+      updateLabView();
+    };
+    updateLabView();
+  }
+}
+function updateLabView(){
+  if(LAB.mode!=='trace'||!$('labListing'))return;
+  const res=LAB.res,steps=res.steps,last=steps.length-1,st=steps[LAB.cur];
+  const lines=LAB.code.split('\n');
+  const perr=res.parseError!==undefined;
+  let lh='';
+  lines.forEach((ln,i)=>{
+    let c='ln';
+    if(perr&&i===res.errorLine)c+=' err';
+    else if(st&&st.line===i)c+=(st.kind==='error'?' err':' cur');
+    lh+='<div class="'+c+'"><span class="no">'+(i+1)+'</span><span class="tx">'+(escapeHtml(ln)||' ')+'</span></div>';
+  });
+  $('labListing').innerHTML=lh;
+  if(perr){
+    $('labVars').innerHTML='<div class="note">Nothing ran.</div>';$('labOut').textContent='';
+    $('labNote').className='stepnote error';
+    $('labNote').textContent='Line '+(res.errorLine===undefined||res.errorLine===null?'?':res.errorLine+1)+': '+res.parseError;
+    $('labBanner').innerHTML='';$('labCount').textContent='';
+    ['labReset','labBack','labNext','labPlay','labEnd'].forEach(id=>{$(id).disabled=true});$('labScrub').disabled=true;
+    return;
+  }
+  let vh='';
+  st.frames.forEach(f=>{
+    vh+='<div class="frame'+(f.top?' top':'')+'"><div class="fh">'+escapeHtml(f.name)+'</div>';
+    if(f.vars.length){
+      vh+='<table class="vt">';
+      f.vars.forEach(v=>{vh+='<tr class="'+(v.c?'chg':'')+'"><td>'+escapeHtml(v.n)+'</td><td>'+escapeHtml(v.v)+'</td></tr>'});
+      vh+='</table>';
+    }else vh+='<div class="note" style="padding:6px 9px">No variables yet.</div>';
+    vh+='</div>';
+  });
+  $('labVars').innerHTML=vh;
+  const out=$('labOut');out.textContent=st.out;if(!st.out)out.innerHTML='<span class="note">(nothing printed yet)</span>';
+  $('labNote').className='stepnote'+(st.kind==='error'?' error':st.kind==='done'?' done':'');
+  $('labNote').textContent=(st.line!==null&&st.line!==undefined?'Line '+(st.line+1)+': ':'')+st.note;
+  let ban='';
+  if(LAB.cur===last&&res.truncated)ban='<div class="stepnote error" style="margin-top:8px">The Trace Lab stopped after '+TraceInterp.MAXSTEPS+' steps. A loop that never ends looks like this: check that something inside the loop changes the value its condition depends on.</div>';
+  $('labBanner').innerHTML=ban;
+  $('labCount').textContent='Step '+(LAB.cur+1)+' of '+(last+1)+(res.truncated?'+':'');
+  $('labScrub').max=last;$('labScrub').value=LAB.cur;$('labScrub').disabled=last<1;
+  $('labBack').disabled=LAB.cur===0;$('labReset').disabled=LAB.cur===0;
+  $('labNext').disabled=LAB.cur>=last;$('labEnd').disabled=LAB.cur>=last;
+  $('labPlay').disabled=last<1;$('labPlay').textContent=LAB.timer?'Pause':'Play';
+  const cur=$('labListing').querySelector('.cur,.err');
+  if(cur&&cur.scrollIntoView&&$('labListing').scrollHeight>$('labListing').clientHeight)cur.scrollIntoView({block:'nearest'});
+}
+document.addEventListener('keydown',e=>{
+  if(currentSection!=='lab'||LAB.mode!=='trace')return;
+  const t=(e.target&&e.target.tagName)||'';
+  if(/INPUT|TEXTAREA|SELECT/.test(t))return;
+  if(e.key==='ArrowRight'){e.preventDefault();stepLab(1)}
+  else if(e.key==='ArrowLeft'){e.preventDefault();stepLab(-1)}
+});
+
+/* ---------------- Study Guide ---------------- */
+const GUIDE_UI={filter:'all',open:{}};
+function gBody(c){
+  let h='<div class="gbody">';
+  c.body.forEach(p=>{h+='<p>'+rich(p)+'</p>'});
+  if(c.points&&c.points.length){h+='<h4>Key points</h4><ul>'+c.points.map(x=>'<li>'+rich(x)+'</li>').join('')+'</ul>'}
+  if(c.code)h+='<h4>Example</h4><pre class="code">'+escapeHtml(c.code)+'</pre>';
+  if(c.traps&&c.traps.length)h+='<h4>Common traps</h4><ul>'+c.traps.map(x=>'<li>'+rich(x)+'</li>').join('')+'</ul>';
+  h+='<h4>Go further</h4><div class="toolsrow" style="margin-top:4px">';
+  c.topics.forEach(t=>{const f=firstOf(t);if(f)h+='<button class="btn small" data-act="prac" data-sec="'+f.sec+'" data-i="'+f.i+'">Practice: '+escapeHtml(t)+' ('+f.n+')</button>'});
+  (c.labs||[]).forEach(id=>{const p=progById(id);if(p)h+='<button class="btn small" data-act="lab" data-p="'+id+'">Trace: '+escapeHtml(p.title)+'</button>'});
+  if(c.search)h+='<button class="btn small" data-act="search">Open Search Lab</button>';
+  return h+'</div></div>';
+}
+function renderGuide(){
+  const y=window.scrollY||0;
+  let h=retBar()+'<div class="card"><div class="toolhead">Study Guide</div>'+
+    '<p class="note" style="margin:4px 0 10px">One card per concept group, written in the course\'s pseudocode style. Open a card, then use the buttons at its bottom to practice that topic or trace a matching program. The Review this concept button under any answered question brings you here.</p>'+
+    '<div class="toolsrow" style="margin-top:0">'+['all','C1','C2','C3'].map(f=>'<button class="btn small'+(GUIDE_UI.filter===f?' primary':'')+'" data-f="'+f+'">'+(f==='all'?'All cards ('+GUIDE.length+')':f)+'</button>').join('')+
+    '<button class="btn small" data-f="expand" style="margin-left:auto">Expand all shown</button><button class="btn small" data-f="collapse">Collapse all</button></div></div>';
+  GUIDE.filter(c=>GUIDE_UI.filter==='all'||c.comp===GUIDE_UI.filter).forEach(c=>{
+    const open=!!GUIDE_UI.open[c.id];
+    h+='<div class="card gcard" id="g-'+c.id+'"><div class="ghead" data-id="'+c.id+'" role="button" tabindex="0" aria-expanded="'+open+'"><span class="pill '+compPill[c.comp]+'">'+c.comp+'</span><span class="gtitle">'+escapeHtml(c.title)+'</span><span class="gcaret">'+(open?'−':'+')+'</span></div>'+
+      '<div class="gtopics">'+c.topics.map(t=>'<span class="pill pill-diff">'+escapeHtml(t)+'</span>').join('')+'</div>'+(open?gBody(c):'')+'</div>';
+  });
+  const el=$('guide');el.innerHTML=h;bindRet(el);
+  el.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{
+    const f=b.dataset.f;
+    if(f==='expand'){GUIDE.forEach(c=>{if(GUIDE_UI.filter==='all'||c.comp===GUIDE_UI.filter)GUIDE_UI.open[c.id]=true})}
+    else if(f==='collapse'){GUIDE_UI.open={}}
+    else GUIDE_UI.filter=f;
+    renderGuide();
+  });
+  el.querySelectorAll('.ghead').forEach(hd=>{
+    const tog=()=>{GUIDE_UI.open[hd.dataset.id]=!GUIDE_UI.open[hd.dataset.id];renderGuide()};
+    hd.onclick=tog;hd.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tog()}};
+  });
+  el.querySelectorAll('.gbody button').forEach(b=>b.onclick=()=>{
+    const a=b.dataset.act;
+    if(a==='prac'){RET.v=null;switchSection(b.dataset.sec,parseInt(b.dataset.i,10))}
+    else if(a==='lab'){loadProg(b.dataset.p);switchSection('lab')}
+    else if(a==='search')switchSection('search');
+  });
+  if(window.scrollTo)try{window.scrollTo(0,y)}catch(e){}
+}
+function openGuide(id){
+  GUIDE_UI.filter='all';GUIDE_UI.open[id]=true;
+  switchSection('guide');
+  const el=$('g-'+id);
+  if(el&&el.scrollIntoView)el.scrollIntoView({block:'start'});
+}
+
+/* ---------------- Search Lab ---------------- */
+const SL={algo:'binary',listText:'3, 8, 12, 19, 25, 31, 44, 50',targetText:'31',list:[],target:0,steps:[],cur:0,timer:null,err:''};
+const SL_PRESETS=[
+  {t:'Sorted, found',list:'3, 8, 12, 19, 25, 31, 44, 50',target:'31',algo:'binary'},
+  {t:'Sorted, missing',list:'3, 8, 12, 19, 25, 31, 44, 50',target:'20',algo:'binary'},
+  {t:'Target is first',list:'3, 8, 12, 19, 25, 31, 44, 50',target:'3',algo:'linear'},
+  {t:'Unsorted: binary fails',list:'14, 3, 27, 9, 41, 8, 22',target:'41',algo:'binary'},
+  {t:'64 elements',list:Array.from({length:64},(_,i)=>(i+1)*2).join(', '),target:'128',algo:'binary'}
+];
+function stopSearchPlay(){if(SL.timer){clearInterval(SL.timer);SL.timer=null}}
+function slCompute(){
+  const pl=parseList(SL.listText),tt=String(SL.targetText).trim();
+  SL.err='';
+  if(pl.err){SL.err=pl.err;SL.steps=[];return}
+  if(!/^-?\d+$/.test(tt)){SL.err='The target must be a whole number.';SL.steps=[];return}
+  SL.list=pl.list;SL.target=parseInt(tt,10);
+  SL.steps=SL.algo==='linear'?linearSteps(SL.list,SL.target):binarySteps(SL.list,SL.target);
+  SL.cur=0;
+}
+function slLast(){return SL.steps.length-1}
+function stepSL(d){
+  const n=Math.max(0,Math.min(slLast(),SL.cur+d));
+  if(n===SL.cur)return false;
+  SL.cur=n;updateSearchView();return true;
+}
+function renderSearchLab(){
+  const el=$('search');
+  if(!SL.steps.length&&!SL.err)slCompute();
+  let h=retBar()+'<div class="card"><div class="toolhead">Search Lab</div>'+
+    '<p class="note" style="margin:4px 0 10px">Compare linear and binary search on a list you choose. A comparison here means looking at one element and checking it against the target, the same counting the practice questions use.</p>'+
+    '<div class="toolsrow" style="margin-top:0">'+SL_PRESETS.map((p,i)=>'<button class="btn small" data-pre="'+i+'">'+escapeHtml(p.t)+'</button>').join('')+'</div>'+
+    '<div class="labrow"><label>List (whole numbers)<input class="txt" id="slList" type="text" style="width:300px;max-width:100%"></label>'+
+    '<label>Target<input class="txt" id="slTarget" type="text" style="width:90px"></label>'+
+    '<label>Algorithm<span class="seg"><button class="btn small'+(SL.algo==='linear'?' primary':'')+'" data-algo="linear">Linear</button><button class="btn small'+(SL.algo==='binary'?' primary':'')+'" data-algo="binary">Binary</button></span></label>'+
+    '<div class="labbtns"><button class="btn primary small" id="slGo">Set up</button></div></div>'+
+    '<div id="slErr"></div></div>'+
+    '<div class="card" id="slViz"></div>'+
+    '<div class="card"><div class="toolhead" style="font-size:14px">How the worst case grows</div>'+
+    '<p class="note" style="margin:4px 0 8px">Worst-case comparisons if one comparison takes 1 microsecond. Binary search needs floor(log2 N) + 1 comparisons, counting the comparison that finds the target.</p>'+scaleTable()+'</div>';
+  el.innerHTML=h;bindRet(el);
+  $('slList').value=SL.listText;$('slTarget').value=SL.targetText;
+  const apply=()=>{stopSearchPlay();SL.listText=$('slList').value;SL.targetText=$('slTarget').value;slCompute();updateSearchView()};
+  $('slGo').onclick=apply;
+  $('slList').onkeydown=$('slTarget').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();apply()}};
+  el.querySelectorAll('[data-algo]').forEach(b=>b.onclick=()=>{
+    SL.algo=b.dataset.algo;stopSearchPlay();SL.listText=$('slList').value;SL.targetText=$('slTarget').value;slCompute();renderSearchLab();
+  });
+  el.querySelectorAll('[data-pre]').forEach(b=>b.onclick=()=>{
+    const p=SL_PRESETS[parseInt(b.dataset.pre,10)];stopSearchPlay();
+    SL.listText=p.list;SL.targetText=p.target;SL.algo=p.algo;slCompute();renderSearchLab();
+  });
+  updateSearchView();
+}
+function scaleTable(){
+  const rows=[8,16,64,128,1000,1000000,1000000000];
+  let h='<div class="scalewrap"><table class="scale"><tr><th>List size N</th><th>Linear, worst case</th><th>Binary, worst case</th><th>Linear time</th><th>Binary time</th></tr>';
+  rows.forEach(n=>{
+    const b=bitsLen(n);
+    h+='<tr><td>'+n.toLocaleString('en-US')+'</td><td>'+n.toLocaleString('en-US')+'</td><td>'+b+'</td><td>'+fmtDuration(n)+'</td><td>'+fmtDuration(b)+'</td></tr>';
+  });
+  return h+'</table></div>';
+}
+function updateSearchView(){
+  const errEl=$('slErr'),viz=$('slViz');if(!viz)return;
+  if(SL.err){errEl.innerHTML='<div class="stepnote error" style="margin-top:8px">'+escapeHtml(SL.err)+'</div>';viz.style.display='none';return}
+  errEl.innerHTML='';viz.style.display='block';
+  const st=SL.steps[SL.cur],n=SL.list.length,last=slLast();
+  const warn=SL.algo==='binary'&&!isSortedAsc(SL.list);
+  let cells='<div class="cells'+(n>24?' sm':'')+'">';
+  SL.list.forEach((v,i)=>{
+    let c='cell',mark='';
+    if(SL.algo==='linear'){
+      if(st.idx>=0&&i<st.idx)c+=' seen';
+      if(i===st.idx)c+=(st.found===i?' hit':' now');
+      if(st.end)c+=' seen';
+    }else{
+      if(st.end||i<st.low||i>st.high)c+=' off';
+      if(i===st.mid)c+=(st.found===i?' hit':' now');
+      if(!st.end){
+        if(i===st.low)mark+='L';
+        if(i===st.mid)mark+='M';
+        if(i===st.high)mark+='H';
+      }
+    }
+    cells+='<div class="cellw"><div class="cmark">'+mark+'</div><div class="'+c+'">'+v+'</div><div class="cidx">'+i+'</div></div>';
+  });
+  cells+='</div>';
+  const worstLin=n,worstBin=bitsLen(n);
+  let h='<div class="note" style="margin-bottom:2px">Looking for <strong>'+SL.target+'</strong> with <strong>'+(SL.algo==='linear'?'linear':'binary')+'</strong> search in '+n+' element'+(n===1?'':'s')+'.'+
+    (SL.algo==='binary'?' <span style="color:var(--purple)">L</span> = low, <span style="color:var(--purple)">M</span> = middle, <span style="color:var(--purple)">H</span> = high.':'')+'</div>';
+  if(warn)h+='<div class="stepnote error" style="margin:8px 0">This list is not sorted, so binary search is not valid on it. The search can report "not found" for a value that is in the list. Step through to see why.</div>';
+  h+=cells;
+  h+='<div class="stepnote'+(st.found!==null&&st.found!==undefined&&st.found>=0?' done':st.end?' error':'')+'">'+escapeHtml(st.text)+'</div>';
+  h+='<div class="statrow"><div class="stat"><div class="n">'+st.cmp+'</div><div class="l">Comparisons so far</div></div>'+
+    '<div class="stat"><div class="n">'+worstLin+'</div><div class="l">Linear worst case</div></div>'+
+    '<div class="stat"><div class="n">'+worstBin+'</div><div class="l">Binary worst case</div></div></div>';
+  h+='<input type="range" class="scrub" id="slScrub" min="0" max="'+last+'" value="'+SL.cur+'" aria-label="Step position">'+
+    '<div class="labctl"><button class="btn small" id="slReset"'+(SL.cur===0?' disabled':'')+'>↺ Start</button><button class="btn small" id="slBack"'+(SL.cur===0?' disabled':'')+'>← Back</button>'+
+    '<button class="btn small primary" id="slNext"'+(SL.cur>=last?' disabled':'')+'>Next →</button><button class="btn small" id="slPlay"'+(last<1?' disabled':'')+'>'+(SL.timer?'Pause':'Play')+'</button><button class="btn small" id="slEnd"'+(SL.cur>=last?' disabled':'')+'>End ⇥</button>'+
+    '<span class="note" style="margin-left:auto">Step '+(SL.cur+1)+' of '+(last+1)+'</span></div>';
+  viz.innerHTML=h;
+  $('slBack').onclick=()=>stepSL(-1);$('slNext').onclick=()=>stepSL(1);
+  $('slEnd').onclick=()=>{stopSearchPlay();SL.cur=last;updateSearchView()};
+  $('slReset').onclick=()=>{stopSearchPlay();SL.cur=0;updateSearchView()};
+  $('slScrub').oninput=e=>{SL.cur=parseInt(e.target.value,10);updateSearchView()};
+  $('slPlay').onclick=()=>{
+    if(SL.timer){stopSearchPlay();updateSearchView();return}
+    if(SL.cur>=last)SL.cur=0;
+    SL.timer=setInterval(()=>{if(!stepSL(1)){stopSearchPlay();updateSearchView()}},800);
+    updateSearchView();
+  };
 }
 
 buildNav();renderSummary();renderTabRow();renderQuestion();updateScoreboard();renderBreakdown();
